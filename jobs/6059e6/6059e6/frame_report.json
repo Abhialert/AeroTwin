@@ -1,0 +1,431 @@
+{
+  "video_file": "jobs\\6059e6\\input.mp4",
+  "video_resolution": "1920x1080",
+  "video_fps": 30.0,
+  "total_video_frames": 688,
+  "video_duration_sec": 22.93,
+  "frame_interval": 10,
+  "blur_threshold": 100.0,
+  "frames_sampled": 69,
+  "frames_blurry": 0,
+  "frames_kept": 69,
+  "blur_scores": [
+    {
+      "frame_index": 0,
+      "blur_score": 829.6,
+      "kept": true
+    },
+    {
+      "frame_index": 10,
+      "blur_score": 602.93,
+      "kept": true
+    },
+    {
+      "frame_index": 20,
+      "blur_score": 680.79,
+      "kept": true
+    },
+    {
+      "frame_index": 30,
+      "blur_score": 571.36,
+      "kept": true
+    },
+    {
+      "frame_index": 40,
+      "blur_score": 640.05,
+      "kept": true
+    },
+    {
+      "frame_index": 50,
+      "blur_score": 568.14,
+      "kept": true
+    },
+    {
+      "frame_index": 60,
+      "blur_score": 781.52,
+      "kept": true
+    },
+    {
+      "frame_index": 70,
+      "blur_score": 575.85,
+      "kept": true
+    },
+    {
+      "frame_index": 80,
+      "blur_score": 652.03,
+      "kept": true
+    },
+    {
+      "frame_index": 90,
+      "blur_score": 580.09,
+      "kept": true
+    },
+    {
+      "frame_index": 100,
+      "blur_score": 637.16,
+      "kept": true
+    },
+    {
+      "frame_index": 110,
+      "blur_score": 560.56,
+      "kept": true
+    },
+    {
+      "frame_index": 120,
+      "blur_score": 781.39,
+      "kept": true
+    },
+    {
+      "frame_index": 130,
+      "blur_score": 593.62,
+      "kept": true
+    },
+    {
+      "frame_index": 140,
+      "blur_score": 666.93,
+      "kept": true
+    },
+    {
+      "frame_index": 150,
+      "blur_score": 591.28,
+      "kept": true
+    },
+    {
+      "frame_index": 160,
+      "blur_score": 651.77,
+      "kept": true
+    },
+    {
+      "frame_index": 170,
+      "blur_score": 598.23,
+      "kept": true
+    },
+    {
+      "frame_index": 180,
+      "blur_score": 856.42,
+      "kept": true
+    },
+    {
+      "frame_index": 190,
+      "blur_score": 630.97,
+      "kept": true
+    },
+    {
+      "frame_index": 200,
+      "blur_score": 705.8,
+      "kept": true
+    },
+    {
+      "frame_index": 210,
+      "blur_score": 614.5,
+      "kept": true
+    },
+    {
+      "frame_index": 220,
+      "blur_score": 669.07,
+      "kept": true
+    },
+    {
+      "frame_index": 230,
+      "blur_score": 607.26,
+      "kept": true
+    },
+    {
+      "frame_index": 240,
+      "blur_score": 832.63,
+      "kept": true
+    },
+    {
+      "frame_index": 250,
+      "blur_score": 618.12,
+      "kept": true
+    },
+    {
+      "frame_index": 260,
+      "blur_score": 669.49,
+      "kept": true
+    },
+    {
+      "frame_index": 270,
+      "blur_score": 580.61,
+      "kept": true
+    },
+    {
+      "frame_index": 280,
+      "blur_score": 621.78,
+      "kept": true
+    },
+    {
+      "frame_index": 290,
+      "blur_score": 565.89,
+      "kept": true
+    },
+    {
+      "frame_index": 300,
+      "blur_score": 817.13,
+      "kept": true
+    },
+    {
+      "frame_index": 310,
+      "blur_score": 594.83,
+      "kept": true
+    },
+    {
+      "frame_index": 320,
+      "blur_score": 641.55,
+      "kept": true
+    },
+    {
+      "frame_index": 330,
+      "blur_score": 557.25,
+      "kept": true
+    },
+    {
+      "frame_index": 340,
+      "blur_score": 607.19,
+      "kept": true
+    },
+    {
+      "frame_index": 350,
+      "blur_score": 551.85,
+      "kept": true
+    },
+    {
+      "frame_index": 360,
+      "blur_score": 796.65,
+      "kept": true
+    },
+    {
+      "frame_index": 370,
+      "blur_score": 576.92,
+      "kept": true
+    },
+    {
+      "frame_index": 380,
+      "blur_score": 610.48,
+      "kept": true
+    },
+    {
+      "frame_index": 390,
+      "blur_score": 527.7,
+      "kept": true
+    },
+    {
+      "frame_index": 400,
+      "blur_score": 582.82,
+      "kept": true
+    },
+    {
+      "frame_index": 410,
+      "blur_score": 521.73,
+      "kept": true
+    },
+    {
+      "frame_index": 420,
+      "blur_score": 769.33,
+      "kept": true
+    },
+    {
+      "frame_index": 430,
+      "blur_score": 556.41,
+      "kept": true
+    },
+    {
+      "frame_index": 440,
+      "blur_score": 610.88,
+      "kept": true
+    },
+    {
+      "frame_index": 450,
+      "blur_score": 530.33,
+      "kept": true
+    },
+    {
+      "frame_index": 460,
+      "blur_score": 580.53,
+      "kept": true
+    },
+    {
+      "frame_index": 470,
+      "blur_score": 525.55,
+      "kept": true
+    },
+    {
+      "frame_index": 480,
+      "blur_score": 774.73,
+      "kept": true
+    },
+    {
+      "frame_index": 490,
+      "blur_score": 570.92,
+      "kept": true
+    },
+    {
+      "frame_index": 500,
+      "blur_score": 630.76,
+      "kept": true
+    },
+    {
+      "frame_index": 510,
+      "blur_score": 547.4,
+      "kept": true
+    },
+    {
+      "frame_index": 520,
+      "blur_score": 608.78,
+      "kept": true
+    },
+    {
+      "frame_index": 530,
+      "blur_score": 544.13,
+      "kept": true
+    },
+    {
+      "frame_index": 540,
+      "blur_score": 782.74,
+      "kept": true
+    },
+    {
+      "frame_index": 550,
+      "blur_score": 564.33,
+      "kept": true
+    },
+    {
+      "frame_index": 560,
+      "blur_score": 627.01,
+      "kept": true
+    },
+    {
+      "frame_index": 570,
+      "blur_score": 546.65,
+      "kept": true
+    },
+    {
+      "frame_index": 580,
+      "blur_score": 605.56,
+      "kept": true
+    },
+    {
+      "frame_index": 590,
+      "blur_score": 542.08,
+      "kept": true
+    },
+    {
+      "frame_index": 600,
+      "blur_score": 785.39,
+      "kept": true
+    },
+    {
+      "frame_index": 610,
+      "blur_score": 573.74,
+      "kept": true
+    },
+    {
+      "frame_index": 620,
+      "blur_score": 636.73,
+      "kept": true
+    },
+    {
+      "frame_index": 630,
+      "blur_score": 563.5,
+      "kept": true
+    },
+    {
+      "frame_index": 640,
+      "blur_score": 620.87,
+      "kept": true
+    },
+    {
+      "frame_index": 650,
+      "blur_score": 557.14,
+      "kept": true
+    },
+    {
+      "frame_index": 660,
+      "blur_score": 825.64,
+      "kept": true
+    },
+    {
+      "frame_index": 670,
+      "blur_score": 579.1,
+      "kept": true
+    },
+    {
+      "frame_index": 680,
+      "blur_score": 634.67,
+      "kept": true
+    }
+  ],
+  "kept_frame_indices": [
+    0,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100,
+    110,
+    120,
+    130,
+    140,
+    150,
+    160,
+    170,
+    180,
+    190,
+    200,
+    210,
+    220,
+    230,
+    240,
+    250,
+    260,
+    270,
+    280,
+    290,
+    300,
+    310,
+    320,
+    330,
+    340,
+    350,
+    360,
+    370,
+    380,
+    390,
+    400,
+    410,
+    420,
+    430,
+    440,
+    450,
+    460,
+    470,
+    480,
+    490,
+    500,
+    510,
+    520,
+    530,
+    540,
+    550,
+    560,
+    570,
+    580,
+    590,
+    600,
+    610,
+    620,
+    630,
+    640,
+    650,
+    660,
+    670,
+    680
+  ],
+  "processing_time_sec": 11.64
+}

@@ -1,0 +1,725 @@
+{
+  "version": 4,
+  "job_id": "6059e6",
+  "environment": "Aerial Drone Photogrammetry",
+  "point_cloud": {
+    "total_points": 33069,
+    "web_points": 264552,
+    "source": "points3D.txt"
+  },
+  "coordinate_system": {
+    "up_axis": "Y",
+    "ground_y": 0.0,
+    "bounds": {
+      "xmin": -26.7,
+      "xmax": 25.2,
+      "ymin": -3.0,
+      "ymax": 13.4,
+      "zmin": -8.2,
+      "zmax": 42.0
+    },
+    "center": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0
+    }
+  },
+  "metric_scale": {
+    "value": 2.835,
+    "calibrated": true,
+    "source": "COLMAP Metric Baseline",
+    "display": "2.835 m/unit (Metric Calibrated)"
+  },
+  "cameras": {
+    "registered": 62,
+    "trajectory_type": "COLMAP Reconstructed (Video-Derived)",
+    "positions": [
+      {
+        "name": "frame_00007.jpg",
+        "x": 0.05,
+        "y": 48.61,
+        "z": -20.85,
+        "outlier": false
+      },
+      {
+        "name": "frame_00008.jpg",
+        "x": 0.09,
+        "y": 48.45,
+        "z": -20.15,
+        "outlier": false
+      },
+      {
+        "name": "frame_00009.jpg",
+        "x": 0.1,
+        "y": 48.27,
+        "z": -19.43,
+        "outlier": false
+      },
+      {
+        "name": "frame_00010.jpg",
+        "x": 0.15,
+        "y": 48.08,
+        "z": -18.72,
+        "outlier": false
+      },
+      {
+        "name": "frame_00011.jpg",
+        "x": 0.17,
+        "y": 47.9,
+        "z": -18.02,
+        "outlier": false
+      },
+      {
+        "name": "frame_00012.jpg",
+        "x": 0.17,
+        "y": 47.71,
+        "z": -17.3,
+        "outlier": false
+      },
+      {
+        "name": "frame_00013.jpg",
+        "x": 0.18,
+        "y": 47.52,
+        "z": -16.56,
+        "outlier": false
+      },
+      {
+        "name": "frame_00014.jpg",
+        "x": 0.17,
+        "y": 47.32,
+        "z": -15.83,
+        "outlier": false
+      },
+      {
+        "name": "frame_00015.jpg",
+        "x": 0.16,
+        "y": 47.13,
+        "z": -15.09,
+        "outlier": false
+      },
+      {
+        "name": "frame_00016.jpg",
+        "x": 0.14,
+        "y": 46.94,
+        "z": -14.34,
+        "outlier": false
+      },
+      {
+        "name": "frame_00017.jpg",
+        "x": 0.13,
+        "y": 46.74,
+        "z": -13.6,
+        "outlier": false
+      },
+      {
+        "name": "frame_00018.jpg",
+        "x": 0.14,
+        "y": 46.52,
+        "z": -12.87,
+        "outlier": false
+      },
+      {
+        "name": "frame_00019.jpg",
+        "x": 0.15,
+        "y": 46.3,
+        "z": -12.14,
+        "outlier": false
+      },
+      {
+        "name": "frame_00020.jpg",
+        "x": 0.15,
+        "y": 46.08,
+        "z": -11.41,
+        "outlier": false
+      },
+      {
+        "name": "frame_00021.jpg",
+        "x": 0.16,
+        "y": 45.86,
+        "z": -10.67,
+        "outlier": false
+      },
+      {
+        "name": "frame_00022.jpg",
+        "x": 0.17,
+        "y": 45.64,
+        "z": -9.95,
+        "outlier": false
+      },
+      {
+        "name": "frame_00023.jpg",
+        "x": 0.18,
+        "y": 45.4,
+        "z": -9.23,
+        "outlier": false
+      },
+      {
+        "name": "frame_00024.jpg",
+        "x": 0.19,
+        "y": 45.18,
+        "z": -8.5,
+        "outlier": false
+      },
+      {
+        "name": "frame_00025.jpg",
+        "x": 0.19,
+        "y": 44.95,
+        "z": -7.78,
+        "outlier": false
+      },
+      {
+        "name": "frame_00026.jpg",
+        "x": 0.2,
+        "y": 44.71,
+        "z": -7.05,
+        "outlier": false
+      },
+      {
+        "name": "frame_00027.jpg",
+        "x": 0.21,
+        "y": 44.45,
+        "z": -6.33,
+        "outlier": false
+      },
+      {
+        "name": "frame_00028.jpg",
+        "x": 0.22,
+        "y": 44.2,
+        "z": -5.61,
+        "outlier": false
+      },
+      {
+        "name": "frame_00029.jpg",
+        "x": 0.22,
+        "y": 43.93,
+        "z": -4.88,
+        "outlier": false
+      },
+      {
+        "name": "frame_00030.jpg",
+        "x": 0.23,
+        "y": 43.65,
+        "z": -4.16,
+        "outlier": false
+      },
+      {
+        "name": "frame_00031.jpg",
+        "x": 0.24,
+        "y": 43.36,
+        "z": -3.45,
+        "outlier": false
+      },
+      {
+        "name": "frame_00032.jpg",
+        "x": 0.25,
+        "y": 43.05,
+        "z": -2.73,
+        "outlier": false
+      },
+      {
+        "name": "frame_00033.jpg",
+        "x": 0.26,
+        "y": 42.73,
+        "z": -2.02,
+        "outlier": false
+      },
+      {
+        "name": "frame_00034.jpg",
+        "x": 0.27,
+        "y": 42.39,
+        "z": -1.32,
+        "outlier": false
+      },
+      {
+        "name": "frame_00035.jpg",
+        "x": 0.27,
+        "y": 42.05,
+        "z": -0.65,
+        "outlier": false
+      },
+      {
+        "name": "frame_00036.jpg",
+        "x": 0.2,
+        "y": 41.7,
+        "z": -0.06,
+        "outlier": false
+      },
+      {
+        "name": "frame_00037.jpg",
+        "x": 0.13,
+        "y": 41.35,
+        "z": 0.45,
+        "outlier": false
+      },
+      {
+        "name": "frame_00038.jpg",
+        "x": 0.08,
+        "y": 40.99,
+        "z": 0.92,
+        "outlier": false
+      },
+      {
+        "name": "frame_00039.jpg",
+        "x": 0.05,
+        "y": 40.62,
+        "z": 1.36,
+        "outlier": false
+      },
+      {
+        "name": "frame_00040.jpg",
+        "x": 0.03,
+        "y": 40.25,
+        "z": 1.78,
+        "outlier": false
+      },
+      {
+        "name": "frame_00041.jpg",
+        "x": 0.13,
+        "y": 39.91,
+        "z": 2.14,
+        "outlier": false
+      },
+      {
+        "name": "frame_00042.jpg",
+        "x": 0.15,
+        "y": 39.54,
+        "z": 2.52,
+        "outlier": false
+      },
+      {
+        "name": "frame_00043.jpg",
+        "x": 0.14,
+        "y": 39.17,
+        "z": 2.91,
+        "outlier": false
+      },
+      {
+        "name": "frame_00044.jpg",
+        "x": 0.12,
+        "y": 38.79,
+        "z": 3.29,
+        "outlier": false
+      },
+      {
+        "name": "frame_00045.jpg",
+        "x": 0.09,
+        "y": 38.4,
+        "z": 3.67,
+        "outlier": false
+      },
+      {
+        "name": "frame_00046.jpg",
+        "x": 0.05,
+        "y": 38.01,
+        "z": 4.03,
+        "outlier": false
+      },
+      {
+        "name": "frame_00047.jpg",
+        "x": 0.01,
+        "y": 37.61,
+        "z": 4.39,
+        "outlier": false
+      },
+      {
+        "name": "frame_00048.jpg",
+        "x": -0.02,
+        "y": 37.21,
+        "z": 4.75,
+        "outlier": false
+      },
+      {
+        "name": "frame_00049.jpg",
+        "x": -0.04,
+        "y": 36.8,
+        "z": 5.11,
+        "outlier": false
+      },
+      {
+        "name": "frame_00050.jpg",
+        "x": -0.06,
+        "y": 36.4,
+        "z": 5.47,
+        "outlier": false
+      },
+      {
+        "name": "frame_00051.jpg",
+        "x": -0.07,
+        "y": 35.99,
+        "z": 5.81,
+        "outlier": false
+      },
+      {
+        "name": "frame_00052.jpg",
+        "x": -0.07,
+        "y": 35.58,
+        "z": 6.15,
+        "outlier": false
+      },
+      {
+        "name": "frame_00053.jpg",
+        "x": -0.09,
+        "y": 35.17,
+        "z": 6.49,
+        "outlier": false
+      },
+      {
+        "name": "frame_00054.jpg",
+        "x": -0.11,
+        "y": 34.75,
+        "z": 6.81,
+        "outlier": false
+      },
+      {
+        "name": "frame_00055.jpg",
+        "x": -0.13,
+        "y": 34.33,
+        "z": 7.13,
+        "outlier": false
+      },
+      {
+        "name": "frame_00056.jpg",
+        "x": -0.15,
+        "y": 33.9,
+        "z": 7.46,
+        "outlier": false
+      },
+      {
+        "name": "frame_00057.jpg",
+        "x": -0.18,
+        "y": 33.45,
+        "z": 7.79,
+        "outlier": false
+      },
+      {
+        "name": "frame_00058.jpg",
+        "x": -0.2,
+        "y": 33.0,
+        "z": 8.11,
+        "outlier": false
+      },
+      {
+        "name": "frame_00059.jpg",
+        "x": -0.23,
+        "y": 32.54,
+        "z": 8.43,
+        "outlier": false
+      },
+      {
+        "name": "frame_00060.jpg",
+        "x": -0.27,
+        "y": 32.07,
+        "z": 8.75,
+        "outlier": false
+      },
+      {
+        "name": "frame_00061.jpg",
+        "x": -0.3,
+        "y": 31.59,
+        "z": 9.06,
+        "outlier": false
+      },
+      {
+        "name": "frame_00062.jpg",
+        "x": -0.34,
+        "y": 31.09,
+        "z": 9.37,
+        "outlier": false
+      },
+      {
+        "name": "frame_00063.jpg",
+        "x": -0.38,
+        "y": 30.59,
+        "z": 9.67,
+        "outlier": false
+      },
+      {
+        "name": "frame_00064.jpg",
+        "x": -0.44,
+        "y": 30.06,
+        "z": 9.97,
+        "outlier": false
+      },
+      {
+        "name": "frame_00065.jpg",
+        "x": -0.5,
+        "y": 29.53,
+        "z": 10.26,
+        "outlier": false
+      },
+      {
+        "name": "frame_00066.jpg",
+        "x": -0.58,
+        "y": 28.98,
+        "z": 10.54,
+        "outlier": false
+      },
+      {
+        "name": "frame_00067.jpg",
+        "x": -0.65,
+        "y": 28.42,
+        "z": 10.81,
+        "outlier": false
+      },
+      {
+        "name": "frame_00068.jpg",
+        "x": -0.72,
+        "y": 27.84,
+        "z": 11.07,
+        "outlier": false
+      }
+    ]
+  },
+  "semantic": {
+    "method": "Multi-View 2D Projection (Real Video Ground Truth)",
+    "classes": {
+      "Unknown": {
+        "count": 9112,
+        "pct": 3.4
+      },
+      "Road/Ground": {
+        "count": 37680,
+        "pct": 14.2
+      },
+      "Building/Roof": {
+        "count": 35800,
+        "pct": 13.5
+      },
+      "Vegetation": {
+        "count": 142288,
+        "pct": 53.8
+      },
+      "Water": {
+        "count": 39672,
+        "pct": 15.0
+      },
+      "Vehicle": {
+        "count": 0,
+        "pct": 0.0
+      }
+    },
+    "class_colors": {
+      "0": "#50555f",
+      "1": "#64748b",
+      "2": "#00d4ff",
+      "3": "#22c55e",
+      "4": "#0284c7",
+      "5": "#f97316"
+    }
+  },
+  "buildings": [
+    {
+      "id": 2,
+      "cx": 2.3,
+      "cy": 4.8,
+      "cz": 0.8,
+      "w": 15.9,
+      "d": 23.8,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.3,
+      "pts": 2130,
+      "type": "residential_house",
+      "label": "House #2 (9.5m)"
+    },
+    {
+      "id": 1,
+      "cx": -8.4,
+      "cy": 4.7,
+      "cz": 0.4,
+      "w": 15.9,
+      "d": 21.6,
+      "h": 9.4,
+      "roof_type": "pitched",
+      "roof_h": 3.3,
+      "pts": 1517,
+      "type": "residential_house",
+      "label": "House #1 (9.4m)"
+    },
+    {
+      "id": 6,
+      "cx": -11.7,
+      "cy": 2.6,
+      "cz": 16.9,
+      "w": 10.0,
+      "d": 10.0,
+      "h": 5.2,
+      "roof_type": "hip",
+      "roof_h": 1.8,
+      "pts": 104,
+      "type": "residential_house",
+      "label": "House #6 (5.2m)"
+    },
+    {
+      "id": 4,
+      "cx": -18.1,
+      "cy": 2.6,
+      "cz": 10.7,
+      "w": 10.0,
+      "d": 10.0,
+      "h": 5.2,
+      "roof_type": "hip",
+      "roof_h": 1.8,
+      "pts": 72,
+      "type": "residential_house",
+      "label": "House #4 (5.2m)"
+    },
+    {
+      "id": 5,
+      "cx": 8.8,
+      "cy": 2.6,
+      "cz": 13.1,
+      "w": 10.0,
+      "d": 10.0,
+      "h": 5.2,
+      "roof_type": "hip",
+      "roof_h": 1.8,
+      "pts": 71,
+      "type": "residential_house",
+      "label": "House #5 (5.2m)"
+    },
+    {
+      "id": 8,
+      "cx": -22.2,
+      "cy": 2.6,
+      "cz": 25.6,
+      "w": 10.0,
+      "d": 10.0,
+      "h": 5.2,
+      "roof_type": "hip",
+      "roof_h": 1.8,
+      "pts": 60,
+      "type": "residential_house",
+      "label": "House #8 (5.2m)"
+    },
+    {
+      "id": 7,
+      "cx": 10.6,
+      "cy": 2.6,
+      "cz": 21.6,
+      "w": 10.0,
+      "d": 10.0,
+      "h": 5.2,
+      "roof_type": "hip",
+      "roof_h": 1.8,
+      "pts": 24,
+      "type": "residential_house",
+      "label": "House #7 (5.2m)"
+    },
+    {
+      "id": 3,
+      "cx": 17.0,
+      "cy": 2.6,
+      "cz": 5.7,
+      "w": 10.0,
+      "d": 10.0,
+      "h": 5.2,
+      "roof_type": "hip",
+      "roof_h": 1.8,
+      "pts": 21,
+      "type": "residential_house",
+      "label": "House #3 (5.2m)"
+    }
+  ],
+  "vegetation": [
+    {
+      "x": 7.6,
+      "y": 0.0,
+      "z": -4.0,
+      "h": 7.5,
+      "r": 3.4,
+      "pts": 4500
+    },
+    {
+      "x": -6.4,
+      "y": 0.0,
+      "z": -4.0,
+      "h": 7.5,
+      "r": 3.4,
+      "pts": 3116
+    },
+    {
+      "x": -16.9,
+      "y": 0.0,
+      "z": 17.0,
+      "h": 3.8,
+      "r": 2.2,
+      "pts": 235
+    },
+    {
+      "x": -9.9,
+      "y": 0.0,
+      "z": 20.5,
+      "h": 3.8,
+      "r": 2.2,
+      "pts": 98
+    }
+  ],
+  "roads": [
+    {
+      "x": 1.2,
+      "z": -0.0,
+      "w": 19.1,
+      "d": 20.0,
+      "pts": 2459
+    },
+    {
+      "x": -10.8,
+      "z": 1.6,
+      "w": 14.8,
+      "d": 19.4,
+      "pts": 1773
+    },
+    {
+      "x": -16.6,
+      "z": 20.5,
+      "w": 19.9,
+      "d": 19.9,
+      "pts": 210
+    },
+    {
+      "x": 4.2,
+      "z": 21.1,
+      "w": 19.0,
+      "d": 18.7,
+      "pts": 245
+    }
+  ],
+  "water": [
+    {
+      "x": 5.9,
+      "z": 2.1,
+      "w": 21.0,
+      "d": 24.8,
+      "type": "pool",
+      "pts": 1803
+    },
+    {
+      "x": -9.8,
+      "z": 2.6,
+      "w": 23.3,
+      "d": 23.7,
+      "type": "pool",
+      "pts": 2687
+    },
+    {
+      "x": 8.0,
+      "z": 25.9,
+      "w": 21.7,
+      "d": 19.3,
+      "type": "pool",
+      "pts": 145
+    },
+    {
+      "x": -10.6,
+      "z": 25.9,
+      "w": 25.0,
+      "d": 15.7,
+      "type": "pool",
+      "pts": 324
+    }
+  ],
+  "dense_ply_url": "/jobs/6059e6/scene/dense_web.ply",
+  "semantic_ply_url": "/jobs/6059e6/scene/semantic.ply",
+  "build_time_sec": 2.5
+}

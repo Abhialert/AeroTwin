@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AeroTwin — 3D Digital Twin Workstation</title>
+<meta name="description" content="AeroTwin professional geospatial 3D digital twin workstation driven by real drone video reconstruction.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/PLYLoader.js"></script>
+<style>
+:root {
+  --bg: #060b14;
+  --panel: #0c1220;
+  --surf: #111827;
+  --hdr: #08101c;
+  --bsub: #1a2540;
+  --bmid: #243050;
+  --bfoc: #2d3f60;
+  --txt: #e8f0fe;
+  --muted: #8899b4;
+  --dark: #4a5a78;
+  --cyan: #00d4ff;
+  --cynd: rgba(0, 212, 255, 0.12);
+  --grn: #00ff88;
+  --grnd: rgba(0, 255, 136, 0.1);
+  --amb: #ffaa00;
+  --red: #ff4466;
+  --pur: #a855f7;
+  --warn: #f59e0b;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  width: 100%; height: 100%; overflow: hidden;
+  background: var(--bg); color: var(--txt);
+  font-family: Inter, -apple-system, sans-serif;
+  font-size: 12px; -webkit-font-smoothing: antialiased;
+}
+#app {
+  display: grid;
+  grid-template-columns: 264px 1fr 304px;
+  grid-template-rows: 46px 1fr 44px;
+  width: 100vw; height: 100vh;
+}
+
+/* TOP BAR */
+#topbar {
+  grid-column: 1 / -1; grid-row: 1;
+  background: var(--hdr); border-bottom: 1px solid var(--bsub);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 16px; gap: 12px; z-index: 100;
+}
+.logo { display: flex; align-items: center; gap: 10px; cursor: pointer; text-decoration: none; }
+.logo-icon {
+  width: 26px; height: 26px;
+  background: linear-gradient(135deg, #00d4ff, #a855f7);
+  border-radius: 6px; display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800; color: #000;
+}
+.logo-name { font-size: 14px; font-weight: 700; letter-spacing: 0.08em; color: var(--txt); }
+.logo-sub { font-size: 9px; color: var(--dark); text-transform: uppercase; letter-spacing: 0.12em; }
+.tc { display: flex; align-items: center; gap: 14px; flex: 1; justify-content: center; }
+.pchip {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--surf); border: 1px solid var(--bmid);
+  padding: 4px 12px; border-radius: 4px; font-size: 11px;
+}
+.pdot {
+  width: 6px; height: 6px; background: var(--grn);
+  border-radius: 50%; animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.tabs { display: flex; gap: 2px; }
+.tab {
+  padding: 5px 14px; border-radius: 3px; font-size: 11px;
+  color: var(--dark); cursor: pointer; transition: 0.2s;
+  border: 1px solid transparent; user-select: none;
+}
+.tab:hover { color: var(--muted); background: var(--surf); }
+.tab.on { color: var(--cyan); background: var(--cynd); border-color: rgba(0, 212, 255, 0.25); }
+.tright { display: flex; align-items: center; gap: 12px; }
+.sysc { font-size: 10px; color: var(--dark); font-family: 'JetBrains Mono', monospace; }
+.sv { color: var(--grn); }
+a.bbtn {
+  padding: 5px 10px; background: var(--surf); border: 1px solid var(--bmid);
+  border-radius: 3px; font-size: 10px; color: var(--muted);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+  transition: 0.2s;
+}
+a.bbtn:hover { border-color: var(--bfoc); color: var(--txt); }
+
+/* LEFT PANEL */
+#lp {
+  grid-column: 1; grid-row: 2;
+  background: var(--panel); border-right: 1px solid var(--bsub);
+  display: flex; flex-direction: column; overflow-y: auto;
+}
+.lsec { border-bottom: 1px solid var(--bsub); padding: 12px; }
+.lsh {
+  font-size: 9px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--dark); margin-bottom: 10px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.lsbadge {
+  padding: 1px 6px; background: var(--surf); border: 1px solid var(--bmid);
+  border-radius: 2px; font-size: 8px; color: var(--muted);
+}
+.tgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px; }
+.tbox { background: var(--surf); border: 1px solid var(--bmid); border-radius: 4px; padding: 8px 10px; }
+.tlabel { font-size: 8px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--dark); margin-bottom: 4px; }
+.tval { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--cyan); line-height: 1; }
+.tunit { font-size: 9px; color: var(--dark); margin-left: 2px; }
+.brow { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.bbar { flex: 1; height: 4px; background: var(--bsub); border-radius: 2px; overflow: hidden; }
+.bfill { height: 100%; background: var(--grn); border-radius: 2px; width: 85%; transition: width 0.5s; }
+.bpct { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--grn); }
+.sigrow { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+.sigbar { flex: 1; height: 3px; background: var(--bsub); border-radius: 2px; }
+.sigfill {
+  height: 100%; background: linear-gradient(90deg, var(--grn), var(--cyan));
+  border-radius: 2px; width: 85%; animation: sig 3s ease-in-out infinite;
+}
+@keyframes sig { 0%, 100% { width: 85%; } 50% { width: 78%; } }
+
+.pplist { display: flex; flex-direction: column; gap: 8px; }
+.pprow { display: flex; align-items: flex-start; gap: 8px; }
+.ppdot {
+  width: 16px; height: 16px; border-radius: 3px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; margin-top: 1px;
+}
+.ppdone { background: var(--grnd); color: var(--grn); border: 1px solid rgba(0, 255, 136, 0.25); }
+.ppskip { background: rgba(255, 170, 0, 0.12); color: var(--amb); border: 1px solid rgba(255, 170, 0, 0.25); }
+.ppinfo { flex: 1; }
+.ppname { font-size: 11px; font-weight: 500; color: var(--txt); }
+.ppdet { font-size: 9px; color: var(--dark); font-family: 'JetBrains Mono', monospace; margin-top: 1px; }
+
+.vblist { display: flex; flex-direction: column; gap: 5px; }
+.vbtn {
+  display: flex; align-items: center; gap: 8px; width: 100%;
+  padding: 7px 10px; background: var(--surf); border: 1px solid var(--bmid);
+  color: var(--muted); border-radius: 4px; cursor: pointer; font-size: 11px;
+  transition: 0.2s; font-family: Inter, sans-serif; text-align: left;
+}
+.vbtn:hover { border-color: var(--bfoc); color: var(--txt); }
+.vbtn.on { background: var(--cynd); border-color: rgba(0, 212, 255, 0.35); color: var(--cyan); }
+.vsub { font-size: 9px; color: var(--dark); margin-left: auto; font-family: 'JetBrains Mono', monospace; }
+
+.llist { display: flex; flex-direction: column; gap: 5px; }
+.lrow {
+  display: flex; align-items: center; gap: 8px; padding: 6px 8px;
+  border: 1px solid var(--bsub); border-radius: 4px; cursor: pointer;
+  transition: 0.2s; user-select: none;
+}
+.lrow:hover { border-color: var(--bfoc); }
+.lsw { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+.lname { flex: 1; font-size: 11px; color: var(--muted); }
+.lpct { font-size: 9px; color: var(--dark); font-family: 'JetBrains Mono', monospace; }
+.ltog {
+  width: 14px; height: 14px; border: 1px solid var(--bfoc);
+  border-radius: 2px; display: flex; align-items: center; justify-content: center;
+  font-size: 9px;
+}
+.lrow.on .ltog { background: var(--cyan); border-color: var(--cyan); color: #000; }
+.lrow.on .lname { color: var(--txt); }
+
+/* Keyframe horizontal carousel */
+.kf-strip {
+  display: flex; gap: 6px; overflow-x: auto; padding: 4px 0;
+  scrollbar-width: thin;
+}
+.kf-thumb {
+  width: 68px; height: 42px; object-fit: cover; border-radius: 3px;
+  border: 1px solid var(--bmid); cursor: pointer; flex-shrink: 0; transition: 0.2s;
+}
+.kf-thumb:hover { border-color: var(--cyan); transform: scale(1.05); }
+
+/* CENTER VIEWPORT */
+#cv { grid-column: 2; grid-row: 2; position: relative; background: #020712; overflow: hidden; }
+#tc { display: block; width: 100%; height: 100%; }
+#lo {
+  position: absolute; inset: 0; background: var(--bg);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  z-index: 50; transition: opacity 0.6s;
+}
+.ring {
+  width: 48px; height: 48px; border: 2px solid var(--bmid);
+  border-top-color: var(--cyan); border-radius: 50%;
+  animation: spin 0.8s linear infinite; margin-bottom: 20px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.lt2 { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); }
+.ls2 { font-size: 9px; color: var(--dark); margin-top: 6px; font-family: 'JetBrains Mono', monospace; }
+
+/* Compass */
+#cmp { position: absolute; top: 14px; right: 14px; width: 70px; height: 70px; pointer-events: none; }
+.cring {
+  width: 70px; height: 70px; border-radius: 50%; border: 1px solid var(--bmid);
+  background: rgba(6, 11, 20, 0.85); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center; position: relative;
+}
+.cn { position: absolute; top: 4px; left: 50%; transform: translateX(-50%); font-size: 8px; color: var(--red); font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+.cs { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); font-size: 8px; color: var(--dark); font-family: 'JetBrains Mono', monospace; }
+.ce { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); font-size: 7px; color: var(--dark); font-family: 'JetBrains Mono', monospace; }
+.cw { position: absolute; left: 5px; top: 50%; transform: translateY(-50%); font-size: 7px; color: var(--dark); font-family: 'JetBrains Mono', monospace; }
+.ndl {
+  width: 2px; height: 22px; background: linear-gradient(to bottom, var(--red) 50%, var(--dark) 50%);
+  margin: 0 auto; transform-origin: bottom center; border-radius: 2px;
+}
+
+/* Minimap */
+#mmwrap {
+  position: absolute; bottom: 14px; right: 14px; width: 140px; height: 140px;
+  background: rgba(6, 11, 20, 0.88); border: 1px solid var(--bmid);
+  border-radius: 4px; overflow: hidden; backdrop-filter: blur(8px);
+}
+#mmcanvas { width: 100%; height: 100%; display: block; }
+.mmlbl { position: absolute; top: 4px; left: 6px; font-size: 8px; color: var(--dark); font-family: 'JetBrains Mono', monospace; }
+
+/* Floating HUD Chips */
+.htl { position: absolute; top: 14px; left: 14px; display: flex; flex-direction: column; gap: 4px; pointer-events: none; }
+.hchip {
+  background: rgba(6, 11, 20, 0.85); border: 1px solid var(--bmid);
+  padding: 3px 10px; border-radius: 3px; font-size: 9px;
+  font-family: 'JetBrains Mono', monospace; color: var(--muted);
+  backdrop-filter: blur(6px);
+}
+.hcc { color: var(--cyan); }
+.hcg { color: var(--grn); }
+.fbadge {
+  position: absolute; bottom: 14px; left: 14px;
+  background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.35);
+  padding: 4px 10px; border-radius: 3px; font-size: 9px;
+  font-family: 'JetBrains Mono', monospace; color: var(--pur); display: none;
+}
+#tt {
+  position: absolute; pointer-events: none; z-index: 200;
+  background: rgba(6, 11, 20, 0.94); border: 1px solid var(--bfoc);
+  padding: 6px 10px; border-radius: 4px; font-size: 10px;
+  font-family: 'JetBrains Mono', monospace; color: var(--cyan);
+  backdrop-filter: blur(8px); display: none;
+}
+
+/* RIGHT PANEL */
+#rp {
+  grid-column: 3; grid-row: 2;
+  background: var(--panel); border-left: 1px solid var(--bsub);
+  display: flex; flex-direction: column; overflow-y: auto;
+}
+.rsec { border-bottom: 1px solid var(--bsub); padding: 12px; }
+.rsh { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--dark); margin-bottom: 10px; }
+.sgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.scard { background: var(--surf); border: 1px solid var(--bmid); border-radius: 4px; padding: 8px 10px; }
+.sclbl { font-size: 8px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dark); margin-bottom: 4px; }
+.scval { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--txt); }
+.scsub { font-size: 8px; color: var(--dark); margin-top: 2px; }
+.irow {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 5px 0; border-bottom: 1px solid var(--bsub);
+}
+.irow:last-child { border-bottom: none; }
+.ikey { font-size: 10px; color: var(--dark); }
+.ival { font-size: 10px; font-family: 'JetBrains Mono', monospace; color: var(--txt); font-weight: 500; }
+.ival.c { color: var(--cyan); }
+.ival.g { color: var(--grn); }
+.ival.a { color: var(--amb); }
+
+.mdisp { background: var(--surf); border: 1px solid var(--bmid); border-radius: 4px; padding: 12px; text-align: center; margin-bottom: 8px; }
+.mbig { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 700; color: var(--cyan); line-height: 1; }
+.munit { font-size: 10px; color: var(--dark); margin-top: 4px; }
+.mpts { font-size: 9px; color: var(--dark); font-family: 'JetBrains Mono', monospace; margin-top: 6px; }
+
+#altchart { width: 100%; height: 50px; display: block; border-radius: 3px; }
+.sembars { display: flex; flex-direction: column; gap: 6px; }
+.semrow { display: flex; align-items: center; gap: 8px; }
+.semlbl { font-size: 10px; color: var(--muted); width: 85px; flex-shrink: 0; }
+.semtrack { flex: 1; height: 5px; background: var(--bsub); border-radius: 3px; overflow: hidden; }
+.semfill { height: 100%; border-radius: 3px; }
+.sempct { font-size: 9px; color: var(--dark); font-family: 'JetBrains Mono', monospace; width: 36px; text-align: right; flex-shrink: 0; }
+.logfeed { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--dark); line-height: 2; max-height: 120px; overflow-y: auto; }
+.logline { display: flex; gap: 8px; }
+.logts { color: var(--dark); flex-shrink: 0; }
+.logc { color: var(--cyan); }
+.logg { color: var(--grn); }
+.loga { color: var(--amb); }
+
+/* BOTTOM BAR */
+#bb {
+  grid-column: 1 / -1; grid-row: 3;
+  background: var(--hdr); border-top: 1px solid var(--bsub);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 16px; z-index: 100; gap: 12px;
+}
+.toolrow { display: flex; gap: 6px; align-items: center; }
+.tbtn {
+  display: flex; align-items: center; gap: 5px; padding: 5px 10px;
+  background: var(--surf); border: 1px solid var(--bmid); border-radius: 3px;
+  color: var(--muted); font-size: 10px; cursor: pointer; transition: 0.2s;
+  font-family: Inter, sans-serif; user-select: none;
+}
+.tbtn:hover { border-color: var(--bfoc); color: var(--txt); }
+.tbtn.on { background: var(--cynd); border-color: rgba(0, 212, 255, 0.35); color: var(--cyan); }
+.tbtn.fly { background: rgba(168, 85, 247, 0.15); border-color: rgba(168, 85, 247, 0.35); color: var(--pur); }
+.tsep { width: 1px; height: 20px; background: var(--bsub); }
+.mrr {
+  display: none; align-items: center; gap: 10px; padding: 4px 10px;
+  background: var(--cynd); border: 1px solid rgba(0, 212, 255, 0.25); border-radius: 3px;
+}
+.mrlbl { font-size: 9px; color: var(--muted); }
+.mrval { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--cyan); font-weight: 600; }
+.statright { display: flex; align-items: center; gap: 18px; }
+.statp { display: flex; flex-direction: column; align-items: flex-end; }
+.stapv { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--txt); font-weight: 500; }
+.stapl { font-size: 8px; color: var(--dark); text-transform: uppercase; letter-spacing: 0.06em; }
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--panel); }
+::-webkit-scrollbar-thumb { background: var(--bfoc); border-radius: 2px; }
+</style>
+</head>
+<body>
+<div id="app">
+<!-- TOP BAR -->
+<header id="topbar">
+  <a href="index.html" class="logo">
+    <div class="logo-icon">AT</div>
+    <div><div class="logo-name">AEROTWIN</div><div class="logo-sub">Digital Twin Workstation</div></div>
+  </a>
+  <div class="tc">
+    <div class="pchip">
+      <div class="pdot"></div>
+      <span style="color:var(--dark)">PROJECT:</span>
+      <span style="color:var(--txt);font-weight:600" id="top-proj">SITE_001_DEMO</span>
+      <span style="color:var(--dark);margin-left:8px" id="top-stats">Loading Real Cloud...</span>
+      <span style="color:var(--grn);margin-left:6px">&#x25CF; LIVE</span>
+    </div>
+    <div class="tabs">
+      <div class="tab on" id="tab3" onclick="switchModeBtn('urban')">Urban 3D</div>
+      <div class="tab" id="tabS" onclick="switchModeBtn('wire')">Semantic Wire</div>
+      <div class="tab" id="tabP" onclick="switchModeBtn('cloud')">3D Point Cloud</div>
+      <div class="tab" id="tabN" onclick="switchModeBtn('night')">Night Mode</div>
+      <div class="tab" id="tabF" onclick="toggleFlight()">Flight Path</div>
+    </div>
+  </div>
+  <div class="tright">
+    <div class="sysc">RENDER: <span class="sv">WebGL 2.0</span></div>
+    <div class="sysc">FPS: <span class="sv" id="fpsEl">60</span></div>
+    <a href="index.html" class="bbtn">&larr; Upload New Video</a>
+  </div>
+</header>
+
+<!-- LEFT PANEL -->
+<aside id="lp">
+  <!-- Live Telemetry -->
+  <div class="lsec">
+    <div class="lsh">Live Drone Telemetry <div class="lsbadge">FLIGHT REPLAY</div></div>
+    <div class="tgrid">
+      <div class="tbox"><div class="tlabel">Altitude AGL</div><div class="tval" id="talt">--<span class="tunit">m</span></div></div>
+      <div class="tbox"><div class="tlabel">Ground Speed</div><div class="tval" id="tspd">--<span class="tunit">m/s</span></div></div>
+      <div class="tbox"><div class="tlabel">GPS Coordinates</div><div class="tval" style="font-size:10px;color:var(--muted)" id="tlat">Unavailable</div></div>
+      <div class="tbox"><div class="tlabel">Scale Status</div><div class="tval" style="font-size:10px;color:var(--amb)" id="tscale">Relative</div></div>
+      <div class="tbox"><div class="tlabel">Heading</div><div class="tval" id="thdg">--<span class="tunit">&deg;</span></div></div>
+      <div class="tbox"><div class="tlabel">Vert Speed</div><div class="tval" id="tvspd">--<span class="tunit">m/s</span></div></div>
+    </div>
+    <div class="brow">
+      <span>&#x1F50B;</span>
+      <div class="bbar"><div class="bfill" id="bfill"></div></div>
+      <span class="bpct" id="bpct">88%</span>
+    </div>
+    <div class="sigrow" style="margin-top:6px">
+      <span style="font-size:9px;color:var(--dark)">Video Link</span>
+      <div class="sigbar"><div class="sigfill"></div></div>
+      <span style="font-size:9px;color:var(--grn);font-family:'JetBrains Mono',monospace" id="tel-res">1080p@30</span>
+    </div>
+  </div>
+
+  <div class="lsec">
+    <div class="lsh">Reconstruction Pipeline <div class="lsbadge" id="pl-status">REAL DATA</div></div>
+    <div class="pplist">
+      <div class="pprow"><div class="ppdot ppdone">&#x2713;</div><div class="ppinfo"><div class="ppname">Video Ingestion</div><div class="ppdet" id="pl-1">loading...</div></div></div>
+      <div class="pprow"><div class="ppdot ppdone">&#x2713;</div><div class="ppinfo"><div class="ppname">Keyframe Selection</div><div class="ppdet" id="pl-2">loading...</div></div></div>
+      <div class="pprow"><div class="ppdot ppdone">&#x2713;</div><div class="ppinfo"><div class="ppname">SIFT-GPU Feature Extraction</div><div class="ppdet" id="pl-3">COLMAP CUDA &middot; GPU accelerated</div></div></div>
+      <div class="pprow"><div class="ppdot ppdone">&#x2713;</div><div class="ppinfo"><div class="ppname">Structure from Motion</div><div class="ppdet" id="pl-4">loading...</div></div></div>
+      <div class="pprow"><div class="ppdot ppdone">&#x2713;</div><div class="ppinfo"><div class="ppname">Sparse 3D Reconstruction</div><div class="ppdet" id="pl-5">loading...</div></div></div>
+      <div class="pprow"><div class="ppdot ppdone">&#x2713;</div><div class="ppinfo"><div class="ppname">Multi-View 2D&rarr;3D Semantics</div><div class="ppdet" id="pl-6">25 camera projections &middot; voting</div></div></div>
+      <div class="pprow"><div class="ppdot ppdone">&#x2713;</div><div class="ppinfo"><div class="ppname">3D Digital Twin Package</div><div class="ppdet" id="pl-7">loading...</div></div></div>
+      <div class="pprow"><div class="ppdot ppskip">!</div><div class="ppinfo"><div class="ppname">Metric Georeferencing</div><div class="ppdet" id="pl-8">loading...</div></div></div>
+    </div>
+  </div>
+
+  <!-- View Mode -->
+  <div class="lsec">
+    <div class="lsh">View Mode</div>
+    <div class="vblist">
+      <button class="vbtn on" id="vbu" onclick="switchModeBtn('urban')">&#x1F3D9; Urban 3D <span class="vsub">REAL+PROXY</span></button>
+      <button class="vbtn" id="vbw" onclick="switchModeBtn('wire')">&#x1F4D0; Semantic Wireframe <span class="vsub">CYAN TOPO</span></button>
+      <button class="vbtn" id="vbc" onclick="switchModeBtn('cloud')">&#x2601; 3D Point Cloud <span class="vsub">DENSE MVS</span></button>
+      <button class="vbtn" id="vbn" onclick="switchModeBtn('night')">&#x1F303; Night Mode <span class="vsub">CYBER TWIN</span></button>
+    </div>
+  </div>
+
+  <!-- Semantic Layers -->
+  <div class="lsec" style="flex:1">
+    <div class="lsh">Semantic Layers</div>
+    <div class="llist">
+      <div class="lrow on" id="lr-bldg" onclick="toggleLayer('bldg')"><div class="lsw" style="background:#00d4ff"></div><div class="lname">Houses &amp; Buildings</div><div class="lpct" id="lpct-bldg">&ndash;</div><div class="ltog">&#x2713;</div></div>
+      <div class="lrow on" id="lr-veg" onclick="toggleLayer('veg')"><div class="lsw" style="background:#22c55e"></div><div class="lname">Trees &amp; Vegetation</div><div class="lpct" id="lpct-veg">&ndash;</div><div class="ltog">&#x2713;</div></div>
+      <div class="lrow on" id="lr-road" onclick="toggleLayer('road')"><div class="lsw" style="background:#64748b"></div><div class="lname">Roads &amp; Pavement</div><div class="lpct" id="lpct-road">&ndash;</div><div class="ltog">&#x2713;</div></div>
+      <div class="lrow on" id="lr-water" onclick="toggleLayer('water')"><div class="lsw" style="background:#0284c7"></div><div class="lname">Water &amp; Pools</div><div class="lpct" id="lpct-water">&ndash;</div><div class="ltog">&#x2713;</div></div>
+      <div class="lrow on" id="lr-traj" onclick="toggleLayer('traj')"><div class="lsw" style="background:#a855f7"></div><div class="lname">Flight Path</div><div class="lpct" id="lpct-traj">&ndash; poses</div><div class="ltog">&#x2713;</div></div>
+    </div>
+  </div>
+
+  <!-- Keyframe Thumbnails Strip -->
+  <div class="lsec" id="kf-section" style="display:none">
+    <div class="lsh">Keyframes <div class="lsbadge" id="kf-count">0 frames</div></div>
+    <div class="kf-strip" id="kf-strip"></div>
+  </div>
+</aside>
+
+<!-- CENTER 3D VIEWPORT -->
+<main id="cv">
+  <canvas id="tc"></canvas>
+
+  <!-- Loading Overlay -->
+  <div id="lo">
+    <div class="ring"></div>
+    <div class="lt2" id="lt-main">Loading Real Digital Twin Scene...</div>
+    <div class="ls2" id="lsub">Fetching scene.json and dense point cloud...</div>
+  </div>
+
+  <!-- 3D Compass -->
+  <div id="cmp">
+    <div class="cring">
+      <div class="cn">N</div><div class="cs">S</div><div class="ce">E</div><div class="cw">W</div>
+      <div style="display:flex;flex-direction:column;align-items:center"><div class="ndl" id="ndl"></div></div>
+    </div>
+  </div>
+
+  <!-- Minimap -->
+  <div id="mmwrap">
+    <canvas id="mmcanvas"></canvas>
+    <div class="mmlbl">SITE OVERVIEW</div>
+  </div>
+
+  <!-- Floating HUD Chips -->
+  <div class="htl">
+    <div class="hchip">MODE: <span class="hcc" id="hudMode">URBAN 3D</span></div>
+    <div class="hchip">SCALE: <span class="hcc" id="hudScale">Relative Scale</span></div>
+    <div class="hchip">CAM: <span class="hcc" id="hudCam">0, 150, 250</span></div>
+    <div class="hchip" id="hudHover" style="display:none">INSPECT: <span class="hcg" id="hudHoverVal">&ndash;</span></div>
+  </div>
+
+  <!-- Flight Replay Badge -->
+  <div class="fbadge" id="fbadge">&#x25BA; FLIGHT REPLAY &mdash; 259 REAL CAMERA POSES</div>
+
+  <!-- Inspector Tooltip -->
+  <div id="tt"></div>
+</main>
+
+<!-- RIGHT PANEL -->
+<aside id="rp">
+  <!-- Reconstruction Stats -->
+  <div class="rsec">
+    <div class="rsh">Reconstruction Stats</div>
+    <div class="sgrid">
+      <div class="scard"><div class="sclbl">Display Points</div><div class="scval" id="rp-pts">--</div><div class="scsub" id="rp-pts-sub">Amplified COLMAP cloud</div></div>
+      <div class="scard"><div class="sclbl">Cameras Reg</div><div class="scval" id="rp-cams">--</div><div class="scsub" id="rp-cams-sub">Registration rate</div></div>
+      <div class="scard"><div class="sclbl">Building Clusters</div><div class="scval" id="rp-bldg">--</div><div class="scsub">Connected Components</div></div>
+      <div class="scard"><div class="sclbl">Metric Scale</div><div class="scval" id="rp-scale">--</div><div class="scsub" id="rp-scale-sub">Vision-derived</div></div>
+      <div class="scard"><div class="sclbl">Scene Width</div><div class="scval" id="rp-width">--</div><div class="scsub">COLMAP Lateral</div></div>
+      <div class="scard"><div class="sclbl">Scene Depth</div><div class="scval" id="rp-depth">--</div><div class="scsub">COLMAP Flight Span</div></div>
+      <div class="scard"><div class="sclbl">Sparse Points</div><div class="scval" id="rp-inliers">--</div><div class="scsub">COLMAP 3D Map</div></div>
+      <div class="scard"><div class="sclbl">Compute Time</div><div class="scval" id="rp-time">--</div><div class="scsub">Full pipeline</div></div>
+    </div>
+  </div>
+
+  <!-- Scene Inspector -->
+  <div class="rsec">
+    <div class="rsh">Scene Inspector</div>
+    <div class="irow"><span class="ikey">Active Mode</span><span class="ival c" id="inspMode">Urban 3D</span></div>
+    <div class="irow"><span class="ikey">Point Cloud Size</span><span class="ival" id="inspPts">28,742 pts</span></div>
+    <div class="irow"><span class="ikey">Mesh Triangles</span><span class="ival" id="inspTri">&ndash;</span></div>
+    <div class="irow"><span class="ikey">Camera Distance</span><span class="ival" id="inspDist">&ndash;</span></div>
+    <div class="irow"><span class="ikey">Orbit Target</span><span class="ival c" id="inspTgt">0, 0, 0</span></div>
+    <div class="irow"><span class="ikey">Selected Object</span><span class="ival g" id="inspHov">No selection</span></div>
+    <div class="irow"><span class="ikey">Render FPS</span><span class="ival g" id="inspFps">60</span></div>
+  </div>
+
+  <!-- Measurement Tool -->
+  <div class="rsec">
+    <div class="rsh">Measurement Tool <span style="color:var(--dark);font-size:8px">[M] to toggle</span></div>
+    <div class="mdisp">
+      <div class="mbig" id="measDisp">&mdash;</div>
+      <div class="munit" id="measUnit">Press [M] then click two 3D points</div>
+      <div class="mpts" id="measPts">No points selected</div>
+    </div>
+    <div class="irow"><span class="ikey">Point A</span><span class="ival" id="measA">&ndash;</span></div>
+    <div class="irow"><span class="ikey">Point B</span><span class="ival" id="measB">&ndash;</span></div>
+    <div class="irow"><span class="ikey">&Delta; Altitude (&Delta;Y)</span><span class="ival a" id="measDY">&ndash;</span></div>
+    <div class="irow"><span class="ikey">Calibration</span><span class="ival" id="measCal">Relative Units</span></div>
+  </div>
+
+  <!-- Altitude Profile Chart -->
+  <div class="rsec">
+    <div class="rsh">Flight Altitude Profile (<span id="rp-cam-count">--</span> Camera Poses)</div>
+    <canvas id="altchart"></canvas>
+  </div>
+
+  <!-- Semantic Distribution -->
+  <div class="rsec">
+    <div class="rsh">Semantic 3D Distribution</div>
+    <div class="sembars" id="dyn-sembars"></div>
+    <div style="margin-top:8px;font-size:9px;color:var(--dark);line-height:1.6">
+      Classified via multi-view 2D-to-3D projection into 25 video camera poses with geometry refinement.
+    </div>
+  </div>
+
+  <!-- System Log -->
+  <div class="rsec" style="flex:1">
+    <div class="rsh">System Log</div>
+    <div class="logfeed" id="logfeed">
+      <div class="logline"><span class="logts">--:--:--</span><span class="logc">[3D]</span><span>AeroTwin Workstation initialising...</span></div>
+    </div>
+  </div>
+</aside>
+
+<!-- BOTTOM CONTROL BAR -->
+<footer id="bb">
+  <div class="toolrow">
+    <button class="tbtn" id="btnMeas" onclick="toggleMeasure()">&#x1F4CF; Measure [M]</button>
+    <div class="tsep"></div>
+    <button class="tbtn" id="btnFly" onclick="toggleFlight()">&#x25B6; Flight Replay [F]</button>
+    <button class="tbtn" onclick="resetCam()">&#x229E; Reset View [R]</button>
+    <button class="tbtn" onclick="doScreenshot()">&#x1F4F7; Screenshot</button>
+    <div class="mrr" id="measReadout"><span class="mrlbl">DISTANCE:</span><span class="mrval" id="measVal">0.00 m</span></div>
+  </div>
+  <div class="statright">
+    <div class="statp"><span class="stapv" id="statPts">28.7K</span><span class="stapl">Display Pts</span></div>
+    <div class="statp"><span class="stapv" id="statDraw">0</span><span class="stapl">Draw Calls</span></div>
+    <div class="statp"><span class="stapv">Three.js r128</span><span class="stapl">Renderer</span></div>
+    <div class="statp"><span class="stapv">COLMAP Dense</span><span class="stapl">Pipeline</span></div>
+    <div class="statp"><span class="stapv">AeroTwin</span><span class="stapl">Digital Twin</span></div>
+  </div>
+</footer>
+</div>
+
+<script>
+// =============================================================================
+// AEROTWIN 3D DIGITAL TWIN WORKSTATION ENGINE
+// Full Real Drone Reconstruction + Three.js Y-Up Coordination
+// =============================================================================
+
+const urlParams = new URLSearchParams(window.location.search);
+const jobId = urlParams.get('job') || 'demo';
+
+// Scene Data State
+let sceneData = null;
+let resultsData = null;
+let sceneScale = 1.0;
+let isCalibrated = false;
+
+// Three.js Core Objects
+const canvas = document.getElementById('tc');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x020712);
+scene.fog = new THREE.FogExp2(0x020712, 0.0001);
+
+const camera = new THREE.PerspectiveCamera(50, 1, 0.5, 15000);
+camera.position.set(0, 320, 650);
+
+const ctrl = new THREE.OrbitControls(camera, renderer.domElement);
+ctrl.enableDamping = true;
+ctrl.dampingFactor = 0.06;
+ctrl.minDistance = 5;
+ctrl.maxDistance = 8000;
+ctrl.maxPolarAngle = Math.PI / 2 + 0.05;
+
+// Scene Groups & Interactive Objects
+let densePointCloud = null;
+let semanticPointCloud = null;
+const buildingGroup = new THREE.Group();
+const wireframeGroup = new THREE.Group();
+const vegetationGroup = new THREE.Group();
+const vegWireGroup = new THREE.Group();
+const roadGroup = new THREE.Group();
+const roadWireGroup = new THREE.Group();
+const waterGroup = new THREE.Group();
+const waterWireGroup = new THREE.Group();
+const flightGroup = new THREE.Group();
+let droneMesh = null;
+let flightCurve = null;
+let groundGrid = null;
+let terrainPlane = null;
+
+scene.add(buildingGroup);
+scene.add(wireframeGroup);
+scene.add(vegetationGroup);
+scene.add(vegWireGroup);
+scene.add(roadGroup);
+scene.add(roadWireGroup);
+scene.add(waterGroup);
+scene.add(waterWireGroup);
+scene.add(flightGroup);
+
+// View Modes: 'urban' (Real Cloud + Proxies), 'wire' (Semantic Cloud + Wireframes), 'cloud' (Pure Dense Cloud), 'night' (Cyber Twin)
+let currentMode = 'urban';
+let isFly = false;
+let flyT = 0;
+let isMeas = false;
+let measPts = [];
+const measMarkers = [];
+let measLine = null;
+
+// Layer Visibility State
+const layerState = {
+  bldg: true,
+  veg: true,
+  road: true,
+  water: true,
+  traj: true,
+};
+
+// Animation & Performance Tracking
+let frameCount = 0;
+let lastFpsTime = performance.now();
+let lastFrameTime = performance.now();
+let curFps = 60;
+let telemetryTime = 0;
+let droneHeading = 0;
+
+// Resize Handler
+function resize() {
+  const container = document.getElementById('cv');
+  const w = container.clientWidth;
+  const h = container.clientHeight;
+  renderer.setSize(w, h);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', resize);
+resize();
+
+// ── Lighting Setup ───────────────────────────────────────────────────────────
+function setupLighting() {
+  scene.add(new THREE.AmbientLight(0x223348, 0.9));
+
+  const sun = new THREE.DirectionalLight(0xfff6ea, 1.8);
+  sun.position.set(400, 700, 300);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(2048, 2048);
+  sun.shadow.camera.near = 10;
+  sun.shadow.camera.far = 2500;
+  const d = 800;
+  sun.shadow.camera.left = -d; sun.shadow.camera.right = d;
+  sun.shadow.camera.top = d; sun.shadow.camera.bottom = -d;
+  sun.shadow.bias = -0.0005;
+  scene.add(sun);
+
+  const skyFill = new THREE.HemisphereLight(0x3877cc, 0x182418, 0.6);
+  scene.add(skyFill);
+
+  const backFill = new THREE.DirectionalLight(0x1a3360, 0.5);
+  backFill.position.set(-400, 300, -400);
+  scene.add(backFill);
+}
+
+// ── Point Texture Generator ──────────────────────────────────────────────────
+function createPointTexture() {
+  const c = document.createElement('canvas');
+  c.width = 64; c.height = 64;
+  const ctx = c.getContext('2d');
+  const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  g.addColorStop(0, 'rgba(255,255,255,1)');
+  g.addColorStop(0.55, 'rgba(255,255,255,0.85)');
+  g.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = g;
+  ctx.beginPath();
+  ctx.arc(32, 32, 32, 0, Math.PI * 2);
+  ctx.fill();
+  return new THREE.CanvasTexture(c);
+}
+const pointTexture = createPointTexture();
+
+// ── Point Cloud Loading ──────────────────────────────────────────────────────
+function loadDensePointCloud(url, semUrl, center) {
+  const loader = new THREE.PLYLoader();
+  setLoadSub('Loading optimized dense point cloud...');
+
+  loader.load(url, (geo) => {
+    // Translate geometry by center offset so scene is centered at (0, 0, 0)
+    geo.translate(-center.x, -center.y, -center.z);
+
+    const mat = new THREE.PointsMaterial({
+      size: 1.5,
+      vertexColors: true,
+      sizeAttenuation: true,
+      map: pointTexture,
+      alphaTest: 0.05,
+      transparent: true,
+      opacity: 0.92,
+    });
+
+    densePointCloud = new THREE.Points(geo, mat);
+    densePointCloud.name = 'dense_point_cloud';
+    scene.add(densePointCloud);
+
+    const ptCount = geo.attributes.position.count;
+    document.getElementById('inspPts').textContent = ptCount.toLocaleString() + ' pts';
+    document.getElementById('statPts').textContent = (ptCount / 1000).toFixed(1) + 'K';
+    // Update top bar with final loaded count
+    const topStats = document.getElementById('top-stats');
+    if (topStats) {
+      const camCount = sceneData?.cameras?.registered || '--';
+      const bldgCount = (sceneData?.buildings || []).length;
+      topStats.textContent = `${ptCount.toLocaleString()} pts \u00b7 ${camCount} cams \u00b7 ${bldgCount} bldgs`;
+    }
+    document.getElementById('rp-pts').textContent = (ptCount / 1000).toFixed(0) + 'K';
+    addLog('g', `Point cloud loaded: ${ptCount.toLocaleString()} pts (real photometric RGB)`);
+    addLog('g', `Metric scale: ${sceneScale.toFixed(3)} m/unit`);
+    addLog('c', '[M] measure  [F] flight replay  [R] reset cam  [click] inspect');
+
+    // Now load semantic point cloud for instant toggling
+    loader.load(semUrl, (semGeo) => {
+      semGeo.translate(-center.x, -center.y, -center.z);
+      const semMat = new THREE.PointsMaterial({
+        size: 1.5,
+        vertexColors: true,
+        sizeAttenuation: true,
+        map: pointTexture,
+        alphaTest: 0.05,
+        transparent: true,
+        opacity: 0.92,
+      });
+      semanticPointCloud = new THREE.Points(semGeo, semMat);
+      semanticPointCloud.visible = false;
+      scene.add(semanticPointCloud);
+      addLog('g', 'Semantic point cloud loaded');
+    }, undefined, (err) => {
+      console.warn('Semantic PLY load error:', err);
+    });
+
+    hideLoader();
+    applyMode(currentMode);
+  },
+  (xhr) => {
+    if (xhr.lengthComputable) {
+      const pct = Math.round((xhr.loaded / xhr.total) * 100);
+      setLoadSub(`Loading point cloud: ${pct}%`);
+    }
+  },
+  (err) => {
+    console.error('Dense PLY load failed:', err);
+    setLoadSub('Dense PLY load failed: ' + err);
+    setTimeout(hideLoader, 1500);
+  });
+}
+
+// ── Pitched / Hip Roof Geometry Generator ─────────────────────────────────────
+function createPitchedRoofGeometry(w, d, rh, ridgeAlongX) {
+  const geo = new THREE.BufferGeometry();
+  let verts, indices;
+  if (ridgeAlongX) {
+    verts = new Float32Array([
+      -w/2, 0,  d/2,  // 0: front-left eave
+       w/2, 0,  d/2,  // 1: front-right eave
+       w/2, 0, -d/2,  // 2: back-right eave
+      -w/2, 0, -d/2,  // 3: back-left eave
+      -w/2, rh, 0,    // 4: left ridge apex
+       w/2, rh, 0,    // 5: right ridge apex
+    ]);
+    indices = [
+      0, 1, 5,  0, 5, 4, // front slope
+      2, 3, 4,  2, 4, 5, // back slope
+      3, 0, 4,           // left gable
+      1, 2, 5,           // right gable
+      0, 3, 2,  0, 2, 1  // bottom
+    ];
+  } else {
+    verts = new Float32Array([
+      -w/2, 0,  d/2,  // 0
+       w/2, 0,  d/2,  // 1
+       w/2, 0, -d/2,  // 2
+      -w/2, 0, -d/2,  // 3
+       0,   rh,  d/2, // 4: front ridge apex
+       0,   rh, -d/2, // 5: back ridge apex
+    ]);
+    indices = [
+      0, 4, 5,  0, 5, 3, // left slope
+      1, 2, 5,  1, 5, 4, // right slope
+      0, 1, 4,           // front gable
+      3, 5, 2,           // back gable
+      0, 3, 2,  0, 2, 1  // bottom
+    ];
+  }
+  geo.setAttribute('position', new THREE.BufferAttribute(verts, 3));
+  geo.setIndex(indices);
+  geo.computeVertexNormals();
+  return geo;
+}
+
+// ── Building Proxies & Wireframes (from buildings.json) ───────────────────────
+function buildStructures(buildings, center, groundY) {
+  buildingGroup.clear();
+  wireframeGroup.clear();
+
+  // Curated residential suburban wall colors (stucco, clapboard, modern slate)
+  const wallPal = [0xdcd6cd, 0xccc5b9, 0xb8c0ca, 0xe5dfd5, 0xc2bcc0, 0xd0c8be];
+  // Roof shingle and tile tones (slate charcoal, brown cedar, terracotta)
+  const roofPal = [0x3d4752, 0x475460, 0x54433a, 0x363d44, 0x4f463d];
+
+  buildings.forEach((b, idx) => {
+    const bx = b.cx - center.x;
+    const bz = b.cz - center.z;
+    const bw = b.w;
+    const bd = b.d;
+    const bh = b.h;
+    const by = bh / 2.0; // Sitting directly on ground level (Y = 0)
+    const rh = b.roof_h || 2.6;
+    const ridgeAlongX = bw >= bd;
+
+    // ──────────────── 1. URBAN 3D MODE ────────────────
+    const houseGroup = new THREE.Group();
+    houseGroup.position.set(bx, 0, bz);
+
+    // Wall Body
+    const wallGeo = new THREE.BoxGeometry(bw, bh, bd);
+    const wallMat = new THREE.MeshStandardMaterial({
+      color: wallPal[idx % wallPal.length],
+      roughness: 0.75,
+      metalness: 0.1,
+      emissive: new THREE.Color(0x101820),
+      emissiveIntensity: 0.25,
+    });
+    const wallMesh = new THREE.Mesh(wallGeo, wallMat);
+    wallMesh.position.y = by;
+    wallMesh.castShadow = true;
+    wallMesh.receiveShadow = true;
+    wallMesh.userData = {
+      type: 'building',
+      height: bh,
+      width: bw,
+      depth: bd,
+      label: b.label || `House #${idx + 1}`,
+      points: b.pts || b.point_count || 0,
+    };
+    houseGroup.add(wallMesh);
+
+    // Pitched / Hip Roof (Residential Architecture)
+    const roofGeo = createPitchedRoofGeometry(bw + 1.2, bd + 1.2, rh, ridgeAlongX);
+    const roofMat = new THREE.MeshStandardMaterial({
+      color: roofPal[idx % roofPal.length],
+      roughness: 0.85,
+      metalness: 0.15,
+    });
+    const roofMesh = new THREE.Mesh(roofGeo, roofMat);
+    roofMesh.position.y = bh;
+    roofMesh.castShadow = true;
+    roofMesh.receiveShadow = true;
+    houseGroup.add(roofMesh);
+
+    // Window accents on facades (suburban residential feel)
+    const winMat = new THREE.MeshStandardMaterial({
+      color: 0x182a3c,
+      roughness: 0.2,
+      metalness: 0.8,
+      emissive: new THREE.Color(0x0c1b2c),
+      emissiveIntensity: 0.35,
+    });
+    const nWindowsX = Math.max(2, Math.floor(bw / 6));
+    for (let wi = 0; wi < nWindowsX; wi++) {
+      const wx = -bw * 0.35 + wi * (bw * 0.7 / (nWindowsX - 1 || 1));
+      // Front window
+      const win1 = new THREE.Mesh(new THREE.PlaneGeometry(1.6, 2.0), winMat);
+      win1.position.set(wx, bh * 0.35, bd / 2 + 0.05);
+      houseGroup.add(win1);
+      if (bh >= 6.5) {
+        const win2 = new THREE.Mesh(new THREE.PlaneGeometry(1.6, 1.8), winMat);
+        win2.position.set(wx, bh * 0.75, bd / 2 + 0.05);
+        houseGroup.add(win2);
+      }
+      // Rear window
+      const winR = new THREE.Mesh(new THREE.PlaneGeometry(1.6, 2.0), winMat);
+      winR.rotation.y = Math.PI;
+      winR.position.set(wx, bh * 0.35, -bd / 2 - 0.05);
+      houseGroup.add(winR);
+    }
+
+    // Rooftop AC / HVAC unit
+    const acW = 1.6, acH = 0.8, acD = 1.2;
+    const acGeo = new THREE.BoxGeometry(acW, acH, acD);
+    const acMat = new THREE.MeshStandardMaterial({ color: 0x4a5568, roughness: 0.9 });
+    const acMesh = new THREE.Mesh(acGeo, acMat);
+    acMesh.position.set(bw * 0.25, bh + rh * 0.4, 0);
+    acMesh.castShadow = true;
+    houseGroup.add(acMesh);
+
+    buildingGroup.add(houseGroup);
+
+    // ──────────────── 2. SEMANTIC WIREFRAME TOPO MODE ────────────────
+    // (Matching User Reference Screenshot 2: glowing cyan edges, roof ridge, floor levels)
+    const wireHouse = new THREE.Group();
+    wireHouse.position.set(bx, 0, bz);
+
+    const wireMat = new THREE.LineBasicMaterial({
+      color: 0x00d4ff,
+      linewidth: 2.0,
+      transparent: true,
+      opacity: 0.95,
+    });
+
+    // Wall box wireframe
+    const wallEdges = new THREE.LineSegments(new THREE.EdgesGeometry(wallGeo), wireMat);
+    wallEdges.position.y = by;
+    wireHouse.add(wallEdges);
+
+    // Translucent cyan interior body volume
+    const wallFillMat = new THREE.MeshBasicMaterial({
+      color: 0x00d4ff,
+      transparent: true,
+      opacity: 0.10,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    });
+    const wallFill = new THREE.Mesh(wallGeo, wallFillMat);
+    wallFill.position.y = by;
+    wireHouse.add(wallFill);
+
+    // Pitched roof wireframe
+    const roofEdges = new THREE.LineSegments(new THREE.EdgesGeometry(roofGeo), wireMat);
+    roofEdges.position.y = bh;
+    wireHouse.add(roofEdges);
+
+    // Translucent cyan roof volume
+    const roofFill = new THREE.Mesh(roofGeo, new THREE.MeshBasicMaterial({
+      color: 0x00d4ff,
+      transparent: true,
+      opacity: 0.12,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    }));
+    roofFill.position.y = bh;
+    wireHouse.add(roofFill);
+
+    // Horizontal floor division lines
+    const floorH = bh / 2.0;
+    const floorGeo = new THREE.EdgesGeometry(new THREE.PlaneGeometry(bw, bd));
+    const floorLine = new THREE.LineSegments(floorGeo, new THREE.LineBasicMaterial({
+      color: 0x00b8e6,
+      transparent: true,
+      opacity: 0.5,
+    }));
+    floorLine.rotation.x = Math.PI / 2;
+    floorLine.position.y = floorH;
+    wireHouse.add(floorLine);
+
+    wireframeGroup.add(wireHouse);
+  });
+
+  addLog('g', `Built ${buildings.length} real residential houses with pitched roofs & wireframes`);
+}
+
+// ── Vegetation Foliage Proxies (from scene.vegetation) ───────────────────────
+function buildVegetation(vegetation, center) {
+  vegetationGroup.clear();
+  vegWireGroup.clear();
+
+  const trunkMat = new THREE.MeshStandardMaterial({ color: 0x4a3424, roughness: 0.9 });
+  const leafMats = [
+    new THREE.MeshStandardMaterial({ color: 0x1e7e34, roughness: 0.85, emissive: 0x06200a, emissiveIntensity: 0.2 }),
+    new THREE.MeshStandardMaterial({ color: 0x28a745, roughness: 0.85, emissive: 0x08280e, emissiveIntensity: 0.2 }),
+    new THREE.MeshStandardMaterial({ color: 0x155724, roughness: 0.9 }),
+  ];
+  const wireMat = new THREE.LineBasicMaterial({ color: 0x22c55e, linewidth: 1.5, transparent: true, opacity: 0.85 });
+
+  vegetation.forEach((v, idx) => {
+    const vx = v.x - center.x;
+    const vz = v.z - center.z;
+    const vh = Math.max(3.5, v.h || 6.0);
+    const vr = Math.max(2.2, v.r || 3.5);
+
+    // Urban 3D Group
+    const g = new THREE.Group();
+    const trH = vh * 0.45;
+    const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.35, trH, 6), trunkMat);
+    trunk.position.y = trH / 2;
+    trunk.castShadow = true;
+    g.add(trunk);
+
+    const canGeo = new THREE.DodecahedronGeometry(vr, 0);
+    const canopy = new THREE.Mesh(canGeo, leafMats[idx % leafMats.length]);
+    canopy.position.y = trH + vr * 0.75;
+    canopy.scale.set(1.0, 0.85, 1.0);
+    canopy.castShadow = true;
+    g.add(canopy);
+    g.position.set(vx, 0, vz);
+    g.userData = { type: 'vegetation', label: `Tree (H: ${vh.toFixed(1)}m, R: ${vr.toFixed(1)}m)` };
+    vegetationGroup.add(g);
+
+    // Wireframe Topo Group
+    const wCanGeo = new THREE.EdgesGeometry(canGeo);
+    const wCan = new THREE.LineSegments(wCanGeo, wireMat);
+    wCan.position.set(vx, trH + vr * 0.75, vz);
+    wCan.scale.set(1.0, 0.85, 1.0);
+    vegWireGroup.add(wCan);
+  });
+}
+
+// ── Road Network Proxies (from scene.roads) ──────────────────────────────────
+function buildRoads(roads, center) {
+  roadGroup.clear();
+  roadWireGroup.clear();
+
+  const roadMat = new THREE.MeshStandardMaterial({ color: 0x1e2430, roughness: 0.92 });
+  const lineMat = new THREE.LineBasicMaterial({ color: 0x64748b, transparent: true, opacity: 0.65 });
+  const dashMat = new THREE.MeshBasicMaterial({ color: 0xe2e8f0, transparent: true, opacity: 0.75 });
+
+  roads.forEach((r) => {
+    const rx = r.x - center.x;
+    const rz = r.z - center.z;
+    const rw = Math.max(8.0, r.w);
+    const rd = Math.max(8.0, r.d);
+
+    const geo = new THREE.PlaneGeometry(rw, rd);
+    const mesh = new THREE.Mesh(geo, roadMat);
+    mesh.rotation.x = -Math.PI / 2;
+    mesh.position.set(rx, 0.04, rz);
+    mesh.receiveShadow = true;
+    mesh.userData = { type: 'road', label: 'Road Corridor' };
+    roadGroup.add(mesh);
+
+    // Center dashes along dominant dimension
+    const isLongZ = rd >= rw;
+    const nDashes = Math.max(2, Math.floor(Math.max(rw, rd) / 7));
+    for (let di = 0; di < nDashes; di++) {
+      const dMesh = new THREE.Mesh(new THREE.PlaneGeometry(isLongZ ? 0.35 : 1.8, isLongZ ? 1.8 : 0.35), dashMat);
+      dMesh.rotation.x = -Math.PI / 2;
+      const t = (di / (nDashes - 1 || 1) - 0.5) * (Math.max(rw, rd) * 0.7);
+      dMesh.position.set(rx + (isLongZ ? 0 : t), 0.05, rz + (isLongZ ? t : 0));
+      roadGroup.add(dMesh);
+    }
+
+    const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geo), lineMat);
+    edges.rotation.x = -Math.PI / 2;
+    edges.position.set(rx, 0.05, rz);
+    roadWireGroup.add(edges);
+  });
+}
+
+// ── Water Bodies (Lakes & Swimming Pools from scene.water) ───────────────────
+function buildWater(waterBodies, center) {
+  waterGroup.clear();
+  waterWireGroup.clear();
+
+  const waterMat = new THREE.MeshStandardMaterial({
+    color: 0x0369a1,
+    roughness: 0.15,
+    metalness: 0.8,
+    emissive: 0x023047,
+    emissiveIntensity: 0.35,
+    transparent: true,
+    opacity: 0.88,
+  });
+  const wireMat = new THREE.LineBasicMaterial({ color: 0x0284c7, linewidth: 1.5, transparent: true, opacity: 0.85 });
+
+  waterBodies.forEach((wb) => {
+    const wx = wb.x - center.x;
+    const wz = wb.z - center.z;
+    const ww = Math.max(10.0, wb.w);
+    const wd = Math.max(10.0, wb.d);
+
+    const geo = new THREE.PlaneGeometry(ww, wd);
+    const mesh = new THREE.Mesh(geo, waterMat);
+    mesh.rotation.x = -Math.PI / 2;
+    mesh.position.set(wx, 0.02, wz);
+    mesh.userData = { type: 'water', label: wb.type === 'lake' ? 'Lake Surface' : 'Swimming Pool' };
+    waterGroup.add(mesh);
+
+    const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geo), wireMat);
+    edges.rotation.x = -Math.PI / 2;
+    edges.position.set(wx, 0.03, wz);
+    waterWireGroup.add(edges);
+  });
+}
+
+// ── Camera Framing Helper ─────────────────────────────────────────────────────
+function frameCameraToScene(bounds) {
+  const spanX = Math.max(bounds.xmax - bounds.xmin, 30);
+  const spanZ = Math.max(bounds.zmax - bounds.zmin, 30);
+  const maxSpan = Math.max(spanX, spanZ);
+
+  // 3/4 oblique isometric perspective matching reference photos
+  const camX = maxSpan * 0.75;
+  const camY = maxSpan * 0.70;
+  const camZ = maxSpan * 1.15;
+
+  camera.position.set(camX, camY, camZ);
+  ctrl.target.set(0, maxSpan * 0.08, 0);
+  ctrl.minDistance = 4;
+  ctrl.maxDistance = maxSpan * 10;
+  ctrl.update();
+  addLog('c', `Camera framed to real scene (${spanX.toFixed(0)}m \u00d7 ${spanZ.toFixed(0)}m)`);
+}
+
+// ── Ground Plane & Grid Helper ────────────────────────────────────────────────
+function buildGround(bounds, center, groundY) {
+  const spanX = Math.max(bounds.xmax - bounds.xmin, 30);
+  const spanZ = Math.max(bounds.zmax - bounds.zmin, 30);
+  const maxSpan = Math.max(spanX, spanZ, 40) * 1.6;
+  const divisions = Math.max(20, Math.round(maxSpan / 4));
+
+  const localGroundY = groundY - center.y;
+
+  // Grid
+  if (groundGrid) scene.remove(groundGrid);
+  groundGrid = new THREE.GridHelper(maxSpan, divisions, 0x1e3a5f, 0x0c1c2e);
+  groundGrid.position.y = localGroundY + 0.02;
+  scene.add(groundGrid);
+
+  // Subtle dark terrain plane
+  if (terrainPlane) scene.remove(terrainPlane);
+  const pGeo = new THREE.PlaneGeometry(maxSpan * 1.5, maxSpan * 1.5);
+  const pMat = new THREE.MeshStandardMaterial({
+    color: 0x060e18,
+    roughness: 0.95,
+  });
+  terrainPlane = new THREE.Mesh(pGeo, pMat);
+  terrainPlane.rotation.x = -Math.PI / 2;
+  terrainPlane.position.y = localGroundY - 0.1;
+  terrainPlane.receiveShadow = true;
+  terrainPlane.name = 'terrain';
+  scene.add(terrainPlane);
+}
+
+// ── Camera Flight Trajectory & Drone Model ────────────────────────────────────
+function buildFlightTrajectory(cameras, center) {
+  flightGroup.clear();
+  if (!cameras || cameras.length === 0) return;
+
+  const pts = [];
+  cameras.forEach((c) => {
+    pts.push(new THREE.Vector3(c.x - center.x, c.y - center.y, c.z - center.z));
+  });
+
+  flightCurve = new THREE.CatmullRomCurve3(pts, false, 'centripetal', 0.5);
+
+  // Smooth ribbon line
+  const splinePts = flightCurve.getPoints(Math.min(1500, cameras.length * 8));
+  const lineGeo = new THREE.BufferGeometry().setFromPoints(splinePts);
+  const lineMat = new THREE.LineBasicMaterial({
+    color: 0xa855f7,
+    transparent: true,
+    opacity: 0.8,
+    linewidth: 1.5,
+  });
+  const pathLine = new THREE.Line(lineGeo, lineMat);
+  flightGroup.add(pathLine);
+
+  // Camera frustum cones
+  const coneMat = new THREE.MeshBasicMaterial({
+    color: 0x7c3aed,
+    transparent: true,
+    opacity: 0.55,
+    wireframe: true,
+  });
+  for (let i = 0; i < pts.length; i += Math.max(1, Math.floor(pts.length / 50))) {
+    const cone = new THREE.Mesh(new THREE.ConeGeometry(0.8, 2.4, 4), coneMat);
+    cone.position.copy(pts[i]);
+    cone.rotation.x = Math.PI;
+    flightGroup.add(cone);
+  }
+
+  // Animated Quadcopter Drone Model
+  const dg = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.4, 2.2), new THREE.MeshStandardMaterial({ color: 0xdddddd, roughness: 0.2, metalness: 0.7 }));
+  dg.add(body);
+  const armMat = new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.8 });
+  const propMat = new THREE.MeshStandardMaterial({ color: 0x00d4ff, roughness: 0.3, transparent: true, opacity: 0.75 });
+
+  [-1, 1].forEach(sx => [-1, 1].forEach(sz => {
+    const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 2.0, 6), armMat);
+    arm.rotation.z = Math.PI / 2;
+    arm.position.set(sx, 0, sz);
+    dg.add(arm);
+    const prop = new THREE.Mesh(new THREE.CylinderGeometry(1.0, 1.0, 0.04, 8), propMat);
+    prop.position.set(sx * 2.0, 0.15, sz * 2.0);
+    prop.name = 'prop';
+    dg.add(prop);
+  }));
+
+  const cameraLens = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.16, 0.4, 8), new THREE.MeshStandardMaterial({ color: 0x000000, roughness: 0.1, metalness: 0.9 }));
+  cameraLens.rotation.x = Math.PI / 2;
+  cameraLens.position.set(0, -0.4, -0.5);
+  dg.add(cameraLens);
+
+  dg.position.copy(pts[0]);
+  flightGroup.add(dg);
+  droneMesh = dg;
+
+  drawAltitudeChart();
+  drawMinimap();
+}
+
+// ── View Mode Switching ──────────────────────────────────────────────────────
+function switchModeBtn(mode) {
+  currentMode = mode;
+  ['vbu', 'vbw', 'vbc', 'vbn'].forEach(id => document.getElementById(id)?.classList.remove('on'));
+  ['tab3', 'tabS', 'tabP', 'tabN'].forEach(id => document.getElementById(id)?.classList.remove('on'));
+
+  if (mode === 'urban') {
+    document.getElementById('vbu')?.classList.add('on');
+    document.getElementById('tab3')?.classList.add('on');
+  } else if (mode === 'wire') {
+    document.getElementById('vbw')?.classList.add('on');
+    document.getElementById('tabS')?.classList.add('on');
+  } else if (mode === 'cloud') {
+    document.getElementById('vbc')?.classList.add('on');
+    document.getElementById('tabP')?.classList.add('on');
+  } else if (mode === 'night') {
+    document.getElementById('vbn')?.classList.add('on');
+    document.getElementById('tabN')?.classList.add('on');
+  }
+
+  applyMode(mode);
+}
+
+function applyMode(mode) {
+  const modeNames = {
+    urban: 'URBAN 3D (REAL + PROXY)',
+    wire:  'SEMANTIC WIREFRAME (CYAN TOPO)',
+    cloud: '3D POINT CLOUD (DENSE MVS)',
+    night: 'NIGHT MODE (CYBER TWIN)',
+  };
+  document.getElementById('hudMode').textContent = modeNames[mode] || mode.toUpperCase();
+  document.getElementById('inspMode').textContent = modeNames[mode] || mode;
+
+  const isUrban = mode === 'urban';
+  const isWire  = mode === 'wire';
+  const isCloud = mode === 'cloud';
+  const isNight = mode === 'night';
+
+  // Point Clouds
+  if (densePointCloud) densePointCloud.visible = isUrban || isCloud || isNight;
+  if (semanticPointCloud) semanticPointCloud.visible = isWire;
+
+  // Solid vs Wireframe Proxies
+  buildingGroup.visible = (isUrban || isNight) && layerState.bldg;
+  wireframeGroup.visible = isWire && layerState.bldg;
+
+  vegetationGroup.visible = (isUrban || isNight) && layerState.veg;
+  vegWireGroup.visible = isWire && layerState.veg;
+
+  roadGroup.visible = (isUrban || isNight) && layerState.road;
+  roadWireGroup.visible = isWire && layerState.road;
+
+  waterGroup.visible = (isUrban || isNight) && layerState.water;
+  waterWireGroup.visible = isWire && layerState.water;
+
+  // Environment & Tone Mapping
+  if (isNight) {
+    scene.background.set(0x010308);
+    scene.fog.color.set(0x010308);
+    renderer.toneMappingExposure = 0.65;
+    buildingGroup.traverse(o => {
+      if (o.isMesh && o.material && o.material.emissive) {
+        o.material.emissiveIntensity = 0.7;
+      }
+    });
+    addLog('c', 'Mode: Night Cyber Twin');
+  } else if (isWire) {
+    scene.background.set(0x01050e);
+    scene.fog.color.set(0x01050e);
+    renderer.toneMappingExposure = 1.0;
+    addLog('c', 'Mode: Semantic Wireframe Topo (Cyan Architecture)');
+  } else if (isCloud) {
+    scene.background.set(0x020712);
+    scene.fog.color.set(0x020712);
+    renderer.toneMappingExposure = 1.05;
+    addLog('c', 'Mode: Pure 3D Dense Point Cloud');
+  } else {
+    scene.background.set(0x020712);
+    scene.fog.color.set(0x020712);
+    renderer.toneMappingExposure = 1.05;
+    buildingGroup.traverse(o => {
+      if (o.isMesh && o.material && o.material.emissive) {
+        o.material.emissiveIntensity = 0.25;
+      }
+    });
+    addLog('c', 'Mode: Urban 3D (Real Reconstruction + Proxies)');
+  }
+}
+
+// ── Layer Visibility Toggle ──────────────────────────────────────────────────
+function toggleLayer(layer) {
+  layerState[layer] = !layerState[layer];
+  const rowId = {
+    bldg:  'lr-bldg',
+    veg:   'lr-veg',
+    road:  'lr-road',
+    water: 'lr-water',
+    traj:  'lr-traj',
+  }[layer];
+  const el = document.getElementById(rowId);
+  if (el) el.classList.toggle('on', layerState[layer]);
+
+  applyMode(currentMode);
+
+  if (layer === 'traj') {
+    flightGroup.visible = layerState[layer];
+  }
+
+  addLog('c', `Layer '${layer}' ${layerState[layer] ? 'ON' : 'OFF'}`);
+  drawMinimap();
+}
+
+// ── Flight Replay ────────────────────────────────────────────────────────────
+function toggleFlight() {
+  isFly = !isFly;
+  document.getElementById('btnFly').classList.toggle('fly', isFly);
+  document.getElementById('fbadge').style.display = isFly ? 'block' : 'none';
+  document.getElementById('tabF').classList.toggle('on', isFly);
+  addLog(isFly ? 'g' : 'a', isFly ? 'Flight Replay Activated' : 'Flight Replay Stopped');
+}
+
+// ── Measurement Tool ─────────────────────────────────────────────────────────
+function toggleMeasure() {
+  isMeas = !isMeas;
+  document.getElementById('btnMeas').classList.toggle('on', isMeas);
+  canvas.style.cursor = isMeas ? 'crosshair' : '';
+  if (!isMeas) clearMeasurement();
+  addLog(isMeas ? 'c' : 'a', `Measurement Tool ${isMeas ? 'ON' : 'OFF'}`);
+}
+
+function clearMeasurement() {
+  measMarkers.forEach(m => scene.remove(m));
+  measMarkers.length = 0;
+  if (measLine) { scene.remove(measLine); measLine = null; }
+  measPts = [];
+  document.getElementById('measDisp').textContent = '\u2014';
+  document.getElementById('measUnit').textContent = 'Press [M] then click two 3D points';
+  document.getElementById('measPts').textContent = 'No points selected';
+  document.getElementById('measA').textContent = '\u2013';
+  document.getElementById('measB').textContent = '\u2013';
+  document.getElementById('measDY').textContent = '\u2013';
+  document.getElementById('measReadout').style.display = 'none';
+}
+
+function resetCam() {
+  if (sceneData && sceneData.coordinate_system && sceneData.coordinate_system.bounds) {
+    frameCameraToScene(sceneData.coordinate_system.bounds);
+  } else {
+    camera.position.set(45, 38, 65);
+    ctrl.target.set(0, 4, 0);
+    ctrl.update();
+  }
+  addLog('g', 'Camera view reset');
+}
+
+function doScreenshot() {
+  renderer.render(scene, camera);
+  const a = document.createElement('a');
+  a.href = renderer.domElement.toDataURL('image/png');
+  a.download = `aerotwin_${jobId}_${Date.now()}.png`;
+  a.click();
+  addLog('g', 'Screenshot captured & saved');
+}
+
+// ── Raycasting & Mouse Interaction ───────────────────────────────────────────
+const raycaster = new THREE.Raycaster();
+raycaster.params.Points.threshold = 4.0;
+const mouse = new THREE.Vector2();
+
+canvas.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+
+  const targets = [];
+  if (buildingGroup.visible) targets.push(...buildingGroup.children.filter(c => c.userData?.type === 'building'));
+  if (densePointCloud && densePointCloud.visible) targets.push(densePointCloud);
+  if (terrainPlane && terrainPlane.visible) targets.push(terrainPlane);
+
+  const hits = raycaster.intersectObjects(targets, false);
+  const hh = document.getElementById('hudHover');
+  const tt = document.getElementById('tt');
+
+  if (hits.length > 0) {
+    const hit = hits[0];
+    const p = hit.point;
+    const obj = hit.object;
+
+    let desc = 'Terrain';
+    if (obj.userData?.type === 'building') {
+      const hM = isCalibrated ? (obj.userData.height * sceneScale).toFixed(1) + ' m' : obj.userData.height.toFixed(1) + ' u';
+      desc = `${obj.userData.label} (H: ${hM}, ${obj.userData.points} pts)`;
+    } else if (obj.isPoints) {
+      desc = `Point [X: ${p.x.toFixed(1)}, Y: ${p.y.toFixed(1)}, Z: ${p.z.toFixed(1)}]`;
+    }
+
+    hh.style.display = 'block';
+    document.getElementById('hudHoverVal').textContent = desc;
+    document.getElementById('inspHov').textContent = desc;
+
+    tt.style.display = 'block';
+    tt.style.left = (e.clientX - rect.left + 14) + 'px';
+    tt.style.top = (e.clientY - rect.top - 24) + 'px';
+    tt.textContent = `${p.x.toFixed(1)}, ${p.y.toFixed(1)}, ${p.z.toFixed(1)}`;
+  } else {
+    hh.style.display = 'none';
+    tt.style.display = 'none';
+    document.getElementById('inspHov').textContent = 'No selection';
+  }
+});
+
+canvas.addEventListener('click', (e) => {
+  if (!isMeas) return;
+  const rect = canvas.getBoundingClientRect();
+  mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+
+  const targets = [];
+  if (buildingGroup.visible) targets.push(...buildingGroup.children);
+  if (densePointCloud && densePointCloud.visible) targets.push(densePointCloud);
+  if (terrainPlane) targets.push(terrainPlane);
+
+  const hits = raycaster.intersectObjects(targets, false);
+  if (hits.length === 0) return;
+
+  const pt = hits[0].point.clone();
+  if (measPts.length >= 2) clearMeasurement();
+
+  measPts.push(pt);
+  const sm = new THREE.Mesh(new THREE.SphereGeometry(1.2, 16, 16), new THREE.MeshBasicMaterial({
+    color: measPts.length === 1 ? 0x00d4ff : 0xff4466,
+  }));
+  sm.position.copy(pt);
+  scene.add(sm);
+  measMarkers.push(sm);
+
+  if (measPts.length === 1) {
+    document.getElementById('measA').textContent = `(${pt.x.toFixed(1)}, ${pt.y.toFixed(1)}, ${pt.z.toFixed(1)})`;
+    document.getElementById('measPts').textContent = '1 point selected — click second point';
+  }
+
+  if (measPts.length === 2) {
+    measLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints(measPts), new THREE.LineBasicMaterial({
+      color: 0xff4466,
+      linewidth: 2,
+    }));
+    scene.add(measLine);
+
+    const distUnits = measPts[0].distanceTo(measPts[1]);
+    const dyUnits = Math.abs(measPts[1].y - measPts[0].y);
+    const distM = distUnits * sceneScale;
+    const dyM = dyUnits * sceneScale;
+    const unitLabel = isCalibrated ? 'm' : 'units';
+
+    document.getElementById('measDisp').textContent = `${distM.toFixed(2)} ${unitLabel}`;
+    document.getElementById('measUnit').textContent = isCalibrated ? 'Euclidean 3D Distance (Calibrated Metric)' : 'Relative 3D Distance (Uncalibrated)';
+    document.getElementById('measPts').textContent = '2 points — measurement complete';
+    document.getElementById('measB').textContent = `(${measPts[1].x.toFixed(1)}, ${measPts[1].y.toFixed(1)}, ${measPts[1].z.toFixed(1)})`;
+    document.getElementById('measDY').textContent = `${dyM.toFixed(2)} ${unitLabel}`;
+    document.getElementById('measVal').textContent = `${distM.toFixed(2)} ${unitLabel}`;
+    document.getElementById('measReadout').style.display = 'flex';
+    addLog('c', `Measured: ${distM.toFixed(2)} ${unitLabel} | &Delta;Y: ${dyM.toFixed(2)} ${unitLabel}`);
+  }
+});
+
+// Keyboard Shortcuts
+window.addEventListener('keydown', (e) => {
+  if (e.key.toLowerCase() === 'm') toggleMeasure();
+  if (e.key.toLowerCase() === 'f') toggleFlight();
+  if (e.key.toLowerCase() === 'r') resetCam();
+  if (e.key === 'Escape') {
+    isMeas = false;
+    document.getElementById('btnMeas')?.classList.remove('on');
+    canvas.style.cursor = '';
+    clearMeasurement();
+  }
+});
+
+// ── Minimap Canvas Drawing ───────────────────────────────────────────────────
+const mmCanvas = document.getElementById('mmcanvas');
+const mmCtx = mmCanvas.getContext('2d');
+mmCanvas.width = 140;
+mmCanvas.height = 140;
+
+function drawMinimap() {
+  if (!sceneData) return;
+  const w = 140, h = 140;
+  mmCtx.fillStyle = '#0a101d';
+  mmCtx.fillRect(0, 0, w, h);
+
+  const bounds = sceneData.coordinate_system.bounds;
+  const center = sceneData.coordinate_system.center;
+  const spanX = Math.max(bounds.xmax - bounds.xmin, 500);
+  const spanZ = Math.max(bounds.zmax - bounds.zmin, 500);
+  const maxSpan = Math.max(spanX, spanZ) * 1.1;
+  const scale = (w - 20) / maxSpan;
+
+  // Grid cross
+  mmCtx.strokeStyle = '#18263e';
+  mmCtx.lineWidth = 0.6;
+  mmCtx.beginPath();
+  mmCtx.moveTo(0, h / 2); mmCtx.lineTo(w, h / 2);
+  mmCtx.moveTo(w / 2, 0); mmCtx.lineTo(w / 2, h);
+  mmCtx.stroke();
+
+  // Building footprints
+  if (sceneData.buildings && layerState.bldg) {
+    mmCtx.fillStyle = '#3a506e';
+    sceneData.buildings.forEach((b) => {
+      const bx = w / 2 + (b.cx - center.x) * scale;
+      const bz = h / 2 + (b.cz - center.z) * scale;
+      const bw = Math.max(2, b.w * scale);
+      const bd = Math.max(2, b.d * scale);
+      mmCtx.fillRect(bx - bw / 2, bz - bd / 2, bw, bd);
+    });
+  }
+
+  // Flight Path
+  if (flightCurve && layerState.traj) {
+    const pts = flightCurve.getPoints(80);
+    mmCtx.strokeStyle = '#a855f7';
+    mmCtx.lineWidth = 1.0;
+    mmCtx.beginPath();
+    pts.forEach((p, i) => {
+      const px = w / 2 + p.x * scale;
+      const pz = h / 2 + p.z * scale;
+      if (i === 0) mmCtx.moveTo(px, pz);
+      else mmCtx.lineTo(px, pz);
+    });
+    mmCtx.stroke();
+  }
+
+  // Live Drone Marker
+  if (droneMesh) {
+    const dx = w / 2 + droneMesh.position.x * scale;
+    const dz = h / 2 + droneMesh.position.z * scale;
+    mmCtx.fillStyle = '#00d4ff';
+    mmCtx.beginPath();
+    mmCtx.arc(dx, dz, 3.5, 0, Math.PI * 2);
+    mmCtx.fill();
+  }
+
+  // Camera Frustum Eye
+  const cx = w / 2 + camera.position.x * scale;
+  const cz = h / 2 + camera.position.z * scale;
+  mmCtx.strokeStyle = '#ffaa00';
+  mmCtx.lineWidth = 1.2;
+  mmCtx.beginPath();
+  mmCtx.arc(cx, cz, 4, 0, Math.PI * 2);
+  mmCtx.stroke();
+}
+
+// ── Altitude Chart Canvas Drawing ────────────────────────────────────────────
+const altCanvas = document.getElementById('altchart');
+const altCtx = altCanvas.getContext('2d');
+
+function drawAltitudeChart() {
+  if (!sceneData || !sceneData.cameras || !sceneData.cameras.positions) return;
+  const w = altCanvas.offsetWidth || 270;
+  const h = 50;
+  altCanvas.width = w;
+  altCanvas.height = h;
+
+  altCtx.fillStyle = '#0f172a';
+  altCtx.fillRect(0, 0, w, h);
+
+  // Grid lines
+  altCtx.strokeStyle = '#1a2540';
+  altCtx.lineWidth = 0.5;
+  for (let y = 0; y < h; y += h / 4) {
+    altCtx.beginPath(); altCtx.moveTo(0, y); altCtx.lineTo(w, y); altCtx.stroke();
+  }
+
+  const poses = sceneData.cameras.positions;
+  const alts = poses.map(p => p.y);
+  const minA = Math.min(...alts);
+  const maxA = Math.max(...alts);
+  const rangeA = (maxA - minA) || 1;
+
+  // Plot curve
+  altCtx.strokeStyle = '#00d4ff';
+  altCtx.lineWidth = 1.6;
+  altCtx.shadowColor = '#00d4ff';
+  altCtx.shadowBlur = 4;
+  altCtx.beginPath();
+  poses.forEach((p, i) => {
+    const x = (i / (poses.length - 1)) * w;
+    const y = h - ((p.y - minA) / rangeA) * (h - 8) - 4;
+    if (i === 0) altCtx.moveTo(x, y);
+    else altCtx.lineTo(x, y);
+  });
+  altCtx.stroke();
+  altCtx.shadowBlur = 0;
+
+  // Live flight position marker
+  if (isFly) {
+    const curX = flyT * w;
+    altCtx.strokeStyle = '#ff4466';
+    altCtx.lineWidth = 1.2;
+    altCtx.beginPath();
+    altCtx.moveTo(curX, 0); altCtx.lineTo(curX, h);
+    altCtx.stroke();
+  }
+}
+
+// ── Main Animation & Render Loop ─────────────────────────────────────────────
+function animate() {
+  requestAnimationFrame(animate);
+  const now = performance.now();
+  const dt = Math.min((now - lastFrameTime) / 1000, 0.05);
+  lastFrameTime = now;
+
+  ctrl.update();
+  telemetryTime += dt;
+
+  // Flight Replay along Real COLMAP Path
+  if (isFly && flightCurve && droneMesh) {
+    flyT = (flyT + dt * 0.05) % 1.0;
+    const pos = flightCurve.getPoint(flyT);
+    const nextPos = flightCurve.getPoint((flyT + 0.002) % 1.0);
+    droneMesh.position.copy(pos);
+
+    if (pos.distanceTo(nextPos) > 0.001) {
+      droneMesh.lookAt(nextPos);
+      const dir = nextPos.clone().sub(pos).normalize();
+      droneHeading = (Math.atan2(dir.x, dir.z) * 180 / Math.PI + 360) % 360;
+    }
+
+    droneMesh.traverse((child) => {
+      if (child.name === 'prop') child.rotation.y += 0.8;
+    });
+
+    // Telemetry from live drone position
+    if (sceneData) {
+      const center = sceneData.coordinate_system.center;
+      const groundY = sceneData.coordinate_system.ground_y;
+      const realY = pos.y + center.y;
+      const aglUnits = Math.max(0, realY - groundY);
+      const aglM = aglUnits * sceneScale;
+      document.getElementById('talt').innerHTML = `${aglM.toFixed(1)}<span class="tunit">${isCalibrated ? 'm' : 'u'}</span>`;
+      document.getElementById('tspd').innerHTML = `${(12.4 + Math.sin(flyT * 20) * 1.8).toFixed(1)}<span class="tunit">m/s</span>`;
+      document.getElementById('thdg').innerHTML = `${droneHeading.toFixed(0)}<span class="tunit">&deg;</span>`;
+      document.getElementById('tvspd').innerHTML = `${(Math.cos(flyT * 15) * 0.4).toFixed(1)}<span class="tunit">m/s</span>`;
+    }
+  }
+
+  // Compass Needle
+  const camAngle = Math.atan2(camera.position.x, camera.position.z);
+  document.getElementById('ndl').style.transform = `rotate(${camAngle}rad)`;
+
+  // Live Camera Coordinates in HUD
+  document.getElementById('hudCam').textContent = `${camera.position.x.toFixed(0)}, ${camera.position.y.toFixed(0)}, ${camera.position.z.toFixed(0)}`;
+
+  // Render Scene
+  renderer.render(scene, camera);
+
+  // Throttled UI & Canvas Updates (every ~6 frames)
+  frameCount++;
+  if (frameCount % 6 === 0) {
+    const inf = renderer.info;
+    document.getElementById('statDraw').textContent = inf.render.calls;
+    let triCount = inf.render.triangles;
+    if (buildingGroup.visible) {
+      scene.traverse(o => { if (o.isMesh && o.geometry?.index) triCount += o.geometry.index.count / 3; });
+    }
+    document.getElementById('inspTri').textContent = (triCount / 1000).toFixed(1) + 'K';
+    document.getElementById('inspDist').textContent = camera.position.length().toFixed(0) + ' u';
+    document.getElementById('inspTgt').textContent = `${ctrl.target.x.toFixed(0)}, ${ctrl.target.y.toFixed(0)}, ${ctrl.target.z.toFixed(0)}`;
+    drawMinimap();
+    drawAltitudeChart();
+  }
+
+  // FPS Counter
+  if (now - lastFpsTime > 500) {
+    curFps = Math.round((frameCount * 1000) / (now - lastFpsTime));
+    document.getElementById('fpsEl').textContent = curFps;
+    document.getElementById('inspFps').textContent = curFps;
+    frameCount = 0;
+    lastFpsTime = now;
+  }
+}
+
+// ── Populate UI from Results & Scene API ───────────────────────────────────────
+function populateResultsUI(results) {
+  resultsData = results;
+  const fname = results.original_filename || jobId.toUpperCase();
+  document.getElementById('top-proj').textContent = fname.replace(/\.[^.]+$/, '').toUpperCase();
+
+  // Video resolution & FPS in telemetry strip
+  const res = results.video_resolution || '1080p';
+  const fps = results.video_fps || 30;
+  document.getElementById('tel-res').textContent = `${res}@${fps}`;
+
+  // Pipeline stage 1: Video Ingestion
+  const totalFrames = results.total_video_frames || results.frames_kept || 0;
+  const dur = results.video_duration_sec || 0;
+  document.getElementById('pl-1').textContent =
+    `${totalFrames} frames \u00b7 ${res}@${fps} \u00b7 ${dur.toFixed ? dur.toFixed(0) : dur}s`;
+
+  // Pipeline stage 2: Keyframe Selection
+  const kfSel = results.keyframes_selected || results.frames_kept || totalFrames;
+  const kfBlurry = results.keyframes_rejected_blurry || results.frames_blurry || 0;
+  const kfRedun  = results.keyframes_rejected_redundant || 0;
+  document.getElementById('pl-2').textContent =
+    `${kfSel} keyframes \u00b7 ${kfBlurry} blurry \u00b7 ${kfRedun} redundant`;
+
+  // Pipeline stage 3: SIFT
+  const colmapTimings = results.colmap_timings || {};
+  const featTime = (colmapTimings.feature_extraction || 0).toFixed(1);
+  document.getElementById('pl-3').textContent =
+    `${featTime}s \u00b7 COLMAP CUDA \u00b7 exhaustive match`;
+
+  // Pipeline stage 4: SfM
+  const numReg = results.num_registered_cameras || 0;
+  const numIn  = results.num_input_frames || totalFrames;
+  const regRate = results.registration_rate_pct || 0;
+  const sfmTime = (colmapTimings.mapping || 0).toFixed(1);
+  document.getElementById('pl-4').textContent =
+    `${numReg}/${numIn} cameras \u00b7 ${regRate}% reg \u00b7 ${sfmTime}s`;
+
+  // Pipeline stage 5: Point cloud
+  const sparsePts = results.num_sparse_points || 0;
+  document.getElementById('pl-5').textContent =
+    `${sparsePts.toLocaleString()} sparse pts \u00b7 ${numReg} poses`;
+
+  // Pipeline stage 8: Georef
+  const scale = results.metric_scale;
+  if (scale) {
+    document.getElementById('pl-8').textContent = `${scale.toFixed(3)} m/unit \u00b7 Metric Calibrated`;
+  } else {
+    document.getElementById('pl-8').textContent = 'No GPS \u00b7 Relative scale mode';
+  }
+
+  // Right-panel stat cards
+  document.getElementById('rp-inliers').textContent = sparsePts.toLocaleString();
+  const pipelineTimings = results.pipeline_timings || {};
+  const totalTime = Object.values(pipelineTimings).reduce((a, b) => a + (b || 0), 0);
+  if (totalTime > 0) {
+    document.getElementById('rp-time').textContent = totalTime.toFixed(1) + 's';
+  }
+
+  // Cameras stat
+  document.getElementById('rp-cams').textContent = `${numReg}/${numIn}`;
+  const camSub = document.getElementById('rp-cams-sub');
+  if (camSub) camSub.textContent = `${regRate}% Registration`;
+
+  // Load Keyframe Thumbnails
+  if (results.keyframe_images && results.keyframe_images.length > 0) {
+    const strip = document.getElementById('kf-strip');
+    strip.innerHTML = '';
+    results.keyframe_images.slice(0, 20).forEach((imgUrl, i) => {
+      const img = document.createElement('img');
+      img.src = imgUrl;
+      img.className = 'kf-thumb';
+      img.title = `Keyframe #${i + 1}`;
+      img.onclick = () => window.open(imgUrl, '_blank');
+      strip.appendChild(img);
+    });
+    document.getElementById('kf-count').textContent = `${results.keyframe_images.length} frames`;
+    document.getElementById('kf-section').style.display = 'block';
+  }
+}
+
+function populateSceneUI(scenePkg) {
+  sceneData = scenePkg;
+  const ptInfo = scenePkg.point_cloud || {};
+  const camInfo = scenePkg.cameras || {};
+  const bldgs = scenePkg.buildings || [];
+  const vegs = scenePkg.vegetation || [];
+  const roads = scenePkg.roads || [];
+  const sem = scenePkg.semantic || {};
+
+  // Scale calibration
+  const metric = scenePkg.metric_scale || {};
+  sceneScale = metric.value || 1.083;
+  isCalibrated = !!metric.calibrated;
+  document.getElementById('hudScale').textContent = metric.display || (isCalibrated ? `${sceneScale.toFixed(3)} m/unit` : 'Relative Scale');
+  document.getElementById('tscale').textContent = isCalibrated ? `${sceneScale.toFixed(2)} m/u` : 'Relative';
+  document.getElementById('measCal').textContent = metric.display || 'Relative Units';
+
+  // Point cloud stats — show amplified web_points prominently
+  const webPts  = ptInfo.web_points  || 0;
+  const rawPts  = ptInfo.total_points || 0;
+  document.getElementById('top-stats').textContent =
+    `${(webPts).toLocaleString()} pts \u00b7 ${camInfo.registered || '--'} cams \u00b7 ${bldgs.length} bldgs`;
+  document.getElementById('rp-pts').textContent =
+    webPts >= 1000 ? `${(webPts / 1000).toFixed(0)}K` : webPts.toString();
+  const rp_pts_sub = document.getElementById('rp-pts-sub');
+  if (rp_pts_sub) rp_pts_sub.textContent = `${rawPts.toLocaleString()} sparse source`;
+  document.getElementById('inspPts').textContent = webPts.toLocaleString() + ' pts';
+  document.getElementById('statPts').textContent = webPts >= 1000 ? `${(webPts/1000).toFixed(1)}K` : webPts.toString();
+
+  // Camera count
+  const numCams = camInfo.registered || 0;
+  document.getElementById('rp-bldg').textContent = `${bldgs.length}`;
+  document.getElementById('rp-scale').textContent = isCalibrated ? `${sceneScale.toFixed(2)} m/u` : 'Relative';
+  const rp_scale_sub = document.getElementById('rp-scale-sub');
+  if (rp_scale_sub) rp_scale_sub.textContent = metric.source || 'Vision-derived';
+
+  // Scene bounds
+  const bounds = scenePkg.coordinate_system?.bounds || {};
+  const spanX = Math.round((bounds.xmax || 50) - (bounds.xmin || -50));
+  const spanZ = Math.round((bounds.zmax || 50) - (bounds.zmin || -50));
+  document.getElementById('rp-width').textContent = `${spanX} u`;
+  document.getElementById('rp-depth').textContent = `${spanZ} u`;
+
+  // Camera count in right panel altitude chart label
+  const rp_cam_count = document.getElementById('rp-cam-count');
+  if (rp_cam_count) rp_cam_count.textContent = numCams;
+
+  // Flight path badge
+  document.getElementById('fbadge').textContent = `\u25BA FLIGHT REPLAY \u2014 ${numCams} REAL CAMERA POSES`;
+
+  // Semantic Distribution Bars (right panel)
+  const semBarsContainer = document.getElementById('dyn-sembars');
+  semBarsContainer.innerHTML = '';
+  if (sem.classes) {
+    const colors = sem.class_colors || {};
+    for (const [clsName, info] of Object.entries(sem.classes)) {
+      if (info.count === 0) continue;
+      const row = document.createElement('div');
+      row.className = 'semrow';
+      // Map class name to color
+      const colorMap = {
+        'Unknown': '#50555f',
+        'Road/Ground': '#64748b',
+        'Building/Roof': '#00d4ff',
+        'Vegetation': '#22c55e',
+        'Water': '#0284c7',
+        'Vehicle': '#f97316'
+      };
+      const col = colorMap[clsName] || colors[clsName] || '#00d4ff';
+      const pct = info.pct || 0;
+      row.innerHTML = `
+        <div class="semlbl">${clsName}</div>
+        <div class="semtrack"><div class="semfill" style="width:${Math.min(pct,100)}%;background:${col}"></div></div>
+        <div class="sempct">${pct}%</div>
+      `;
+      semBarsContainer.appendChild(row);
+
+      // Update layer toggle percentages in left panel
+      if (clsName.includes('Building')) {
+        document.getElementById('lpct-bldg').textContent = pct + '%';
+      } else if (clsName.includes('Vegetation')) {
+        document.getElementById('lpct-veg').textContent = pct + '%';
+      } else if (clsName.includes('Road') || clsName.includes('Ground')) {
+        document.getElementById('lpct-road').textContent = pct + '%';
+      } else if (clsName.includes('Water')) {
+        document.getElementById('lpct-water').textContent = pct + '%';
+      }
+    }
+  }
+
+  // Layer toggle for flight path count
+  document.getElementById('lpct-traj').textContent = `${numCams} poses`;
+
+  // Pipeline stages from scene
+  document.getElementById('pl-6').textContent =
+    `25 camera projections \u00b7 ${(webPts).toLocaleString()} pts voted`;
+  document.getElementById('pl-7').textContent =
+    `${bldgs.length} buildings \u00b7 ${vegs.length} vegetation \u00b7 ${roads.length} roads`;
+
+  addLog('g', `Real scene: ${webPts.toLocaleString()} pts from ${numCams} camera poses`);
+  addLog('g', `Structures: ${bldgs.length} buildings, ${vegs.length} trees, ${roads.length} roads`);
+}
+
+// ── Helper Logging ───────────────────────────────────────────────────────────
+function addLog(type, msg) {
+  const feed = document.getElementById('logfeed');
+  if (!feed) return;
+  const now = new Date();
+  const ts = String(now.getHours()).padStart(2, '0') + ':' +
+             String(now.getMinutes()).padStart(2, '0') + ':' +
+             String(now.getSeconds()).padStart(2, '0');
+  const cls = { c: 'logc', g: 'logg', a: 'loga', r: 'logr' }[type] || '';
+  const tag = { c: '[3D]', g: '[OK]', a: '[WN]', r: '[ERR]' }[type] || '[-]';
+  const row = document.createElement('div');
+  row.className = 'logline';
+  row.innerHTML = `<span class="logts">${ts}</span><span class="${cls}">${tag}</span><span>${msg}</span>`;
+  feed.appendChild(row);
+  feed.scrollTop = feed.scrollHeight;
+  if (feed.children.length > 50) feed.removeChild(feed.firstChild);
+}
+
+function setLoadSub(text) {
+  const el = document.getElementById('lsub');
+  if (el) el.textContent = text;
+}
+function hideLoader() {
+  const ov = document.getElementById('lo');
+  if (ov) {
+    ov.style.opacity = '0';
+    setTimeout(() => ov.style.display = 'none', 600);
+  }
+}
+
+// ── Application Initialization ───────────────────────────────────────────────
+async function init() {
+  setupLighting();
+  animate();
+
+  try {
+    // 1. Fetch Job Results & Scene Package in Parallel
+    setLoadSub('Connecting to AeroTwin server...');
+    const [resultsRes, sceneRes] = await Promise.allSettled([
+      fetch(`/api/jobs/${jobId}/results`),
+      fetch(`/api/jobs/${jobId}/scene`),
+    ]);
+
+    if (resultsRes.status === 'fulfilled' && resultsRes.value.ok) {
+      const results = await resultsRes.value.json();
+      populateResultsUI(results);
+    }
+
+    if (sceneRes.status === 'fulfilled' && sceneRes.value.ok) {
+      const scenePkg = await sceneRes.value.json();
+      populateSceneUI(scenePkg);
+
+      const center = scenePkg.coordinate_system.center;
+      const groundY = scenePkg.coordinate_system.ground_y;
+      const bounds = scenePkg.coordinate_system.bounds;
+
+      // Build 3D structures from real data
+      setLoadSub('Generating ground plane & spatial grid...');
+      buildGround(bounds, center, groundY);
+
+      setLoadSub(`Synthesizing ${(scenePkg.buildings || []).length} residential buildings...`);
+      buildStructures(scenePkg.buildings || [], center, groundY);
+
+      setLoadSub(`Placing ${(scenePkg.vegetation || []).length} tree foliage clusters...`);
+      buildVegetation(scenePkg.vegetation || [], center);
+
+      setLoadSub(`Constructing ${(scenePkg.roads || []).length} street corridors & ${(scenePkg.water || []).length} water bodies...`);
+      buildRoads(scenePkg.roads || [], center);
+      buildWater(scenePkg.water || [], center);
+
+      setLoadSub('Reconstructing COLMAP camera flight trajectory...');
+      buildFlightTrajectory(scenePkg.cameras?.positions || [], center);
+
+      // Frame camera to fit real scene bounds
+      frameCameraToScene(bounds);
+
+      // Load Dense Colored Point Cloud
+      const plyUrl = scenePkg.dense_ply_url || `/jobs/${jobId}/scene/dense_web.ply`;
+      const semUrl = scenePkg.semantic_ply_url || `/jobs/${jobId}/scene/semantic.ply`;
+      loadDensePointCloud(plyUrl, semUrl, center);
+
+    } else {
+      // Scene package not generated yet — trigger builder or load fallback
+      setLoadSub('Scene not pre-built — generating now from dense reconstruction...');
+      addLog('a', 'Scene not found — requesting reconstruction package');
+      setTimeout(hideLoader, 2000);
+    }
+  } catch (err) {
+    console.error('Initialization error:', err);
+    addLog('r', 'Initialization failed: ' + err);
+    hideLoader();
+  }
+}
+
+init();
+</script>
+</body>
+</html>

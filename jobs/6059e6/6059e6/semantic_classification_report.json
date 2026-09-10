@@ -1,0 +1,375 @@
+{
+  "method": "HSV_Semantic_Segmentation",
+  "frames_analyzed": 30,
+  "total_extracted_frames": 69,
+  "class_averages": {
+    "Unknown": 1.08,
+    "Road/Ground": 18.72,
+    "Building/Roof": 14.74,
+    "Vegetation": 47.0,
+    "Water": 18.46,
+    "Vehicle": 0.0
+  },
+  "results": [
+    {
+      "frame": "frame_00000.jpg",
+      "semantic_image": "sem_frame_00000.jpg",
+      "classes": {
+        "Unknown": 2.11,
+        "Road/Ground": 18.34,
+        "Building/Roof": 15.17,
+        "Vegetation": 42.91,
+        "Water": 21.47,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00002.jpg",
+      "semantic_image": "sem_frame_00002.jpg",
+      "classes": {
+        "Unknown": 1.59,
+        "Road/Ground": 18.94,
+        "Building/Roof": 15.33,
+        "Vegetation": 42.49,
+        "Water": 21.65,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00004.jpg",
+      "semantic_image": "sem_frame_00004.jpg",
+      "classes": {
+        "Unknown": 1.58,
+        "Road/Ground": 19.35,
+        "Building/Roof": 15.39,
+        "Vegetation": 43.12,
+        "Water": 20.56,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00006.jpg",
+      "semantic_image": "sem_frame_00006.jpg",
+      "classes": {
+        "Unknown": 1.78,
+        "Road/Ground": 19.71,
+        "Building/Roof": 15.71,
+        "Vegetation": 43.32,
+        "Water": 19.48,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00008.jpg",
+      "semantic_image": "sem_frame_00008.jpg",
+      "classes": {
+        "Unknown": 1.52,
+        "Road/Ground": 20.01,
+        "Building/Roof": 14.97,
+        "Vegetation": 44.65,
+        "Water": 18.85,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00010.jpg",
+      "semantic_image": "sem_frame_00010.jpg",
+      "classes": {
+        "Unknown": 1.5,
+        "Road/Ground": 19.85,
+        "Building/Roof": 14.17,
+        "Vegetation": 45.6,
+        "Water": 18.88,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00012.jpg",
+      "semantic_image": "sem_frame_00012.jpg",
+      "classes": {
+        "Unknown": 1.59,
+        "Road/Ground": 19.94,
+        "Building/Roof": 14.24,
+        "Vegetation": 44.64,
+        "Water": 19.6,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00014.jpg",
+      "semantic_image": "sem_frame_00014.jpg",
+      "classes": {
+        "Unknown": 1.28,
+        "Road/Ground": 18.15,
+        "Building/Roof": 14.42,
+        "Vegetation": 45.82,
+        "Water": 20.32,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00016.jpg",
+      "semantic_image": "sem_frame_00016.jpg",
+      "classes": {
+        "Unknown": 1.16,
+        "Road/Ground": 16.17,
+        "Building/Roof": 14.48,
+        "Vegetation": 47.47,
+        "Water": 20.72,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00018.jpg",
+      "semantic_image": "sem_frame_00018.jpg",
+      "classes": {
+        "Unknown": 1.04,
+        "Road/Ground": 15.65,
+        "Building/Roof": 14.29,
+        "Vegetation": 47.18,
+        "Water": 21.84,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00020.jpg",
+      "semantic_image": "sem_frame_00020.jpg",
+      "classes": {
+        "Unknown": 0.87,
+        "Road/Ground": 15.92,
+        "Building/Roof": 14.54,
+        "Vegetation": 46.87,
+        "Water": 21.8,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00022.jpg",
+      "semantic_image": "sem_frame_00022.jpg",
+      "classes": {
+        "Unknown": 0.84,
+        "Road/Ground": 16.29,
+        "Building/Roof": 14.5,
+        "Vegetation": 47.78,
+        "Water": 20.59,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00024.jpg",
+      "semantic_image": "sem_frame_00024.jpg",
+      "classes": {
+        "Unknown": 0.89,
+        "Road/Ground": 16.79,
+        "Building/Roof": 14.72,
+        "Vegetation": 48.21,
+        "Water": 19.39,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00026.jpg",
+      "semantic_image": "sem_frame_00026.jpg",
+      "classes": {
+        "Unknown": 0.72,
+        "Road/Ground": 17.28,
+        "Building/Roof": 14.65,
+        "Vegetation": 48.85,
+        "Water": 18.51,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00028.jpg",
+      "semantic_image": "sem_frame_00028.jpg",
+      "classes": {
+        "Unknown": 0.7,
+        "Road/Ground": 17.46,
+        "Building/Roof": 14.17,
+        "Vegetation": 49.11,
+        "Water": 18.56,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00030.jpg",
+      "semantic_image": "sem_frame_00030.jpg",
+      "classes": {
+        "Unknown": 0.69,
+        "Road/Ground": 17.91,
+        "Building/Roof": 14.39,
+        "Vegetation": 47.88,
+        "Water": 19.13,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00032.jpg",
+      "semantic_image": "sem_frame_00032.jpg",
+      "classes": {
+        "Unknown": 0.62,
+        "Road/Ground": 18.24,
+        "Building/Roof": 14.53,
+        "Vegetation": 47.44,
+        "Water": 19.17,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00034.jpg",
+      "semantic_image": "sem_frame_00034.jpg",
+      "classes": {
+        "Unknown": 0.72,
+        "Road/Ground": 18.34,
+        "Building/Roof": 14.85,
+        "Vegetation": 47.22,
+        "Water": 18.87,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00036.jpg",
+      "semantic_image": "sem_frame_00036.jpg",
+      "classes": {
+        "Unknown": 0.64,
+        "Road/Ground": 18.57,
+        "Building/Roof": 14.59,
+        "Vegetation": 47.34,
+        "Water": 18.85,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00038.jpg",
+      "semantic_image": "sem_frame_00038.jpg",
+      "classes": {
+        "Unknown": 0.55,
+        "Road/Ground": 18.9,
+        "Building/Roof": 14.51,
+        "Vegetation": 47.92,
+        "Water": 18.13,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00040.jpg",
+      "semantic_image": "sem_frame_00040.jpg",
+      "classes": {
+        "Unknown": 0.61,
+        "Road/Ground": 19.3,
+        "Building/Roof": 14.25,
+        "Vegetation": 48.27,
+        "Water": 17.58,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00042.jpg",
+      "semantic_image": "sem_frame_00042.jpg",
+      "classes": {
+        "Unknown": 0.62,
+        "Road/Ground": 19.54,
+        "Building/Roof": 14.31,
+        "Vegetation": 47.95,
+        "Water": 17.58,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00044.jpg",
+      "semantic_image": "sem_frame_00044.jpg",
+      "classes": {
+        "Unknown": 0.71,
+        "Road/Ground": 19.77,
+        "Building/Roof": 14.74,
+        "Vegetation": 47.94,
+        "Water": 16.84,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00046.jpg",
+      "semantic_image": "sem_frame_00046.jpg",
+      "classes": {
+        "Unknown": 0.94,
+        "Road/Ground": 19.94,
+        "Building/Roof": 14.54,
+        "Vegetation": 48.09,
+        "Water": 16.49,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00048.jpg",
+      "semantic_image": "sem_frame_00048.jpg",
+      "classes": {
+        "Unknown": 1.02,
+        "Road/Ground": 20.26,
+        "Building/Roof": 14.75,
+        "Vegetation": 47.65,
+        "Water": 16.33,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00050.jpg",
+      "semantic_image": "sem_frame_00050.jpg",
+      "classes": {
+        "Unknown": 1.07,
+        "Road/Ground": 20.29,
+        "Building/Roof": 15.0,
+        "Vegetation": 48.62,
+        "Water": 15.02,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00052.jpg",
+      "semantic_image": "sem_frame_00052.jpg",
+      "classes": {
+        "Unknown": 1.1,
+        "Road/Ground": 20.48,
+        "Building/Roof": 15.33,
+        "Vegetation": 48.63,
+        "Water": 14.46,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00054.jpg",
+      "semantic_image": "sem_frame_00054.jpg",
+      "classes": {
+        "Unknown": 1.3,
+        "Road/Ground": 20.29,
+        "Building/Roof": 15.62,
+        "Vegetation": 48.1,
+        "Water": 14.69,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00056.jpg",
+      "semantic_image": "sem_frame_00056.jpg",
+      "classes": {
+        "Unknown": 1.28,
+        "Road/Ground": 20.02,
+        "Building/Roof": 15.09,
+        "Vegetation": 49.25,
+        "Water": 14.36,
+        "Vehicle": 0.0
+      }
+    },
+    {
+      "frame": "frame_00058.jpg",
+      "semantic_image": "sem_frame_00058.jpg",
+      "classes": {
+        "Unknown": 1.38,
+        "Road/Ground": 20.0,
+        "Building/Roof": 14.85,
+        "Vegetation": 49.63,
+        "Water": 14.14,
+        "Vehicle": 0.0
+      }
+    }
+  ]
+}

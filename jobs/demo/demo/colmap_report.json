@@ -1,0 +1,19 @@
+{
+  "project": "sample_flight",
+  "num_input_frames": 69,
+  "sparse": {
+    "num_cameras": 1,
+    "num_images_registered": 259,
+    "num_points3D": 559,
+    "model_dir": "1"
+  },
+  "dense": {},
+  "timings": {
+    "feature_extraction": 6.76,
+    "feature_matching": 1.2,
+    "sparse_reconstruction": 380.64,
+    "undistortion": 11.8
+  },
+  "total_time_sec": 405.34,
+  "success": true
+}

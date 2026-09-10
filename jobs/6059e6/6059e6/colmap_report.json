@@ -1,0 +1,19 @@
+{
+  "project": "6059e6",
+  "num_input_frames": 69,
+  "sparse": {
+    "num_images_registered": 62,
+    "num_points3D": 33069,
+    "model_path": "jobs/6059e6/6059e6/sparse/0"
+  },
+  "dense": {
+    "num_points": 33069
+  },
+  "timings": {
+    "feature_extraction": 4.47,
+    "exhaustive_matching": 12.8,
+    "mapping": 14.5
+  },
+  "total_time_sec": 31.77,
+  "success": true
+}

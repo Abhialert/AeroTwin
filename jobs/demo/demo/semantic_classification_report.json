@@ -1,0 +1,344 @@
+{
+  "method": "HSV_Semantic_Segmentation",
+  "frames_analyzed": 30,
+  "total_extracted_frames": 69,
+  "class_averages": {
+    "Unknown": 12.0,
+    "Road/Ground": 5.53,
+    "Building/Roof": 21.23,
+    "Vegetation": 45.27,
+    "Sky": 15.96
+  },
+  "results": [
+    {
+      "frame": "frame_00000.jpg",
+      "semantic_image": "sem_frame_00000.jpg",
+      "classes": {
+        "Unknown": 13.97,
+        "Road/Ground": 6.35,
+        "Building/Roof": 20.72,
+        "Vegetation": 42.47,
+        "Sky": 16.49
+      }
+    },
+    {
+      "frame": "frame_00002.jpg",
+      "semantic_image": "sem_frame_00002.jpg",
+      "classes": {
+        "Unknown": 13.15,
+        "Road/Ground": 6.5,
+        "Building/Roof": 21.89,
+        "Vegetation": 41.22,
+        "Sky": 17.25
+      }
+    },
+    {
+      "frame": "frame_00004.jpg",
+      "semantic_image": "sem_frame_00004.jpg",
+      "classes": {
+        "Unknown": 11.97,
+        "Road/Ground": 6.44,
+        "Building/Roof": 22.09,
+        "Vegetation": 41.81,
+        "Sky": 17.69
+      }
+    },
+    {
+      "frame": "frame_00006.jpg",
+      "semantic_image": "sem_frame_00006.jpg",
+      "classes": {
+        "Unknown": 11.72,
+        "Road/Ground": 6.77,
+        "Building/Roof": 21.2,
+        "Vegetation": 42.34,
+        "Sky": 17.97
+      }
+    },
+    {
+      "frame": "frame_00008.jpg",
+      "semantic_image": "sem_frame_00008.jpg",
+      "classes": {
+        "Unknown": 11.21,
+        "Road/Ground": 6.42,
+        "Building/Roof": 20.45,
+        "Vegetation": 43.23,
+        "Sky": 18.69
+      }
+    },
+    {
+      "frame": "frame_00010.jpg",
+      "semantic_image": "sem_frame_00010.jpg",
+      "classes": {
+        "Unknown": 11.22,
+        "Road/Ground": 5.91,
+        "Building/Roof": 19.35,
+        "Vegetation": 44.22,
+        "Sky": 19.31
+      }
+    },
+    {
+      "frame": "frame_00012.jpg",
+      "semantic_image": "sem_frame_00012.jpg",
+      "classes": {
+        "Unknown": 12.18,
+        "Road/Ground": 6.06,
+        "Building/Roof": 19.38,
+        "Vegetation": 43.69,
+        "Sky": 18.69
+      }
+    },
+    {
+      "frame": "frame_00014.jpg",
+      "semantic_image": "sem_frame_00014.jpg",
+      "classes": {
+        "Unknown": 12.79,
+        "Road/Ground": 6.14,
+        "Building/Roof": 19.92,
+        "Vegetation": 44.42,
+        "Sky": 16.73
+      }
+    },
+    {
+      "frame": "frame_00016.jpg",
+      "semantic_image": "sem_frame_00016.jpg",
+      "classes": {
+        "Unknown": 13.44,
+        "Road/Ground": 5.7,
+        "Building/Roof": 20.74,
+        "Vegetation": 45.92,
+        "Sky": 14.19
+      }
+    },
+    {
+      "frame": "frame_00018.jpg",
+      "semantic_image": "sem_frame_00018.jpg",
+      "classes": {
+        "Unknown": 14.06,
+        "Road/Ground": 4.93,
+        "Building/Roof": 21.72,
+        "Vegetation": 45.88,
+        "Sky": 13.41
+      }
+    },
+    {
+      "frame": "frame_00020.jpg",
+      "semantic_image": "sem_frame_00020.jpg",
+      "classes": {
+        "Unknown": 13.99,
+        "Road/Ground": 5.0,
+        "Building/Roof": 22.11,
+        "Vegetation": 45.19,
+        "Sky": 13.72
+      }
+    },
+    {
+      "frame": "frame_00022.jpg",
+      "semantic_image": "sem_frame_00022.jpg",
+      "classes": {
+        "Unknown": 12.8,
+        "Road/Ground": 5.36,
+        "Building/Roof": 21.94,
+        "Vegetation": 46.0,
+        "Sky": 13.89
+      }
+    },
+    {
+      "frame": "frame_00024.jpg",
+      "semantic_image": "sem_frame_00024.jpg",
+      "classes": {
+        "Unknown": 12.32,
+        "Road/Ground": 5.55,
+        "Building/Roof": 21.43,
+        "Vegetation": 46.63,
+        "Sky": 14.07
+      }
+    },
+    {
+      "frame": "frame_00026.jpg",
+      "semantic_image": "sem_frame_00026.jpg",
+      "classes": {
+        "Unknown": 11.64,
+        "Road/Ground": 5.28,
+        "Building/Roof": 21.38,
+        "Vegetation": 47.05,
+        "Sky": 14.65
+      }
+    },
+    {
+      "frame": "frame_00028.jpg",
+      "semantic_image": "sem_frame_00028.jpg",
+      "classes": {
+        "Unknown": 11.69,
+        "Road/Ground": 4.76,
+        "Building/Roof": 21.39,
+        "Vegetation": 47.21,
+        "Sky": 14.95
+      }
+    },
+    {
+      "frame": "frame_00030.jpg",
+      "semantic_image": "sem_frame_00030.jpg",
+      "classes": {
+        "Unknown": 12.49,
+        "Road/Ground": 4.66,
+        "Building/Roof": 21.58,
+        "Vegetation": 46.1,
+        "Sky": 15.17
+      }
+    },
+    {
+      "frame": "frame_00032.jpg",
+      "semantic_image": "sem_frame_00032.jpg",
+      "classes": {
+        "Unknown": 12.02,
+        "Road/Ground": 4.9,
+        "Building/Roof": 22.19,
+        "Vegetation": 45.48,
+        "Sky": 15.4
+      }
+    },
+    {
+      "frame": "frame_00034.jpg",
+      "semantic_image": "sem_frame_00034.jpg",
+      "classes": {
+        "Unknown": 12.17,
+        "Road/Ground": 5.06,
+        "Building/Roof": 22.01,
+        "Vegetation": 45.22,
+        "Sky": 15.53
+      }
+    },
+    {
+      "frame": "frame_00036.jpg",
+      "semantic_image": "sem_frame_00036.jpg",
+      "classes": {
+        "Unknown": 12.55,
+        "Road/Ground": 5.27,
+        "Building/Roof": 21.31,
+        "Vegetation": 45.49,
+        "Sky": 15.38
+      }
+    },
+    {
+      "frame": "frame_00038.jpg",
+      "semantic_image": "sem_frame_00038.jpg",
+      "classes": {
+        "Unknown": 11.49,
+        "Road/Ground": 5.26,
+        "Building/Roof": 21.8,
+        "Vegetation": 45.77,
+        "Sky": 15.68
+      }
+    },
+    {
+      "frame": "frame_00040.jpg",
+      "semantic_image": "sem_frame_00040.jpg",
+      "classes": {
+        "Unknown": 11.49,
+        "Road/Ground": 5.1,
+        "Building/Roof": 21.59,
+        "Vegetation": 46.1,
+        "Sky": 15.72
+      }
+    },
+    {
+      "frame": "frame_00042.jpg",
+      "semantic_image": "sem_frame_00042.jpg",
+      "classes": {
+        "Unknown": 11.69,
+        "Road/Ground": 5.03,
+        "Building/Roof": 21.34,
+        "Vegetation": 46.01,
+        "Sky": 15.94
+      }
+    },
+    {
+      "frame": "frame_00044.jpg",
+      "semantic_image": "sem_frame_00044.jpg",
+      "classes": {
+        "Unknown": 11.07,
+        "Road/Ground": 5.27,
+        "Building/Roof": 21.56,
+        "Vegetation": 45.82,
+        "Sky": 16.28
+      }
+    },
+    {
+      "frame": "frame_00046.jpg",
+      "semantic_image": "sem_frame_00046.jpg",
+      "classes": {
+        "Unknown": 11.25,
+        "Road/Ground": 5.26,
+        "Building/Roof": 21.27,
+        "Vegetation": 45.95,
+        "Sky": 16.27
+      }
+    },
+    {
+      "frame": "frame_00048.jpg",
+      "semantic_image": "sem_frame_00048.jpg",
+      "classes": {
+        "Unknown": 11.36,
+        "Road/Ground": 5.34,
+        "Building/Roof": 21.44,
+        "Vegetation": 45.64,
+        "Sky": 16.21
+      }
+    },
+    {
+      "frame": "frame_00050.jpg",
+      "semantic_image": "sem_frame_00050.jpg",
+      "classes": {
+        "Unknown": 10.74,
+        "Road/Ground": 5.28,
+        "Building/Roof": 21.5,
+        "Vegetation": 46.3,
+        "Sky": 16.18
+      }
+    },
+    {
+      "frame": "frame_00052.jpg",
+      "semantic_image": "sem_frame_00052.jpg",
+      "classes": {
+        "Unknown": 10.65,
+        "Road/Ground": 5.33,
+        "Building/Roof": 21.51,
+        "Vegetation": 46.32,
+        "Sky": 16.18
+      }
+    },
+    {
+      "frame": "frame_00054.jpg",
+      "semantic_image": "sem_frame_00054.jpg",
+      "classes": {
+        "Unknown": 11.08,
+        "Road/Ground": 5.79,
+        "Building/Roof": 21.15,
+        "Vegetation": 46.17,
+        "Sky": 15.81
+      }
+    },
+    {
+      "frame": "frame_00056.jpg",
+      "semantic_image": "sem_frame_00056.jpg",
+      "classes": {
+        "Unknown": 10.87,
+        "Road/Ground": 5.53,
+        "Building/Roof": 20.75,
+        "Vegetation": 47.0,
+        "Sky": 15.86
+      }
+    },
+    {
+      "frame": "frame_00058.jpg",
+      "semantic_image": "sem_frame_00058.jpg",
+      "classes": {
+        "Unknown": 11.05,
+        "Road/Ground": 5.5,
+        "Building/Roof": 20.29,
+        "Vegetation": 47.52,
+        "Sky": 15.63
+      }
+    }
+  ]
+}

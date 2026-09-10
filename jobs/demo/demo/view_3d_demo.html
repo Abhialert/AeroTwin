@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AeroTwin 3D Digital Twin Viewer</title>
+    <style>
+        body { margin: 0; background: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; overflow: hidden; }
+        #info { position: absolute; top: 16px; left: 16px; z-index: 10; background: rgba(13,17,23,0.92); padding: 18px 24px; border-radius: 12px; border: 1px solid rgba(56,189,248,0.25); box-shadow: 0 10px 40px rgba(0,0,0,0.6); backdrop-filter: blur(12px); max-width: 320px; pointer-events: none; }
+        h2 { margin: 0 0 6px 0; font-size: 20px; color: #38bdf8; font-weight: 700; letter-spacing: -0.5px; }
+        p { margin: 4px 0; font-size: 13px; color: #94a3b8; }
+        .badge { display: inline-block; background: #0284c7; color: white; padding: 3px 8px; border-radius: 4px; font-weight: 600; font-size: 11px; margin-bottom: 8px; margin-right: 4px; }
+        .success { background: #16a34a; }
+        .purple { background: #7c3aed; }
+        .btn-group { margin-top: 12px; display: flex; gap: 8px; pointer-events: auto; }
+        button { background: rgba(56,189,248,0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.4); padding: 7px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600; transition: all 0.2s; }
+        button:hover, button.active { background: #38bdf8; color: #000; }
+        #loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 24px; font-weight: bold; color: #38bdf8; z-index: 100; pointer-events: none; }
+        #canvas-container { width: 100vw; height: 100vh; }
+        #measurement-ui { position: absolute; bottom: 16px; left: 16px; z-index: 10; background: rgba(13,17,23,0.92); padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(168,85,247,0.4); display: none; pointer-events: none; }
+        .measure-val { font-family: monospace; font-size: 18px; color: #a855f7; font-weight: bold; }
+        #mode-indicator { position: absolute; top: 16px; right: 16px; z-index: 10; padding: 6px 12px; background: rgba(220, 38, 38, 0.2); border: 1px solid #dc2626; color: #fca5a5; border-radius: 6px; font-size: 12px; font-weight: bold; display: none; pointer-events: none; }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/PLYLoader.js"></script>
+</head>
+<body>
+    <div id="info">
+        <h2>AeroTwin — Pinpoint Twin</h2>
+        <span class="badge">SIH 2026</span> <span class="badge success">13.3M MVS</span> <span class="badge purple">LIVE RENDER</span>
+        <p><strong>Total Dense Points:</strong> 13.3 Million</p>
+        <p><strong>Mesh Triangles:</strong> 237K Faces</p>
+        <p><strong>Scale:</strong> 1.083 m/unit</p>
+        
+        <div class="btn-group">
+            <button id="btn-points" class="active">Point Cloud</button>
+            <button id="btn-mesh">Surface Mesh</button>
+            <button id="btn-wire">Wireframe</button>
+        </div>
+        <div class="btn-group">
+            <button id="btn-measure" style="border-color: #a855f7; color: #a855f7;">📏 Measure (M)</button>
+        </div>
+
+        <p style="color: #38bdf8; margin-top: 12px; font-weight: 500;">🖱️ Controls:</p>
+        <p>• Left Click: Rotate | Right Click: Pan | Scroll: Zoom</p>
+    </div>
+    
+    <div id="loading">Loading 3D Assets...</div>
+    <div id="mode-indicator">MEASUREMENT MODE ACTIVE</div>
+    <div id="measurement-ui">Distance: <span id="measure-dist" class="measure-val">0.00m</span></div>
+    
+    <div id="canvas-container"></div>
+
+    <script>
+        const container = document.getElementById("canvas-container");
+        const loading = document.getElementById("loading");
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000000);
+
+        const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 2000);
+        camera.position.set(0, -50, 50);
+        camera.up.set(0, 0, 1);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        dirLight.position.set(100, -100, 200);
+        scene.add(dirLight);
+
+        let pointCloud, mesh, wireframe;
+        let objectsLoaded = 0;
+
+        function checkLoadComplete() {
+            objectsLoaded++;
+            if (objectsLoaded >= 2) { // PC + Mesh
+                loading.style.display = 'none';
+            }
+        }
+
+        const loader = new THREE.PLYLoader();
+        
+        // Load Point Cloud (using the display version for performance)
+        loader.load('dense_display.ply', function (geometry) {
+            geometry.computeVertexNormals();
+            let material = new THREE.PointsMaterial({ size: 0.05, vertexColors: geometry.hasAttribute('color') });
+            if (!geometry.hasAttribute('color')) {
+                material.color.setHex(0x38bdf8);
+            }
+            pointCloud = new THREE.Points(geometry, material);
+            // COLMAP Z is often flipped or needs rotation based on the scene, but we leave it as exported.
+            pointCloud.rotation.x = Math.PI; // often needed for COLMAP output
+            scene.add(pointCloud);
+            
+            // Center camera on object
+            geometry.computeBoundingBox();
+            const center = geometry.boundingBox.getCenter(new THREE.Vector3());
+            controls.target.set(center.x, -center.y, -center.z); // Adjust for rotation
+            camera.position.set(center.x, -center.y - 100, -center.z + 100);
+            controls.update();
+
+            checkLoadComplete();
+        }, undefined, function (error) { console.error(error); checkLoadComplete(); });
+
+        // Load Mesh
+        loader.load('aerotwin_surface_mesh.ply', function (geometry) {
+            geometry.computeVertexNormals();
+            const material = new THREE.MeshStandardMaterial({ 
+                color: 0x94a3b8, 
+                flatShading: true, 
+                side: THREE.DoubleSide 
+            });
+            mesh = new THREE.Mesh(geometry, material);
+            mesh.rotation.x = Math.PI;
+            mesh.visible = false;
+            scene.add(mesh);
+
+            // Wireframe helper
+            const wireMaterial = new THREE.LineBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.3 });
+            const wireGeometry = new THREE.WireframeGeometry(geometry);
+            wireframe = new THREE.LineSegments(wireGeometry, wireMaterial);
+            wireframe.rotation.x = Math.PI;
+            wireframe.visible = false;
+            scene.add(wireframe);
+
+            checkLoadComplete();
+        }, undefined, function (error) { console.error(error); checkLoadComplete(); });
+
+        // UI Buttons
+        const btnPoints = document.getElementById('btn-points');
+        const btnMesh = document.getElementById('btn-mesh');
+        const btnWire = document.getElementById('btn-wire');
+
+        function setMode(mode) {
+            btnPoints.classList.remove('active');
+            btnMesh.classList.remove('active');
+            btnWire.classList.remove('active');
+
+            if(pointCloud) pointCloud.visible = false;
+            if(mesh) mesh.visible = false;
+            if(wireframe) wireframe.visible = false;
+
+            if (mode === 'points') {
+                if(pointCloud) pointCloud.visible = true;
+                btnPoints.classList.add('active');
+            } else if (mode === 'mesh') {
+                if(mesh) mesh.visible = true;
+                btnMesh.classList.add('active');
+            } else if (mode === 'wire') {
+                if(mesh) mesh.visible = true;
+                if(wireframe) wireframe.visible = true;
+                btnWire.classList.add('active');
+            }
+        }
+
+        btnPoints.addEventListener('click', () => setMode('points'));
+        btnMesh.addEventListener('click', () => setMode('mesh'));
+        btnWire.addEventListener('click', () => setMode('wire'));
+
+        // Feature 5: Measurement System
+        let isMeasuring = false;
+        const btnMeasure = document.getElementById('btn-measure');
+        const modeIndicator = document.getElementById('mode-indicator');
+        const measurementUi = document.getElementById('measurement-ui');
+        const measureDistEl = document.getElementById('measure-dist');
+        
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+        
+        let measurePoints = [];
+        let measureMarkers = [];
+        let measureLine = null;
+        const COLMAP_SCALE_FACTOR = 1.083; // Derived from feature 4
+
+        btnMeasure.addEventListener('click', () => {
+            isMeasuring = !isMeasuring;
+            if (isMeasuring) {
+                btnMeasure.style.background = '#a855f7';
+                btnMeasure.style.color = '#fff';
+                modeIndicator.style.display = 'block';
+                measurementUi.style.display = 'block';
+                container.style.cursor = 'crosshair';
+                // Switch to mesh for easier clicking if we are in points mode
+                if (btnPoints.classList.contains('active')) {
+                    setMode('mesh');
+                }
+            } else {
+                btnMeasure.style.background = 'rgba(56,189,248,0.15)';
+                btnMeasure.style.color = '#a855f7';
+                modeIndicator.style.display = 'none';
+                container.style.cursor = 'default';
+                clearMeasurement();
+            }
+        });
+
+        function clearMeasurement() {
+            measurePoints = [];
+            measureMarkers.forEach(m => scene.remove(m));
+            measureMarkers = [];
+            if(measureLine) scene.remove(measureLine);
+            measureLine = null;
+            measureDistEl.innerText = "0.00m";
+        }
+
+        window.addEventListener('click', (event) => {
+            if (!isMeasuring) return;
+            // Ignore UI clicks
+            if (event.clientY < 150 && event.clientX < 350) return;
+
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+            raycaster.setFromCamera(mouse, camera);
+            
+            // Intersect with mesh
+            const intersects = mesh ? raycaster.intersectObject(mesh) : [];
+            
+            if (intersects.length > 0) {
+                const p = intersects[0].point;
+                
+                // Add marker
+                const geom = new THREE.SphereGeometry(0.5, 16, 16);
+                const mat = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+                const marker = new THREE.Mesh(geom, mat);
+                marker.position.copy(p);
+                scene.add(marker);
+                measureMarkers.push(marker);
+                measurePoints.push(p);
+
+                if (measurePoints.length === 2) {
+                    // Draw line
+                    const lineGeom = new THREE.BufferGeometry().setFromPoints(measurePoints);
+                    const lineMat = new THREE.LineBasicMaterial({ color: 0xff0000, linewidth: 3 });
+                    measureLine = new THREE.Line(lineGeom, lineMat);
+                    scene.add(measureLine);
+                    
+                    // Calculate distance
+                    const distLocal = measurePoints[0].distanceTo(measurePoints[1]);
+                    const distMetric = distLocal * COLMAP_SCALE_FACTOR;
+                    measureDistEl.innerText = distMetric.toFixed(2) + "m";
+                } else if (measurePoints.length > 2) {
+                    // Reset
+                    clearMeasurement();
+                    // Add new first point
+                    scene.add(marker);
+                    measureMarkers.push(marker);
+                    measurePoints.push(p);
+                }
+            }
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if(e.key.toLowerCase() === 'm') {
+                btnMeasure.click();
+            }
+            if(e.key === 'Escape' && isMeasuring) {
+                clearMeasurement();
+            }
+        });
+
+        window.addEventListener('resize', onWindowResize, false);
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        animate();
+    </script>
+</body>
+</html>

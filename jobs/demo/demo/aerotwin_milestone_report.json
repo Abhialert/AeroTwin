@@ -1,0 +1,27 @@
+{
+  "system": "AeroTwin - SIH 2026 Submission MVP",
+  "status": "VERIFIED_REAL_GEOMETRY",
+  "hardware": "AMD Ryzen 7 7445HS, NVIDIA GeForce RTX 3050 Laptop GPU (6GB VRAM)",
+  "input": {
+    "video": "data/input/drone_flight_sample.mov",
+    "resolution": "2152x1934",
+    "total_frames_in_video": 4185,
+    "extracted_frames": 278,
+    "sampling_step": 15,
+    "blur_filtering": "Laplacian variance filter (1 blurry frame dropped)"
+  },
+  "milestone_1_sparse_sfm": {
+    "engine": "COLMAP 4.2.0 CUDA",
+    "registered_cameras": 260,
+    "feature_extraction_time_s": 31.4,
+    "feature_matching_inliers": 1621,
+    "camera_model": "SIMPLE_RADIAL calibrated for drone nadir flight"
+  },
+  "milestone_2_dense_reconstruction": {
+    "status": "COMPLETED",
+    "dense_points_count": 13339285,
+    "ply_file": "data/output/sample_flight/dense_pointcloud.ply",
+    "ply_size_mb": 343.48,
+    "mvs_method": "COLMAP PatchMatchStereo (GPU) + StereoFusion"
+  }
+}

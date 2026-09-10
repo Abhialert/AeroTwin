@@ -1,0 +1,105 @@
+{
+  "feature": "GPS / Georeferencing",
+  "cameras_registered": 260,
+  "scale_m_per_unit": 1.08299,
+  "trajectory_length_m": 338940.52,
+  "coverage_span_m": {
+    "x": 19562.33,
+    "y": 10592.49,
+    "z": 337762.71
+  },
+  "coordinate_system": "COLMAP local (metric-consistent, not lat/lon anchored)",
+  "gps_status": "GPS metadata NOT present in this video file. To enable true lat/lon georeferencing, provide a DJI telemetry SRT file or a GPX track alongside the video. The local coordinate system is metric-consistent and can be anchored to any known ground control point (GCP).",
+  "camera_positions_local": [
+    {
+      "id": 0,
+      "name": "frame_00018.jpg",
+      "local_xyz": [
+        18006.204663378896,
+        9726.904496709503,
+        -311876.62477041164
+      ]
+    },
+    {
+      "id": 1,
+      "name": "frame_00019.jpg",
+      "local_xyz": [
+        8363.154209709714,
+        5704.493251778086,
+        -136508.0885122
+      ]
+    },
+    {
+      "id": 2,
+      "name": "frame_00020.jpg",
+      "local_xyz": [
+        2557.351229512942,
+        2432.339721834584,
+        -61977.691707226644
+      ]
+    },
+    {
+      "id": 3,
+      "name": "frame_00021.jpg",
+      "local_xyz": [
+        906.851031422708,
+        906.5649074008396,
+        -25989.61506351113
+      ]
+    },
+    {
+      "id": 4,
+      "name": "frame_00022.jpg",
+      "local_xyz": [
+        234.77982110330242,
+        350.2964873531284,
+        -8532.520131825902
+      ]
+    },
+    {
+      "id": 5,
+      "name": "frame_00023.jpg",
+      "local_xyz": [
+        -28.75603762018265,
+        67.88586825290129,
+        -1091.0110093165363
+      ]
+    },
+    {
+      "id": 6,
+      "name": "frame_00024.jpg",
+      "local_xyz": [
+        -57.02524287438772,
+        -53.86580618231788,
+        2.693598453924128
+      ]
+    },
+    {
+      "id": 7,
+      "name": "frame_00025.jpg",
+      "local_xyz": [
+        -3.412346099713848,
+        -2.576808472824345,
+        -1.7677479464171988
+      ]
+    },
+    {
+      "id": 8,
+      "name": "frame_00026.jpg",
+      "local_xyz": [
+        1.7895356718232456,
+        -4.6869384981144,
+        -2.081754102165888
+      ]
+    },
+    {
+      "id": 9,
+      "name": "frame_00027.jpg",
+      "local_xyz": [
+        -0.44285903457342685,
+        -7.997409124629102,
+        -2.8568931817136574
+      ]
+    }
+  ]
+}

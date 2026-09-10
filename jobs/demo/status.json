@@ -1,0 +1,9 @@
+{
+  "job_id": "demo",
+  "stage": "Done",
+  "progress": 100,
+  "message": "Demo job \u2014 seeded from sample_flight reconstruction.",
+  "is_complete": true,
+  "error": false,
+  "timestamp": 1788554851.2086263
+}

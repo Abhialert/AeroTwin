@@ -1,0 +1,17 @@
+# AeroTwin - Milestone 1 Dependencies
+# Core
+opencv-python>=4.10.0
+numpy>=1.26.0
+Pillow>=10.0.0
+PyYAML>=6.0
+tqdm>=4.66.0
+
+# 3D Visualization
+open3d>=0.18.0
+
+# Utilities
+scipy>=1.12.0
+
+# Web Backend
+Flask>=3.0.0
+Werkzeug>=3.0.0

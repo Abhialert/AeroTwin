@@ -1,0 +1,23 @@
+{
+  "project": "c749b9",
+  "num_input_frames": 69,
+  "sparse": {
+    "num_cameras": 1,
+    "num_images_registered": 69,
+    "num_points3D": 40841,
+    "model_dir": "0"
+  },
+  "dense": {
+    "fused_ply_size_mb": 32.85
+  },
+  "timings": {
+    "feature_extraction": 6.52,
+    "feature_matching": 45.45,
+    "sparse_reconstruction": 475.85,
+    "undistortion": 1.74,
+    "patch_match": 126405.97,
+    "fusion": 32.75
+  },
+  "total_time_sec": 126972.2,
+  "success": true
+}

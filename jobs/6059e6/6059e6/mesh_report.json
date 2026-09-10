@@ -1,0 +1,11 @@
+{
+  "project": "6059e6",
+  "dense_available": false,
+  "mesh_generated": false,
+  "mesh_faces": 0,
+  "sparse_points": 33069,
+  "dense_points": 0,
+  "display_cloud": "display_cloud.ply",
+  "mesh_path": null,
+  "processing_time_sec": 0.0
+}

@@ -1,0 +1,53 @@
+# AeroTwin COLMAP Configuration
+# Tuned for RTX 3050 6GB VRAM + 16GB RAM
+
+# Frame extraction settings
+frame_extraction:
+  # Extract every Nth frame from video
+  frame_interval: 10
+  # Minimum Laplacian variance to accept a frame (higher = sharper)
+  blur_threshold: 100.0
+  # Maximum frames to extract (0 = no limit)
+  max_frames: 300
+  # Output image quality (JPEG, 0-100)
+  jpeg_quality: 95
+
+# COLMAP feature extraction
+feature_extraction:
+  # SIFT feature extraction
+  image_reader_camera_model: "SIMPLE_RADIAL"
+  # Use GPU for feature extraction
+  use_gpu: true
+  # Max image dimension (resize if larger, saves VRAM)
+  max_image_size: 1600
+  # Max features per image
+  max_num_features: 8192
+
+# COLMAP feature matching
+feature_matching:
+  # Sequential matching is ideal for continuous drone flight videos
+  method: "sequential"
+  use_gpu: true
+  # Overlap window: matches each frame with its neighboring 10 frames
+  sequential_overlap: 10
+
+# COLMAP sparse reconstruction (mapper)
+mapper:
+  # Minimum number of inliers for image registration
+  min_num_matches: 15
+  # Multiple models allowed for disjoint passes
+  multiple_models: true
+  # Aerial parallax tuning: drone video has small parallax between consecutive frames
+  init_min_tri_angle: 4.0
+  filter_min_tri_angle: 1.0
+
+# COLMAP dense reconstruction
+dense:
+  # Enable dense reconstruction
+  enabled: true
+  # Patch match stereo - reduce for 6GB VRAM
+  max_image_size: 1200
+  # Stereo fusion
+  min_num_pixels: 5
+  # Poisson meshing
+  poisson_trim: 7.0

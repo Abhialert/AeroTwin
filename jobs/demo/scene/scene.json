@@ -1,0 +1,6448 @@
+{
+  "version": 4,
+  "job_id": "demo",
+  "environment": "Aerial Drone Photogrammetry",
+  "point_cloud": {
+    "total_points": 251956,
+    "web_points": 17282,
+    "source": "dense_display.ply"
+  },
+  "coordinate_system": {
+    "up_axis": "Y",
+    "ground_y": 0.0,
+    "bounds": {
+      "xmin": -627.5,
+      "xmax": 1072.3,
+      "ymin": -5.0,
+      "ymax": 45.0,
+      "zmin": -771.2,
+      "zmax": 777.6
+    },
+    "center": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0
+    }
+  },
+  "metric_scale": {
+    "value": 1.083,
+    "calibrated": false,
+    "source": "COLMAP Local",
+    "display": "1.083 m/unit (Metric Calibrated)"
+  },
+  "cameras": {
+    "registered": 259,
+    "trajectory_type": "COLMAP Reconstructed (Video-Derived)",
+    "positions": [
+      {
+        "name": "frame_00019.jpg",
+        "x": 28.79,
+        "y": 160.0,
+        "z": -27.01,
+        "outlier": true
+      },
+      {
+        "name": "frame_00020.jpg",
+        "x": 28.79,
+        "y": 160.0,
+        "z": -27.01,
+        "outlier": true
+      },
+      {
+        "name": "frame_00021.jpg",
+        "x": 28.79,
+        "y": 160.0,
+        "z": -27.01,
+        "outlier": true
+      },
+      {
+        "name": "frame_00022.jpg",
+        "x": 28.79,
+        "y": 160.0,
+        "z": -27.01,
+        "outlier": true
+      },
+      {
+        "name": "frame_00023.jpg",
+        "x": 28.79,
+        "y": 160.0,
+        "z": -27.01,
+        "outlier": true
+      },
+      {
+        "name": "frame_00024.jpg",
+        "x": 28.79,
+        "y": 160.0,
+        "z": -27.01,
+        "outlier": false
+      },
+      {
+        "name": "frame_00025.jpg",
+        "x": 25.31,
+        "y": 160.0,
+        "z": -25.72,
+        "outlier": false
+      },
+      {
+        "name": "frame_00026.jpg",
+        "x": 27.98,
+        "y": 160.0,
+        "z": -27.78,
+        "outlier": false
+      },
+      {
+        "name": "frame_00027.jpg",
+        "x": 28.04,
+        "y": 160.0,
+        "z": -27.34,
+        "outlier": false
+      },
+      {
+        "name": "frame_00028.jpg",
+        "x": 26.9,
+        "y": 160.0,
+        "z": -26.28,
+        "outlier": false
+      },
+      {
+        "name": "frame_00029.jpg",
+        "x": 25.69,
+        "y": 160.0,
+        "z": -26.54,
+        "outlier": false
+      },
+      {
+        "name": "frame_00030.jpg",
+        "x": 26.71,
+        "y": 160.0,
+        "z": -27.77,
+        "outlier": false
+      },
+      {
+        "name": "frame_00031.jpg",
+        "x": 26.29,
+        "y": 160.0,
+        "z": -28.44,
+        "outlier": false
+      },
+      {
+        "name": "frame_00032.jpg",
+        "x": 27.28,
+        "y": 160.0,
+        "z": -28.25,
+        "outlier": false
+      },
+      {
+        "name": "frame_00033.jpg",
+        "x": 21.53,
+        "y": 160.0,
+        "z": -22.0,
+        "outlier": false
+      },
+      {
+        "name": "frame_00034.jpg",
+        "x": 21.5,
+        "y": 160.0,
+        "z": -22.21,
+        "outlier": false
+      },
+      {
+        "name": "frame_00035.jpg",
+        "x": 21.47,
+        "y": 160.0,
+        "z": -22.2,
+        "outlier": false
+      },
+      {
+        "name": "frame_00036.jpg",
+        "x": 21.25,
+        "y": 160.0,
+        "z": -22.02,
+        "outlier": false
+      },
+      {
+        "name": "frame_00037.jpg",
+        "x": 21.18,
+        "y": 160.0,
+        "z": -21.95,
+        "outlier": false
+      },
+      {
+        "name": "frame_00038.jpg",
+        "x": 21.23,
+        "y": 160.0,
+        "z": -21.97,
+        "outlier": false
+      },
+      {
+        "name": "frame_00039.jpg",
+        "x": 21.2,
+        "y": 160.0,
+        "z": -21.96,
+        "outlier": false
+      },
+      {
+        "name": "frame_00040.jpg",
+        "x": 21.1,
+        "y": 160.0,
+        "z": -22.02,
+        "outlier": false
+      },
+      {
+        "name": "frame_00041.jpg",
+        "x": 21.11,
+        "y": 160.0,
+        "z": -21.99,
+        "outlier": false
+      },
+      {
+        "name": "frame_00042.jpg",
+        "x": 21.23,
+        "y": 160.0,
+        "z": -21.97,
+        "outlier": false
+      },
+      {
+        "name": "frame_00043.jpg",
+        "x": 21.2,
+        "y": 160.0,
+        "z": -21.96,
+        "outlier": false
+      },
+      {
+        "name": "frame_00044.jpg",
+        "x": 21.06,
+        "y": 160.0,
+        "z": -22.08,
+        "outlier": false
+      },
+      {
+        "name": "frame_00045.jpg",
+        "x": 21.22,
+        "y": 160.0,
+        "z": -21.99,
+        "outlier": false
+      },
+      {
+        "name": "frame_00046.jpg",
+        "x": 21.3,
+        "y": 160.0,
+        "z": -22.01,
+        "outlier": false
+      },
+      {
+        "name": "frame_00047.jpg",
+        "x": 23.53,
+        "y": 160.0,
+        "z": -19.98,
+        "outlier": false
+      },
+      {
+        "name": "frame_00048.jpg",
+        "x": 21.04,
+        "y": 160.0,
+        "z": -21.06,
+        "outlier": false
+      },
+      {
+        "name": "frame_00049.jpg",
+        "x": 22.73,
+        "y": 160.0,
+        "z": -28.26,
+        "outlier": false
+      },
+      {
+        "name": "frame_00050.jpg",
+        "x": 23.0,
+        "y": 160.0,
+        "z": -27.72,
+        "outlier": false
+      },
+      {
+        "name": "frame_00051.jpg",
+        "x": 22.94,
+        "y": 160.0,
+        "z": -27.68,
+        "outlier": false
+      },
+      {
+        "name": "frame_00052.jpg",
+        "x": 22.99,
+        "y": 160.0,
+        "z": -27.92,
+        "outlier": false
+      },
+      {
+        "name": "frame_00053.jpg",
+        "x": 22.95,
+        "y": 160.0,
+        "z": -27.95,
+        "outlier": false
+      },
+      {
+        "name": "frame_00054.jpg",
+        "x": 23.02,
+        "y": 160.0,
+        "z": -27.97,
+        "outlier": false
+      },
+      {
+        "name": "frame_00055.jpg",
+        "x": 22.92,
+        "y": 160.0,
+        "z": -28.12,
+        "outlier": false
+      },
+      {
+        "name": "frame_00056.jpg",
+        "x": 22.79,
+        "y": 160.0,
+        "z": -28.59,
+        "outlier": false
+      },
+      {
+        "name": "frame_00057.jpg",
+        "x": 23.2,
+        "y": 160.0,
+        "z": -27.27,
+        "outlier": false
+      },
+      {
+        "name": "frame_00058.jpg",
+        "x": 23.19,
+        "y": 160.0,
+        "z": -27.99,
+        "outlier": false
+      },
+      {
+        "name": "frame_00059.jpg",
+        "x": 23.38,
+        "y": 160.0,
+        "z": -28.21,
+        "outlier": false
+      },
+      {
+        "name": "frame_00060.jpg",
+        "x": 23.32,
+        "y": 160.0,
+        "z": -28.08,
+        "outlier": false
+      },
+      {
+        "name": "frame_00061.jpg",
+        "x": 23.11,
+        "y": 160.0,
+        "z": -27.73,
+        "outlier": false
+      },
+      {
+        "name": "frame_00062.jpg",
+        "x": 23.47,
+        "y": 160.0,
+        "z": -27.47,
+        "outlier": false
+      },
+      {
+        "name": "frame_00063.jpg",
+        "x": 23.61,
+        "y": 160.0,
+        "z": -27.32,
+        "outlier": false
+      },
+      {
+        "name": "frame_00064.jpg",
+        "x": 23.48,
+        "y": 160.0,
+        "z": -27.25,
+        "outlier": false
+      },
+      {
+        "name": "frame_00065.jpg",
+        "x": 23.77,
+        "y": 160.0,
+        "z": -27.7,
+        "outlier": false
+      },
+      {
+        "name": "frame_00066.jpg",
+        "x": 25.87,
+        "y": 160.0,
+        "z": -21.34,
+        "outlier": false
+      },
+      {
+        "name": "frame_00067.jpg",
+        "x": 26.21,
+        "y": 160.0,
+        "z": -21.33,
+        "outlier": false
+      },
+      {
+        "name": "frame_00068.jpg",
+        "x": 26.0,
+        "y": 160.0,
+        "z": -21.11,
+        "outlier": false
+      },
+      {
+        "name": "frame_00069.jpg",
+        "x": 25.32,
+        "y": 160.0,
+        "z": -20.23,
+        "outlier": false
+      },
+      {
+        "name": "frame_00070.jpg",
+        "x": 25.26,
+        "y": 160.0,
+        "z": -20.45,
+        "outlier": false
+      },
+      {
+        "name": "frame_00071.jpg",
+        "x": 25.87,
+        "y": 160.0,
+        "z": -22.49,
+        "outlier": false
+      },
+      {
+        "name": "frame_00072.jpg",
+        "x": 25.84,
+        "y": 160.0,
+        "z": -22.48,
+        "outlier": false
+      },
+      {
+        "name": "frame_00073.jpg",
+        "x": 25.54,
+        "y": 160.0,
+        "z": -23.02,
+        "outlier": false
+      },
+      {
+        "name": "frame_00074.jpg",
+        "x": 24.98,
+        "y": 160.0,
+        "z": -23.67,
+        "outlier": false
+      },
+      {
+        "name": "frame_00075.jpg",
+        "x": 25.31,
+        "y": 160.0,
+        "z": -20.8,
+        "outlier": false
+      },
+      {
+        "name": "frame_00076.jpg",
+        "x": 23.91,
+        "y": 160.0,
+        "z": -20.97,
+        "outlier": false
+      },
+      {
+        "name": "frame_00077.jpg",
+        "x": 22.68,
+        "y": 160.0,
+        "z": -22.26,
+        "outlier": false
+      },
+      {
+        "name": "frame_00078.jpg",
+        "x": 24.09,
+        "y": 160.0,
+        "z": -19.36,
+        "outlier": false
+      },
+      {
+        "name": "frame_00079.jpg",
+        "x": 24.83,
+        "y": 160.0,
+        "z": -20.12,
+        "outlier": false
+      },
+      {
+        "name": "frame_00080.jpg",
+        "x": 24.69,
+        "y": 160.0,
+        "z": -20.19,
+        "outlier": false
+      },
+      {
+        "name": "frame_00081.jpg",
+        "x": 24.71,
+        "y": 160.0,
+        "z": -20.01,
+        "outlier": false
+      },
+      {
+        "name": "frame_00082.jpg",
+        "x": 24.63,
+        "y": 160.0,
+        "z": -20.09,
+        "outlier": false
+      },
+      {
+        "name": "frame_00083.jpg",
+        "x": 21.91,
+        "y": 160.0,
+        "z": -18.68,
+        "outlier": false
+      },
+      {
+        "name": "frame_00084.jpg",
+        "x": 21.74,
+        "y": 160.0,
+        "z": -18.73,
+        "outlier": false
+      },
+      {
+        "name": "frame_00085.jpg",
+        "x": 21.79,
+        "y": 160.0,
+        "z": -18.7,
+        "outlier": false
+      },
+      {
+        "name": "frame_00086.jpg",
+        "x": 21.96,
+        "y": 160.0,
+        "z": -18.96,
+        "outlier": false
+      },
+      {
+        "name": "frame_00087.jpg",
+        "x": 21.82,
+        "y": 160.0,
+        "z": -18.99,
+        "outlier": false
+      },
+      {
+        "name": "frame_00088.jpg",
+        "x": 21.69,
+        "y": 160.0,
+        "z": -18.83,
+        "outlier": false
+      },
+      {
+        "name": "frame_00089.jpg",
+        "x": 22.53,
+        "y": 160.0,
+        "z": -20.59,
+        "outlier": false
+      },
+      {
+        "name": "frame_00090.jpg",
+        "x": 21.88,
+        "y": 160.0,
+        "z": -18.86,
+        "outlier": false
+      },
+      {
+        "name": "frame_00091.jpg",
+        "x": 21.84,
+        "y": 160.0,
+        "z": -18.63,
+        "outlier": false
+      },
+      {
+        "name": "frame_00092.jpg",
+        "x": 21.66,
+        "y": 160.0,
+        "z": -18.65,
+        "outlier": false
+      },
+      {
+        "name": "frame_00093.jpg",
+        "x": 21.54,
+        "y": 160.0,
+        "z": -18.54,
+        "outlier": false
+      },
+      {
+        "name": "frame_00094.jpg",
+        "x": 21.48,
+        "y": 160.0,
+        "z": -18.65,
+        "outlier": false
+      },
+      {
+        "name": "frame_00095.jpg",
+        "x": 21.39,
+        "y": 160.0,
+        "z": -18.59,
+        "outlier": false
+      },
+      {
+        "name": "frame_00096.jpg",
+        "x": 21.5,
+        "y": 160.0,
+        "z": -18.62,
+        "outlier": false
+      },
+      {
+        "name": "frame_00097.jpg",
+        "x": 21.3,
+        "y": 160.0,
+        "z": -18.7,
+        "outlier": false
+      },
+      {
+        "name": "frame_00098.jpg",
+        "x": 21.47,
+        "y": 160.0,
+        "z": -18.58,
+        "outlier": false
+      },
+      {
+        "name": "frame_00099.jpg",
+        "x": 22.69,
+        "y": 160.0,
+        "z": -24.2,
+        "outlier": false
+      },
+      {
+        "name": "frame_00100.jpg",
+        "x": 22.06,
+        "y": 160.0,
+        "z": -24.19,
+        "outlier": false
+      },
+      {
+        "name": "frame_00101.jpg",
+        "x": 21.64,
+        "y": 160.0,
+        "z": -24.32,
+        "outlier": false
+      },
+      {
+        "name": "frame_00102.jpg",
+        "x": 21.8,
+        "y": 160.0,
+        "z": -24.97,
+        "outlier": false
+      },
+      {
+        "name": "frame_00103.jpg",
+        "x": 22.68,
+        "y": 160.0,
+        "z": -24.27,
+        "outlier": false
+      },
+      {
+        "name": "frame_00104.jpg",
+        "x": 22.76,
+        "y": 160.0,
+        "z": -24.35,
+        "outlier": false
+      },
+      {
+        "name": "frame_00105.jpg",
+        "x": 23.02,
+        "y": 160.0,
+        "z": -24.93,
+        "outlier": false
+      },
+      {
+        "name": "frame_00106.jpg",
+        "x": 23.19,
+        "y": 160.0,
+        "z": -24.38,
+        "outlier": false
+      },
+      {
+        "name": "frame_00107.jpg",
+        "x": 22.57,
+        "y": 160.0,
+        "z": -24.03,
+        "outlier": false
+      },
+      {
+        "name": "frame_00108.jpg",
+        "x": 22.65,
+        "y": 160.0,
+        "z": -24.77,
+        "outlier": false
+      },
+      {
+        "name": "frame_00109.jpg",
+        "x": 22.34,
+        "y": 160.0,
+        "z": -25.0,
+        "outlier": false
+      },
+      {
+        "name": "frame_00110.jpg",
+        "x": 22.29,
+        "y": 160.0,
+        "z": -24.43,
+        "outlier": false
+      },
+      {
+        "name": "frame_00111.jpg",
+        "x": 22.42,
+        "y": 160.0,
+        "z": -24.98,
+        "outlier": false
+      },
+      {
+        "name": "frame_00112.jpg",
+        "x": 22.7,
+        "y": 160.0,
+        "z": -25.03,
+        "outlier": false
+      },
+      {
+        "name": "frame_00113.jpg",
+        "x": 22.38,
+        "y": 160.0,
+        "z": -25.37,
+        "outlier": false
+      },
+      {
+        "name": "frame_00114.jpg",
+        "x": 22.3,
+        "y": 160.0,
+        "z": -25.37,
+        "outlier": false
+      },
+      {
+        "name": "frame_00115.jpg",
+        "x": 23.18,
+        "y": 160.0,
+        "z": -27.89,
+        "outlier": false
+      },
+      {
+        "name": "frame_00116.jpg",
+        "x": 21.74,
+        "y": 160.0,
+        "z": -22.59,
+        "outlier": false
+      },
+      {
+        "name": "frame_00117.jpg",
+        "x": 21.89,
+        "y": 160.0,
+        "z": -22.58,
+        "outlier": false
+      },
+      {
+        "name": "frame_00118.jpg",
+        "x": 21.96,
+        "y": 160.0,
+        "z": -22.47,
+        "outlier": false
+      },
+      {
+        "name": "frame_00119.jpg",
+        "x": 22.92,
+        "y": 160.0,
+        "z": -23.03,
+        "outlier": false
+      },
+      {
+        "name": "frame_00120.jpg",
+        "x": 22.94,
+        "y": 160.0,
+        "z": -23.1,
+        "outlier": false
+      },
+      {
+        "name": "frame_00121.jpg",
+        "x": 22.81,
+        "y": 160.0,
+        "z": -22.78,
+        "outlier": false
+      },
+      {
+        "name": "frame_00122.jpg",
+        "x": 22.67,
+        "y": 160.0,
+        "z": -22.53,
+        "outlier": false
+      },
+      {
+        "name": "frame_00123.jpg",
+        "x": 22.8,
+        "y": 160.0,
+        "z": -22.98,
+        "outlier": false
+      },
+      {
+        "name": "frame_00124.jpg",
+        "x": 22.91,
+        "y": 160.0,
+        "z": -23.01,
+        "outlier": false
+      },
+      {
+        "name": "frame_00125.jpg",
+        "x": 22.78,
+        "y": 160.0,
+        "z": -23.35,
+        "outlier": false
+      },
+      {
+        "name": "frame_00126.jpg",
+        "x": 22.75,
+        "y": 160.0,
+        "z": -23.63,
+        "outlier": false
+      },
+      {
+        "name": "frame_00127.jpg",
+        "x": 22.7,
+        "y": 160.0,
+        "z": -23.58,
+        "outlier": false
+      },
+      {
+        "name": "frame_00128.jpg",
+        "x": 22.77,
+        "y": 160.0,
+        "z": -23.52,
+        "outlier": false
+      },
+      {
+        "name": "frame_00129.jpg",
+        "x": 22.95,
+        "y": 160.0,
+        "z": -23.55,
+        "outlier": false
+      },
+      {
+        "name": "frame_00130.jpg",
+        "x": 23.83,
+        "y": 160.0,
+        "z": -22.96,
+        "outlier": false
+      },
+      {
+        "name": "frame_00131.jpg",
+        "x": 23.36,
+        "y": 160.0,
+        "z": -23.31,
+        "outlier": false
+      },
+      {
+        "name": "frame_00132.jpg",
+        "x": 22.29,
+        "y": 160.0,
+        "z": -23.5,
+        "outlier": false
+      },
+      {
+        "name": "frame_00133.jpg",
+        "x": 20.52,
+        "y": 160.0,
+        "z": -20.13,
+        "outlier": false
+      },
+      {
+        "name": "frame_00134.jpg",
+        "x": 22.39,
+        "y": 160.0,
+        "z": -20.13,
+        "outlier": false
+      },
+      {
+        "name": "frame_00135.jpg",
+        "x": 23.04,
+        "y": 160.0,
+        "z": -20.28,
+        "outlier": false
+      },
+      {
+        "name": "frame_00136.jpg",
+        "x": 23.73,
+        "y": 160.0,
+        "z": -19.9,
+        "outlier": false
+      },
+      {
+        "name": "frame_00137.jpg",
+        "x": 23.56,
+        "y": 160.0,
+        "z": -19.87,
+        "outlier": false
+      },
+      {
+        "name": "frame_00138.jpg",
+        "x": 23.9,
+        "y": 160.0,
+        "z": -19.74,
+        "outlier": false
+      },
+      {
+        "name": "frame_00139.jpg",
+        "x": 23.87,
+        "y": 160.0,
+        "z": -19.72,
+        "outlier": false
+      },
+      {
+        "name": "frame_00140.jpg",
+        "x": 23.84,
+        "y": 160.0,
+        "z": -19.81,
+        "outlier": false
+      },
+      {
+        "name": "frame_00141.jpg",
+        "x": 23.84,
+        "y": 160.0,
+        "z": -19.81,
+        "outlier": false
+      },
+      {
+        "name": "frame_00142.jpg",
+        "x": 23.89,
+        "y": 160.0,
+        "z": -19.75,
+        "outlier": false
+      },
+      {
+        "name": "frame_00143.jpg",
+        "x": 23.96,
+        "y": 160.0,
+        "z": -19.76,
+        "outlier": false
+      },
+      {
+        "name": "frame_00144.jpg",
+        "x": 29.74,
+        "y": 160.0,
+        "z": -18.14,
+        "outlier": false
+      },
+      {
+        "name": "frame_00145.jpg",
+        "x": 23.56,
+        "y": 160.0,
+        "z": -19.87,
+        "outlier": false
+      },
+      {
+        "name": "frame_00146.jpg",
+        "x": 24.44,
+        "y": 160.0,
+        "z": -19.58,
+        "outlier": false
+      },
+      {
+        "name": "frame_00147.jpg",
+        "x": 24.14,
+        "y": 160.0,
+        "z": -19.67,
+        "outlier": false
+      },
+      {
+        "name": "frame_00148.jpg",
+        "x": 23.69,
+        "y": 160.0,
+        "z": -19.78,
+        "outlier": false
+      },
+      {
+        "name": "frame_00149.jpg",
+        "x": 20.86,
+        "y": 160.0,
+        "z": -23.83,
+        "outlier": false
+      },
+      {
+        "name": "frame_00150.jpg",
+        "x": 20.42,
+        "y": 160.0,
+        "z": -26.46,
+        "outlier": false
+      },
+      {
+        "name": "frame_00151.jpg",
+        "x": 18.72,
+        "y": 160.0,
+        "z": -25.93,
+        "outlier": false
+      },
+      {
+        "name": "frame_00152.jpg",
+        "x": 18.94,
+        "y": 160.0,
+        "z": -25.9,
+        "outlier": false
+      },
+      {
+        "name": "frame_00153.jpg",
+        "x": 18.87,
+        "y": 160.0,
+        "z": -25.55,
+        "outlier": false
+      },
+      {
+        "name": "frame_00154.jpg",
+        "x": 18.82,
+        "y": 160.0,
+        "z": -25.54,
+        "outlier": false
+      },
+      {
+        "name": "frame_00155.jpg",
+        "x": 18.83,
+        "y": 160.0,
+        "z": -25.56,
+        "outlier": false
+      },
+      {
+        "name": "frame_00156.jpg",
+        "x": 18.9,
+        "y": 160.0,
+        "z": -25.36,
+        "outlier": false
+      },
+      {
+        "name": "frame_00157.jpg",
+        "x": 18.81,
+        "y": 160.0,
+        "z": -25.39,
+        "outlier": false
+      },
+      {
+        "name": "frame_00158.jpg",
+        "x": 18.73,
+        "y": 160.0,
+        "z": -25.5,
+        "outlier": false
+      },
+      {
+        "name": "frame_00159.jpg",
+        "x": 18.74,
+        "y": 160.0,
+        "z": -25.38,
+        "outlier": false
+      },
+      {
+        "name": "frame_00160.jpg",
+        "x": 18.86,
+        "y": 160.0,
+        "z": -25.34,
+        "outlier": false
+      },
+      {
+        "name": "frame_00161.jpg",
+        "x": 18.1,
+        "y": 160.0,
+        "z": -24.18,
+        "outlier": false
+      },
+      {
+        "name": "frame_00162.jpg",
+        "x": 18.64,
+        "y": 160.0,
+        "z": -25.3,
+        "outlier": false
+      },
+      {
+        "name": "frame_00163.jpg",
+        "x": 18.75,
+        "y": 160.0,
+        "z": -25.2,
+        "outlier": false
+      },
+      {
+        "name": "frame_00164.jpg",
+        "x": 18.56,
+        "y": 160.0,
+        "z": -25.05,
+        "outlier": false
+      },
+      {
+        "name": "frame_00165.jpg",
+        "x": 18.53,
+        "y": 160.0,
+        "z": -25.25,
+        "outlier": false
+      },
+      {
+        "name": "frame_00166.jpg",
+        "x": 23.1,
+        "y": 160.0,
+        "z": -20.26,
+        "outlier": false
+      },
+      {
+        "name": "frame_00167.jpg",
+        "x": 22.89,
+        "y": 160.0,
+        "z": -20.12,
+        "outlier": false
+      },
+      {
+        "name": "frame_00168.jpg",
+        "x": 22.87,
+        "y": 160.0,
+        "z": -20.14,
+        "outlier": false
+      },
+      {
+        "name": "frame_00169.jpg",
+        "x": 22.9,
+        "y": 160.0,
+        "z": -20.12,
+        "outlier": false
+      },
+      {
+        "name": "frame_00170.jpg",
+        "x": 22.88,
+        "y": 160.0,
+        "z": -20.13,
+        "outlier": false
+      },
+      {
+        "name": "frame_00171.jpg",
+        "x": 22.76,
+        "y": 160.0,
+        "z": -20.32,
+        "outlier": false
+      },
+      {
+        "name": "frame_00172.jpg",
+        "x": 22.75,
+        "y": 160.0,
+        "z": -20.34,
+        "outlier": false
+      },
+      {
+        "name": "frame_00173.jpg",
+        "x": 22.76,
+        "y": 160.0,
+        "z": -20.33,
+        "outlier": false
+      },
+      {
+        "name": "frame_00174.jpg",
+        "x": 22.75,
+        "y": 160.0,
+        "z": -20.3,
+        "outlier": false
+      },
+      {
+        "name": "frame_00175.jpg",
+        "x": 22.78,
+        "y": 160.0,
+        "z": -20.24,
+        "outlier": false
+      },
+      {
+        "name": "frame_00176.jpg",
+        "x": 22.77,
+        "y": 160.0,
+        "z": -20.26,
+        "outlier": false
+      },
+      {
+        "name": "frame_00177.jpg",
+        "x": 22.8,
+        "y": 160.0,
+        "z": -20.26,
+        "outlier": false
+      },
+      {
+        "name": "frame_00178.jpg",
+        "x": 22.79,
+        "y": 160.0,
+        "z": -20.24,
+        "outlier": false
+      },
+      {
+        "name": "frame_00179.jpg",
+        "x": 22.8,
+        "y": 160.0,
+        "z": -20.26,
+        "outlier": false
+      },
+      {
+        "name": "frame_00180.jpg",
+        "x": 22.77,
+        "y": 160.0,
+        "z": -20.28,
+        "outlier": false
+      },
+      {
+        "name": "frame_00181.jpg",
+        "x": 24.31,
+        "y": 160.0,
+        "z": -19.42,
+        "outlier": false
+      },
+      {
+        "name": "frame_00182.jpg",
+        "x": 22.72,
+        "y": 160.0,
+        "z": -19.46,
+        "outlier": false
+      },
+      {
+        "name": "frame_00183.jpg",
+        "x": 21.88,
+        "y": 160.0,
+        "z": -19.6,
+        "outlier": false
+      },
+      {
+        "name": "frame_00184.jpg",
+        "x": 21.82,
+        "y": 160.0,
+        "z": -19.56,
+        "outlier": false
+      },
+      {
+        "name": "frame_00185.jpg",
+        "x": 22.41,
+        "y": 160.0,
+        "z": -19.93,
+        "outlier": false
+      },
+      {
+        "name": "frame_00186.jpg",
+        "x": 22.46,
+        "y": 160.0,
+        "z": -20.19,
+        "outlier": false
+      },
+      {
+        "name": "frame_00187.jpg",
+        "x": 22.48,
+        "y": 160.0,
+        "z": -20.08,
+        "outlier": false
+      },
+      {
+        "name": "frame_00188.jpg",
+        "x": 22.45,
+        "y": 160.0,
+        "z": -20.17,
+        "outlier": false
+      },
+      {
+        "name": "frame_00189.jpg",
+        "x": 22.69,
+        "y": 160.0,
+        "z": -20.19,
+        "outlier": false
+      },
+      {
+        "name": "frame_00190.jpg",
+        "x": 22.75,
+        "y": 160.0,
+        "z": -19.66,
+        "outlier": false
+      },
+      {
+        "name": "frame_00191.jpg",
+        "x": 23.8,
+        "y": 160.0,
+        "z": -17.87,
+        "outlier": false
+      },
+      {
+        "name": "frame_00192.jpg",
+        "x": 23.05,
+        "y": 160.0,
+        "z": -19.89,
+        "outlier": false
+      },
+      {
+        "name": "frame_00193.jpg",
+        "x": 23.07,
+        "y": 160.0,
+        "z": -19.9,
+        "outlier": false
+      },
+      {
+        "name": "frame_00194.jpg",
+        "x": 23.14,
+        "y": 160.0,
+        "z": -20.72,
+        "outlier": false
+      },
+      {
+        "name": "frame_00195.jpg",
+        "x": 22.84,
+        "y": 160.0,
+        "z": -19.26,
+        "outlier": false
+      },
+      {
+        "name": "frame_00196.jpg",
+        "x": 22.87,
+        "y": 160.0,
+        "z": -19.57,
+        "outlier": false
+      },
+      {
+        "name": "frame_00197.jpg",
+        "x": 22.96,
+        "y": 160.0,
+        "z": -19.86,
+        "outlier": false
+      },
+      {
+        "name": "frame_00198.jpg",
+        "x": 23.07,
+        "y": 160.0,
+        "z": -19.75,
+        "outlier": false
+      },
+      {
+        "name": "frame_00199.jpg",
+        "x": 22.67,
+        "y": 160.0,
+        "z": -20.33,
+        "outlier": false
+      },
+      {
+        "name": "frame_00200.jpg",
+        "x": 22.92,
+        "y": 160.0,
+        "z": -21.0,
+        "outlier": false
+      },
+      {
+        "name": "frame_00201.jpg",
+        "x": 22.2,
+        "y": 160.0,
+        "z": -20.15,
+        "outlier": false
+      },
+      {
+        "name": "frame_00202.jpg",
+        "x": 21.88,
+        "y": 160.0,
+        "z": -20.11,
+        "outlier": false
+      },
+      {
+        "name": "frame_00203.jpg",
+        "x": 21.38,
+        "y": 160.0,
+        "z": -20.2,
+        "outlier": false
+      },
+      {
+        "name": "frame_00204.jpg",
+        "x": 21.24,
+        "y": 160.0,
+        "z": -20.2,
+        "outlier": false
+      },
+      {
+        "name": "frame_00205.jpg",
+        "x": 21.49,
+        "y": 160.0,
+        "z": -20.87,
+        "outlier": false
+      },
+      {
+        "name": "frame_00206.jpg",
+        "x": 21.52,
+        "y": 160.0,
+        "z": -20.88,
+        "outlier": false
+      },
+      {
+        "name": "frame_00207.jpg",
+        "x": 21.28,
+        "y": 160.0,
+        "z": -21.37,
+        "outlier": false
+      },
+      {
+        "name": "frame_00208.jpg",
+        "x": 20.53,
+        "y": 160.0,
+        "z": -22.59,
+        "outlier": false
+      },
+      {
+        "name": "frame_00209.jpg",
+        "x": 21.1,
+        "y": 160.0,
+        "z": -21.62,
+        "outlier": false
+      },
+      {
+        "name": "frame_00210.jpg",
+        "x": 31.5,
+        "y": 160.0,
+        "z": -21.62,
+        "outlier": false
+      },
+      {
+        "name": "frame_00211.jpg",
+        "x": 23.69,
+        "y": 160.0,
+        "z": -19.11,
+        "outlier": false
+      },
+      {
+        "name": "frame_00212.jpg",
+        "x": 21.6,
+        "y": 160.0,
+        "z": -16.87,
+        "outlier": false
+      },
+      {
+        "name": "frame_00213.jpg",
+        "x": 21.43,
+        "y": 160.0,
+        "z": -16.47,
+        "outlier": false
+      },
+      {
+        "name": "frame_00214.jpg",
+        "x": 21.52,
+        "y": 160.0,
+        "z": -17.41,
+        "outlier": false
+      },
+      {
+        "name": "frame_00215.jpg",
+        "x": 22.72,
+        "y": 160.0,
+        "z": -18.38,
+        "outlier": false
+      },
+      {
+        "name": "frame_00216.jpg",
+        "x": 19.94,
+        "y": 160.0,
+        "z": -18.04,
+        "outlier": false
+      },
+      {
+        "name": "frame_00217.jpg",
+        "x": 20.15,
+        "y": 160.0,
+        "z": -17.18,
+        "outlier": false
+      },
+      {
+        "name": "frame_00218.jpg",
+        "x": 20.13,
+        "y": 160.0,
+        "z": -17.94,
+        "outlier": false
+      },
+      {
+        "name": "frame_00219.jpg",
+        "x": 20.11,
+        "y": 160.0,
+        "z": -18.15,
+        "outlier": false
+      },
+      {
+        "name": "frame_00220.jpg",
+        "x": 20.03,
+        "y": 160.0,
+        "z": -18.08,
+        "outlier": false
+      },
+      {
+        "name": "frame_00221.jpg",
+        "x": 20.45,
+        "y": 160.0,
+        "z": -17.84,
+        "outlier": false
+      },
+      {
+        "name": "frame_00222.jpg",
+        "x": 20.58,
+        "y": 160.0,
+        "z": -17.84,
+        "outlier": false
+      },
+      {
+        "name": "frame_00223.jpg",
+        "x": 20.54,
+        "y": 160.0,
+        "z": -17.82,
+        "outlier": false
+      },
+      {
+        "name": "frame_00224.jpg",
+        "x": 20.26,
+        "y": 160.0,
+        "z": -18.17,
+        "outlier": false
+      },
+      {
+        "name": "frame_00225.jpg",
+        "x": 20.59,
+        "y": 160.0,
+        "z": -17.75,
+        "outlier": false
+      },
+      {
+        "name": "frame_00226.jpg",
+        "x": 20.51,
+        "y": 160.0,
+        "z": -17.63,
+        "outlier": false
+      },
+      {
+        "name": "frame_00227.jpg",
+        "x": 20.45,
+        "y": 160.0,
+        "z": -17.62,
+        "outlier": false
+      },
+      {
+        "name": "frame_00228.jpg",
+        "x": 19.54,
+        "y": 160.0,
+        "z": -17.92,
+        "outlier": false
+      },
+      {
+        "name": "frame_00229.jpg",
+        "x": 19.58,
+        "y": 160.0,
+        "z": -17.9,
+        "outlier": false
+      },
+      {
+        "name": "frame_00230.jpg",
+        "x": 19.6,
+        "y": 160.0,
+        "z": -18.19,
+        "outlier": false
+      },
+      {
+        "name": "frame_00231.jpg",
+        "x": 19.75,
+        "y": 160.0,
+        "z": -17.83,
+        "outlier": false
+      },
+      {
+        "name": "frame_00232.jpg",
+        "x": 20.05,
+        "y": 160.0,
+        "z": -17.86,
+        "outlier": false
+      },
+      {
+        "name": "frame_00233.jpg",
+        "x": 22.7,
+        "y": 160.0,
+        "z": -19.27,
+        "outlier": false
+      },
+      {
+        "name": "frame_00234.jpg",
+        "x": 22.47,
+        "y": 160.0,
+        "z": -19.28,
+        "outlier": false
+      },
+      {
+        "name": "frame_00235.jpg",
+        "x": 22.6,
+        "y": 160.0,
+        "z": -19.35,
+        "outlier": false
+      },
+      {
+        "name": "frame_00236.jpg",
+        "x": 22.73,
+        "y": 160.0,
+        "z": -20.33,
+        "outlier": false
+      },
+      {
+        "name": "frame_00237.jpg",
+        "x": 22.55,
+        "y": 160.0,
+        "z": -19.55,
+        "outlier": false
+      },
+      {
+        "name": "frame_00238.jpg",
+        "x": 22.0,
+        "y": 160.0,
+        "z": -19.67,
+        "outlier": false
+      },
+      {
+        "name": "frame_00239.jpg",
+        "x": 22.03,
+        "y": 160.0,
+        "z": -20.21,
+        "outlier": false
+      },
+      {
+        "name": "frame_00240.jpg",
+        "x": 23.07,
+        "y": 160.0,
+        "z": -19.77,
+        "outlier": false
+      },
+      {
+        "name": "frame_00241.jpg",
+        "x": 22.26,
+        "y": 160.0,
+        "z": -19.78,
+        "outlier": false
+      },
+      {
+        "name": "frame_00242.jpg",
+        "x": 22.36,
+        "y": 160.0,
+        "z": -19.57,
+        "outlier": false
+      },
+      {
+        "name": "frame_00243.jpg",
+        "x": 22.57,
+        "y": 160.0,
+        "z": -19.51,
+        "outlier": false
+      },
+      {
+        "name": "frame_00244.jpg",
+        "x": 22.11,
+        "y": 160.0,
+        "z": -19.65,
+        "outlier": false
+      },
+      {
+        "name": "frame_00245.jpg",
+        "x": 22.53,
+        "y": 160.0,
+        "z": -19.32,
+        "outlier": false
+      },
+      {
+        "name": "frame_00246.jpg",
+        "x": 22.54,
+        "y": 160.0,
+        "z": -18.77,
+        "outlier": false
+      },
+      {
+        "name": "frame_00247.jpg",
+        "x": 22.34,
+        "y": 160.0,
+        "z": -19.09,
+        "outlier": false
+      },
+      {
+        "name": "frame_00248.jpg",
+        "x": 21.52,
+        "y": 160.0,
+        "z": -16.43,
+        "outlier": false
+      },
+      {
+        "name": "frame_00249.jpg",
+        "x": 22.19,
+        "y": 160.0,
+        "z": -23.09,
+        "outlier": false
+      },
+      {
+        "name": "frame_00250.jpg",
+        "x": 21.42,
+        "y": 160.0,
+        "z": -20.08,
+        "outlier": false
+      },
+      {
+        "name": "frame_00251.jpg",
+        "x": 21.3,
+        "y": 160.0,
+        "z": -20.17,
+        "outlier": false
+      },
+      {
+        "name": "frame_00252.jpg",
+        "x": 21.93,
+        "y": 160.0,
+        "z": -21.25,
+        "outlier": false
+      },
+      {
+        "name": "frame_00253.jpg",
+        "x": 22.66,
+        "y": 160.0,
+        "z": -22.35,
+        "outlier": false
+      },
+      {
+        "name": "frame_00254.jpg",
+        "x": 23.45,
+        "y": 160.0,
+        "z": -23.29,
+        "outlier": false
+      },
+      {
+        "name": "frame_00255.jpg",
+        "x": 22.83,
+        "y": 160.0,
+        "z": -21.34,
+        "outlier": false
+      },
+      {
+        "name": "frame_00256.jpg",
+        "x": 22.76,
+        "y": 160.0,
+        "z": -21.26,
+        "outlier": false
+      },
+      {
+        "name": "frame_00257.jpg",
+        "x": 22.99,
+        "y": 160.0,
+        "z": -21.72,
+        "outlier": false
+      },
+      {
+        "name": "frame_00258.jpg",
+        "x": 22.99,
+        "y": 160.0,
+        "z": -21.75,
+        "outlier": false
+      },
+      {
+        "name": "frame_00259.jpg",
+        "x": 22.74,
+        "y": 160.0,
+        "z": -21.94,
+        "outlier": false
+      },
+      {
+        "name": "frame_00260.jpg",
+        "x": 22.88,
+        "y": 160.0,
+        "z": -21.78,
+        "outlier": false
+      },
+      {
+        "name": "frame_00261.jpg",
+        "x": 22.64,
+        "y": 160.0,
+        "z": -21.85,
+        "outlier": false
+      },
+      {
+        "name": "frame_00262.jpg",
+        "x": 22.81,
+        "y": 160.0,
+        "z": -21.86,
+        "outlier": false
+      },
+      {
+        "name": "frame_00263.jpg",
+        "x": 22.85,
+        "y": 160.0,
+        "z": -21.93,
+        "outlier": false
+      },
+      {
+        "name": "frame_00264.jpg",
+        "x": 25.99,
+        "y": 160.0,
+        "z": -21.61,
+        "outlier": false
+      },
+      {
+        "name": "frame_00265.jpg",
+        "x": 25.26,
+        "y": 160.0,
+        "z": -22.0,
+        "outlier": false
+      },
+      {
+        "name": "frame_00266.jpg",
+        "x": 23.86,
+        "y": 160.0,
+        "z": -19.86,
+        "outlier": false
+      },
+      {
+        "name": "frame_00267.jpg",
+        "x": 23.92,
+        "y": 160.0,
+        "z": -19.5,
+        "outlier": false
+      },
+      {
+        "name": "frame_00268.jpg",
+        "x": 24.63,
+        "y": 160.0,
+        "z": -20.13,
+        "outlier": false
+      },
+      {
+        "name": "frame_00269.jpg",
+        "x": 22.95,
+        "y": 160.0,
+        "z": -20.1,
+        "outlier": false
+      },
+      {
+        "name": "frame_00270.jpg",
+        "x": 22.87,
+        "y": 160.0,
+        "z": -20.56,
+        "outlier": false
+      },
+      {
+        "name": "frame_00271.jpg",
+        "x": 23.27,
+        "y": 160.0,
+        "z": -20.56,
+        "outlier": false
+      },
+      {
+        "name": "frame_00272.jpg",
+        "x": 23.45,
+        "y": 160.0,
+        "z": -20.55,
+        "outlier": false
+      },
+      {
+        "name": "frame_00273.jpg",
+        "x": 23.04,
+        "y": 160.0,
+        "z": -20.57,
+        "outlier": false
+      },
+      {
+        "name": "frame_00274.jpg",
+        "x": 23.06,
+        "y": 160.0,
+        "z": -20.6,
+        "outlier": false
+      },
+      {
+        "name": "frame_00275.jpg",
+        "x": 23.27,
+        "y": 160.0,
+        "z": -20.6,
+        "outlier": false
+      },
+      {
+        "name": "frame_00276.jpg",
+        "x": 23.48,
+        "y": 160.0,
+        "z": -20.6,
+        "outlier": false
+      },
+      {
+        "name": "frame_00277.jpg",
+        "x": 23.01,
+        "y": 160.0,
+        "z": -20.31,
+        "outlier": false
+      }
+    ]
+  },
+  "semantic": {
+    "method": "Multi-View 2D Projection (Real Video Ground Truth)",
+    "classes": {
+      "Unknown": {
+        "count": 2264,
+        "pct": 13.1
+      },
+      "Road/Ground": {
+        "count": 2851,
+        "pct": 16.5
+      },
+      "Building/Roof": {
+        "count": 1356,
+        "pct": 7.8
+      },
+      "Vegetation": {
+        "count": 9029,
+        "pct": 52.2
+      },
+      "Water": {
+        "count": 1782,
+        "pct": 10.3
+      },
+      "Vehicle": {
+        "count": 0,
+        "pct": 0.0
+      }
+    },
+    "class_colors": {
+      "0": "#50555f",
+      "1": "#64748b",
+      "2": "#00d4ff",
+      "3": "#22c55e",
+      "4": "#0284c7",
+      "5": "#f97316"
+    }
+  },
+  "buildings": [
+    {
+      "id": 1,
+      "cx": 13.9,
+      "cy": 4.8,
+      "cz": 137.0,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 1904,
+      "type": "residential_house",
+      "label": "House 1 (9.5m)"
+    },
+    {
+      "id": 5,
+      "cx": 13.9,
+      "cy": 4.8,
+      "cz": 53.1,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 1155,
+      "type": "residential_house",
+      "label": "House 5 (9.5m)"
+    },
+    {
+      "id": 3,
+      "cx": 61.8,
+      "cy": 4.8,
+      "cz": -30.8,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 1076,
+      "type": "residential_house",
+      "label": "House 3 (9.5m)"
+    },
+    {
+      "id": 2,
+      "cx": 25.9,
+      "cy": 4.8,
+      "cz": -18.9,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 977,
+      "type": "residential_house",
+      "label": "House 2 (9.5m)"
+    },
+    {
+      "id": 4,
+      "cx": 25.9,
+      "cy": 4.8,
+      "cz": 17.1,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 970,
+      "type": "residential_house",
+      "label": "House 4 (9.5m)"
+    },
+    {
+      "id": 6,
+      "cx": 13.9,
+      "cy": 4.8,
+      "cz": 196.9,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 692,
+      "type": "residential_house",
+      "label": "House 6 (9.5m)"
+    },
+    {
+      "id": 7,
+      "cx": -57.9,
+      "cy": 4.8,
+      "cz": 101.0,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 465,
+      "type": "residential_house",
+      "label": "House 7 (9.5m)"
+    },
+    {
+      "id": 9,
+      "cx": -81.8,
+      "cy": 4.8,
+      "cz": 125.0,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 444,
+      "type": "residential_house",
+      "label": "House 9 (9.5m)"
+    },
+    {
+      "id": 8,
+      "cx": 25.9,
+      "cy": 4.8,
+      "cz": -66.8,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 398,
+      "type": "residential_house",
+      "label": "House 8 (9.5m)"
+    },
+    {
+      "id": 10,
+      "cx": -45.9,
+      "cy": 4.8,
+      "cz": 77.0,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 341,
+      "type": "residential_house",
+      "label": "House 10 (9.5m)"
+    },
+    {
+      "id": 13,
+      "cx": 37.9,
+      "cy": 4.8,
+      "cz": -258.6,
+      "w": 27.8,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 295,
+      "type": "residential_house",
+      "label": "House 13 (9.5m)"
+    },
+    {
+      "id": 14,
+      "cx": -10.0,
+      "cy": 4.8,
+      "cz": 125.0,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 287,
+      "type": "residential_house",
+      "label": "House 14 (9.5m)"
+    },
+    {
+      "id": 15,
+      "cx": 37.9,
+      "cy": 4.8,
+      "cz": -234.6,
+      "w": 24.9,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 263,
+      "type": "residential_house",
+      "label": "House 15 (9.5m)"
+    },
+    {
+      "id": 18,
+      "cx": 25.9,
+      "cy": 4.8,
+      "cz": -162.7,
+      "w": 27.6,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 220,
+      "type": "residential_house",
+      "label": "House 18 (9.5m)"
+    },
+    {
+      "id": 17,
+      "cx": -10.0,
+      "cy": 4.8,
+      "cz": -162.7,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 208,
+      "type": "residential_house",
+      "label": "House 17 (9.5m)"
+    },
+    {
+      "id": 11,
+      "cx": 73.8,
+      "cy": 4.8,
+      "cz": -90.8,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 200,
+      "type": "residential_house",
+      "label": "House 11 (9.5m)"
+    },
+    {
+      "id": 12,
+      "cx": -117.8,
+      "cy": 4.8,
+      "cz": 196.9,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 199,
+      "type": "residential_house",
+      "label": "House 12 (9.5m)"
+    },
+    {
+      "id": 24,
+      "cx": 25.9,
+      "cy": 4.8,
+      "cz": -186.7,
+      "w": 33.4,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 194,
+      "type": "residential_house",
+      "label": "House 24 (9.5m)"
+    },
+    {
+      "id": 23,
+      "cx": -22.0,
+      "cy": 2.6,
+      "cz": -186.7,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 5.2,
+      "roof_type": "pitched",
+      "roof_h": 1.8,
+      "pts": 189,
+      "type": "residential_house",
+      "label": "House 23 (5.2m)"
+    },
+    {
+      "id": 16,
+      "cx": 49.8,
+      "cy": 4.8,
+      "cz": 5.1,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 186,
+      "type": "residential_house",
+      "label": "House 16 (9.5m)"
+    },
+    {
+      "id": 22,
+      "cx": 25.9,
+      "cy": 4.8,
+      "cz": -138.7,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 179,
+      "type": "residential_house",
+      "label": "House 22 (9.5m)"
+    },
+    {
+      "id": 21,
+      "cx": 25.9,
+      "cy": 4.8,
+      "cz": 364.7,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 175,
+      "type": "residential_house",
+      "label": "House 21 (9.5m)"
+    },
+    {
+      "id": 28,
+      "cx": 37.9,
+      "cy": 4.8,
+      "cz": 340.7,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 175,
+      "type": "residential_house",
+      "label": "House 28 (9.5m)"
+    },
+    {
+      "id": 30,
+      "cx": 25.9,
+      "cy": 4.8,
+      "cz": -210.6,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 175,
+      "type": "residential_house",
+      "label": "House 30 (9.5m)"
+    },
+    {
+      "id": 20,
+      "cx": 2.0,
+      "cy": 4.8,
+      "cz": -90.8,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 142,
+      "type": "residential_house",
+      "label": "House 20 (9.5m)"
+    },
+    {
+      "id": 26,
+      "cx": -81.8,
+      "cy": 4.8,
+      "cz": -150.7,
+      "w": 34.0,
+      "d": 32.5,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 142,
+      "type": "residential_house",
+      "label": "House 26 (9.5m)"
+    },
+    {
+      "id": 19,
+      "cx": -105.8,
+      "cy": 4.8,
+      "cz": 149.0,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 135,
+      "type": "residential_house",
+      "label": "House 19 (9.5m)"
+    },
+    {
+      "id": 25,
+      "cx": -93.8,
+      "cy": 4.8,
+      "cz": 184.9,
+      "w": 31.7,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 135,
+      "type": "residential_house",
+      "label": "House 25 (9.5m)"
+    },
+    {
+      "id": 36,
+      "cx": -34.0,
+      "cy": 4.8,
+      "cz": -270.6,
+      "w": 33.3,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 110,
+      "type": "residential_house",
+      "label": "House 36 (9.5m)"
+    },
+    {
+      "id": 37,
+      "cx": -177.6,
+      "cy": 4.8,
+      "cz": 280.8,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 108,
+      "type": "residential_house",
+      "label": "House 37 (9.5m)"
+    },
+    {
+      "id": 32,
+      "cx": 61.8,
+      "cy": 2.6,
+      "cz": 556.5,
+      "w": 33.9,
+      "d": 34.0,
+      "h": 5.2,
+      "roof_type": "pitched",
+      "roof_h": 1.8,
+      "pts": 106,
+      "type": "residential_house",
+      "label": "House 32 (5.2m)"
+    },
+    {
+      "id": 29,
+      "cx": -105.8,
+      "cy": 4.8,
+      "cz": 220.9,
+      "w": 33.1,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 103,
+      "type": "residential_house",
+      "label": "House 29 (9.5m)"
+    },
+    {
+      "id": 38,
+      "cx": -45.9,
+      "cy": 4.8,
+      "cz": -198.6,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 89,
+      "type": "residential_house",
+      "label": "House 38 (9.5m)"
+    },
+    {
+      "id": 27,
+      "cx": -165.6,
+      "cy": 4.8,
+      "cz": 244.8,
+      "w": 33.9,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 83,
+      "type": "residential_house",
+      "label": "House 27 (9.5m)"
+    },
+    {
+      "id": 35,
+      "cx": -141.7,
+      "cy": 4.8,
+      "cz": -210.6,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 81,
+      "type": "residential_house",
+      "label": "House 35 (9.5m)"
+    },
+    {
+      "id": 34,
+      "cx": -153.7,
+      "cy": 4.8,
+      "cz": 280.8,
+      "w": 30.5,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 75,
+      "type": "residential_house",
+      "label": "House 34 (9.5m)"
+    },
+    {
+      "id": 33,
+      "cx": -69.9,
+      "cy": 4.8,
+      "cz": 29.1,
+      "w": 27.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 74,
+      "type": "residential_house",
+      "label": "House 33 (9.5m)"
+    },
+    {
+      "id": 31,
+      "cx": -141.7,
+      "cy": 4.8,
+      "cz": 220.9,
+      "w": 34.0,
+      "d": 32.7,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 72,
+      "type": "residential_house",
+      "label": "House 31 (9.5m)"
+    },
+    {
+      "id": 39,
+      "cx": -141.7,
+      "cy": 4.8,
+      "cz": 184.9,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 72,
+      "type": "residential_house",
+      "label": "House 39 (9.5m)"
+    },
+    {
+      "id": 48,
+      "cx": -10.0,
+      "cy": 2.6,
+      "cz": 592.4,
+      "w": 33.5,
+      "d": 34.0,
+      "h": 5.2,
+      "roof_type": "pitched",
+      "roof_h": 1.8,
+      "pts": 71,
+      "type": "residential_house",
+      "label": "House 48 (5.2m)"
+    },
+    {
+      "id": 50,
+      "cx": -261.4,
+      "cy": 2.6,
+      "cz": 412.6,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 5.2,
+      "roof_type": "pitched",
+      "roof_h": 1.8,
+      "pts": 70,
+      "type": "residential_house",
+      "label": "House 50 (5.2m)"
+    },
+    {
+      "id": 52,
+      "cx": -22.0,
+      "cy": 4.8,
+      "cz": -234.6,
+      "w": 32.8,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 69,
+      "type": "residential_house",
+      "label": "House 52 (9.5m)"
+    },
+    {
+      "id": 46,
+      "cx": -45.9,
+      "cy": 4.8,
+      "cz": -318.5,
+      "w": 32.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 68,
+      "type": "residential_house",
+      "label": "House 46 (9.5m)"
+    },
+    {
+      "id": 44,
+      "cx": -261.4,
+      "cy": 4.8,
+      "cz": -270.6,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 66,
+      "type": "residential_house",
+      "label": "House 44 (9.5m)"
+    },
+    {
+      "id": 51,
+      "cx": -177.6,
+      "cy": 4.8,
+      "cz": 184.9,
+      "w": 32.7,
+      "d": 27.1,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 56,
+      "type": "residential_house",
+      "label": "House 51 (9.5m)"
+    },
+    {
+      "id": 49,
+      "cx": 217.4,
+      "cy": 4.8,
+      "cz": 184.9,
+      "w": 29.3,
+      "d": 32.2,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 53,
+      "type": "residential_house",
+      "label": "House 49 (9.5m)"
+    },
+    {
+      "id": 43,
+      "cx": 49.8,
+      "cy": 2.6,
+      "cz": 520.5,
+      "w": 34.0,
+      "d": 27.8,
+      "h": 5.2,
+      "roof_type": "pitched",
+      "roof_h": 1.8,
+      "pts": 52,
+      "type": "residential_house",
+      "label": "House 43 (5.2m)"
+    },
+    {
+      "id": 40,
+      "cx": -22.0,
+      "cy": 2.6,
+      "cz": 412.6,
+      "w": 28.2,
+      "d": 21.2,
+      "h": 5.2,
+      "roof_type": "pitched",
+      "roof_h": 1.8,
+      "pts": 50,
+      "type": "residential_house",
+      "label": "House 40 (5.2m)"
+    },
+    {
+      "id": 56,
+      "cx": 121.7,
+      "cy": 4.8,
+      "cz": -6.9,
+      "w": 34.0,
+      "d": 31.4,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 49,
+      "type": "residential_house",
+      "label": "House 56 (9.5m)"
+    },
+    {
+      "id": 45,
+      "cx": -153.7,
+      "cy": 4.8,
+      "cz": -246.6,
+      "w": 34.0,
+      "d": 33.3,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 48,
+      "type": "residential_house",
+      "label": "House 45 (9.5m)"
+    },
+    {
+      "id": 53,
+      "cx": -297.3,
+      "cy": 2.6,
+      "cz": 280.8,
+      "w": 32.1,
+      "d": 33.7,
+      "h": 5.2,
+      "roof_type": "pitched",
+      "roof_h": 1.8,
+      "pts": 48,
+      "type": "residential_house",
+      "label": "House 53 (5.2m)"
+    },
+    {
+      "id": 42,
+      "cx": 85.8,
+      "cy": 4.8,
+      "cz": 41.1,
+      "w": 31.8,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 46,
+      "type": "residential_house",
+      "label": "House 42 (9.5m)"
+    },
+    {
+      "id": 55,
+      "cx": -225.5,
+      "cy": 4.8,
+      "cz": -294.5,
+      "w": 28.4,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 43,
+      "type": "residential_house",
+      "label": "House 55 (9.5m)"
+    },
+    {
+      "id": 41,
+      "cx": 253.4,
+      "cy": 4.8,
+      "cz": 220.9,
+      "w": 32.9,
+      "d": 34.0,
+      "h": 9.5,
+      "roof_type": "pitched",
+      "roof_h": 3.2,
+      "pts": 40,
+      "type": "residential_house",
+      "label": "House 41 (9.5m)"
+    },
+    {
+      "id": 47,
+      "cx": -22.0,
+      "cy": 2.6,
+      "cz": 160.9,
+      "w": 34.0,
+      "d": 33.4,
+      "h": 5.2,
+      "roof_type": "pitched",
+      "roof_h": 1.8,
+      "pts": 36,
+      "type": "residential_house",
+      "label": "House 47 (5.2m)"
+    },
+    {
+      "id": 54,
+      "cx": -297.3,
+      "cy": 2.6,
+      "cz": 424.6,
+      "w": 34.0,
+      "d": 34.0,
+      "h": 5.2,
+      "roof_type": "pitched",
+      "roof_h": 1.8,
+      "pts": 34,
+      "type": "residential_house",
+      "label": "House 54 (5.2m)"
+    }
+  ],
+  "vegetation": [
+    {
+      "x": 64.1,
+      "y": 0.0,
+      "z": -44.6,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 3073
+    },
+    {
+      "x": 64.1,
+      "y": 0.0,
+      "z": -28.6,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1965
+    },
+    {
+      "x": 64.1,
+      "y": 0.0,
+      "z": -60.5,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 2041
+    },
+    {
+      "x": -15.2,
+      "y": 0.0,
+      "z": 35.2,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1889
+    },
+    {
+      "x": 48.3,
+      "y": 0.0,
+      "z": -44.6,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1432
+    },
+    {
+      "x": -15.2,
+      "y": 0.0,
+      "z": 83.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1563
+    },
+    {
+      "x": -31.1,
+      "y": 0.0,
+      "z": 3.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1664
+    },
+    {
+      "x": -31.1,
+      "y": 0.0,
+      "z": 67.2,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1314
+    },
+    {
+      "x": -47.0,
+      "y": 0.0,
+      "z": 19.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1433
+    },
+    {
+      "x": -47.0,
+      "y": 0.0,
+      "z": 3.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1671
+    },
+    {
+      "x": -15.2,
+      "y": 0.0,
+      "z": 19.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1769
+    },
+    {
+      "x": -47.0,
+      "y": 0.0,
+      "z": -12.7,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1380
+    },
+    {
+      "x": 0.6,
+      "y": 0.0,
+      "z": 19.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1345
+    },
+    {
+      "x": 48.3,
+      "y": 0.0,
+      "z": -60.5,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1705
+    },
+    {
+      "x": 80.0,
+      "y": 0.0,
+      "z": -108.4,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 963
+    },
+    {
+      "x": -31.1,
+      "y": 0.0,
+      "z": 51.2,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1137
+    },
+    {
+      "x": 32.4,
+      "y": 0.0,
+      "z": -12.7,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1014
+    },
+    {
+      "x": 80.0,
+      "y": 0.0,
+      "z": -92.5,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1192
+    },
+    {
+      "x": 80.0,
+      "y": 0.0,
+      "z": -76.5,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 977
+    },
+    {
+      "x": -31.1,
+      "y": 0.0,
+      "z": 19.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1383
+    },
+    {
+      "x": 32.4,
+      "y": 0.0,
+      "z": -60.5,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 873
+    },
+    {
+      "x": -31.1,
+      "y": 0.0,
+      "z": 83.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1256
+    },
+    {
+      "x": -62.9,
+      "y": 0.0,
+      "z": 19.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1293
+    },
+    {
+      "x": -47.0,
+      "y": 0.0,
+      "z": -28.6,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1129
+    },
+    {
+      "x": -15.2,
+      "y": 0.0,
+      "z": 67.2,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1447
+    },
+    {
+      "x": -31.1,
+      "y": 0.0,
+      "z": 99.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 960
+    },
+    {
+      "x": -31.1,
+      "y": 0.0,
+      "z": 35.2,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1213
+    },
+    {
+      "x": -15.2,
+      "y": 0.0,
+      "z": 51.2,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1369
+    },
+    {
+      "x": -15.2,
+      "y": 0.0,
+      "z": 3.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1095
+    },
+    {
+      "x": -78.7,
+      "y": 0.0,
+      "z": 210.8,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 830
+    },
+    {
+      "x": -78.7,
+      "y": 0.0,
+      "z": 194.9,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 861
+    },
+    {
+      "x": 334.0,
+      "y": 0.0,
+      "z": 290.7,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 668
+    },
+    {
+      "x": 32.4,
+      "y": 0.0,
+      "z": -28.6,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 724
+    },
+    {
+      "x": 0.6,
+      "y": 0.0,
+      "z": 35.2,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1496
+    },
+    {
+      "x": -31.1,
+      "y": 0.0,
+      "z": -12.7,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1042
+    },
+    {
+      "x": 48.3,
+      "y": 0.0,
+      "z": 3.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 744
+    },
+    {
+      "x": -189.9,
+      "y": 0.0,
+      "z": 83.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 794
+    },
+    {
+      "x": 48.3,
+      "y": 0.0,
+      "z": -76.5,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 878
+    },
+    {
+      "x": -47.0,
+      "y": 0.0,
+      "z": 131.0,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 733
+    },
+    {
+      "x": 80.0,
+      "y": 0.0,
+      "z": -44.6,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 2038
+    },
+    {
+      "x": -94.6,
+      "y": 0.0,
+      "z": -140.4,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 793
+    },
+    {
+      "x": -126.4,
+      "y": 0.0,
+      "z": -156.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 614
+    },
+    {
+      "x": -62.9,
+      "y": 0.0,
+      "z": 3.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1033
+    },
+    {
+      "x": -31.1,
+      "y": 0.0,
+      "z": 115.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 702
+    },
+    {
+      "x": -78.7,
+      "y": 0.0,
+      "z": -156.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 756
+    },
+    {
+      "x": 16.5,
+      "y": 0.0,
+      "z": 51.2,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 602
+    },
+    {
+      "x": 48.3,
+      "y": 0.0,
+      "z": -156.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 668
+    },
+    {
+      "x": -158.1,
+      "y": 0.0,
+      "z": -156.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 689
+    },
+    {
+      "x": -62.9,
+      "y": 0.0,
+      "z": -12.7,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 939
+    },
+    {
+      "x": 0.6,
+      "y": 0.0,
+      "z": 83.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 857
+    },
+    {
+      "x": -62.9,
+      "y": 0.0,
+      "z": -28.6,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 864
+    },
+    {
+      "x": -47.0,
+      "y": 0.0,
+      "z": 210.8,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 741
+    },
+    {
+      "x": 48.3,
+      "y": 0.0,
+      "z": -220.2,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 580
+    },
+    {
+      "x": -110.5,
+      "y": 0.0,
+      "z": -140.4,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 525
+    },
+    {
+      "x": -62.9,
+      "y": 0.0,
+      "z": 83.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 681
+    },
+    {
+      "x": 48.3,
+      "y": 0.0,
+      "z": -12.7,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 891
+    },
+    {
+      "x": 80.0,
+      "y": 0.0,
+      "z": -60.5,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1218
+    },
+    {
+      "x": -47.0,
+      "y": 0.0,
+      "z": 83.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 828
+    },
+    {
+      "x": -47.0,
+      "y": 0.0,
+      "z": 67.2,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 797
+    },
+    {
+      "x": 64.1,
+      "y": 0.0,
+      "z": -76.5,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 993
+    },
+    {
+      "x": 48.3,
+      "y": 0.0,
+      "z": -140.4,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 649
+    },
+    {
+      "x": -158.1,
+      "y": 0.0,
+      "z": -172.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 647
+    },
+    {
+      "x": -62.9,
+      "y": 0.0,
+      "z": 194.9,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 722
+    },
+    {
+      "x": -62.9,
+      "y": 0.0,
+      "z": 99.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 786
+    },
+    {
+      "x": -78.7,
+      "y": 0.0,
+      "z": -140.4,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 746
+    },
+    {
+      "x": -47.0,
+      "y": 0.0,
+      "z": 115.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 862
+    },
+    {
+      "x": -31.1,
+      "y": 0.0,
+      "z": 226.8,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 576
+    },
+    {
+      "x": -94.6,
+      "y": 0.0,
+      "z": 178.9,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 610
+    },
+    {
+      "x": -47.0,
+      "y": 0.0,
+      "z": 99.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 824
+    },
+    {
+      "x": -94.6,
+      "y": 0.0,
+      "z": -124.4,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 608
+    },
+    {
+      "x": -94.6,
+      "y": 0.0,
+      "z": 115.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 555
+    },
+    {
+      "x": -94.6,
+      "y": 0.0,
+      "z": -156.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 702
+    },
+    {
+      "x": -94.6,
+      "y": 0.0,
+      "z": 131.0,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 526
+    },
+    {
+      "x": 80.0,
+      "y": 0.0,
+      "z": -124.4,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 516
+    },
+    {
+      "x": -94.6,
+      "y": 0.0,
+      "z": -12.7,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 590
+    },
+    {
+      "x": -47.0,
+      "y": 0.0,
+      "z": -44.6,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 615
+    },
+    {
+      "x": -78.7,
+      "y": 0.0,
+      "z": 3.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 621
+    },
+    {
+      "x": -205.8,
+      "y": 0.0,
+      "z": 83.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 607
+    },
+    {
+      "x": -174.0,
+      "y": 0.0,
+      "z": -172.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 586
+    },
+    {
+      "x": 48.3,
+      "y": 0.0,
+      "z": -236.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 549
+    },
+    {
+      "x": -142.2,
+      "y": 0.0,
+      "z": -172.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 686
+    },
+    {
+      "x": 0.6,
+      "y": 0.0,
+      "z": -92.5,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 462
+    },
+    {
+      "x": -62.9,
+      "y": 0.0,
+      "z": 131.0,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 552
+    },
+    {
+      "x": -47.0,
+      "y": 0.0,
+      "z": 226.8,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 692
+    },
+    {
+      "x": -62.9,
+      "y": 0.0,
+      "z": 115.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 651
+    },
+    {
+      "x": 302.3,
+      "y": 0.0,
+      "z": -76.5,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 455
+    },
+    {
+      "x": -47.0,
+      "y": 0.0,
+      "z": 194.9,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 566
+    },
+    {
+      "x": -189.9,
+      "y": 0.0,
+      "z": 99.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 630
+    },
+    {
+      "x": -78.7,
+      "y": 0.0,
+      "z": -28.6,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 619
+    },
+    {
+      "x": -78.7,
+      "y": 0.0,
+      "z": 19.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 655
+    },
+    {
+      "x": -62.9,
+      "y": 0.0,
+      "z": 210.8,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 747
+    },
+    {
+      "x": 32.4,
+      "y": 0.0,
+      "z": -44.6,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1000
+    },
+    {
+      "x": -174.0,
+      "y": 0.0,
+      "z": -252.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 435
+    },
+    {
+      "x": -126.4,
+      "y": 0.0,
+      "z": -28.6,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 556
+    },
+    {
+      "x": 0.6,
+      "y": 0.0,
+      "z": -76.5,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 519
+    },
+    {
+      "x": 0.6,
+      "y": 0.0,
+      "z": 67.2,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 910
+    },
+    {
+      "x": 32.4,
+      "y": 0.0,
+      "z": 3.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 621
+    },
+    {
+      "x": 32.4,
+      "y": 0.0,
+      "z": 35.2,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 392
+    },
+    {
+      "x": -31.1,
+      "y": 0.0,
+      "z": 210.8,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 603
+    },
+    {
+      "x": -174.0,
+      "y": 0.0,
+      "z": -236.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 513
+    },
+    {
+      "x": -126.4,
+      "y": 0.0,
+      "z": -12.7,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 509
+    },
+    {
+      "x": -78.7,
+      "y": 0.0,
+      "z": -172.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 519
+    },
+    {
+      "x": 429.3,
+      "y": 0.0,
+      "z": -76.5,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 412
+    },
+    {
+      "x": 349.9,
+      "y": 0.0,
+      "z": 274.7,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 556
+    },
+    {
+      "x": 16.5,
+      "y": 0.0,
+      "z": 35.2,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 724
+    },
+    {
+      "x": -110.5,
+      "y": 0.0,
+      "z": -12.7,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 584
+    },
+    {
+      "x": -31.1,
+      "y": 0.0,
+      "z": -28.6,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 593
+    },
+    {
+      "x": -15.2,
+      "y": 0.0,
+      "z": -156.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 417
+    },
+    {
+      "x": 0.6,
+      "y": 0.0,
+      "z": 3.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 681
+    },
+    {
+      "x": -94.6,
+      "y": 0.0,
+      "z": 210.8,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 580
+    },
+    {
+      "x": 334.0,
+      "y": 0.0,
+      "z": 274.7,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 644
+    },
+    {
+      "x": -221.6,
+      "y": 0.0,
+      "z": 99.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 439
+    },
+    {
+      "x": -142.2,
+      "y": 0.0,
+      "z": -156.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 748
+    },
+    {
+      "x": 80.0,
+      "y": 0.0,
+      "z": -140.4,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 340
+    },
+    {
+      "x": -205.8,
+      "y": 0.0,
+      "z": 99.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 591
+    },
+    {
+      "x": -62.9,
+      "y": 0.0,
+      "z": 178.9,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 489
+    },
+    {
+      "x": 349.9,
+      "y": 0.0,
+      "z": 258.7,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 441
+    },
+    {
+      "x": 397.6,
+      "y": 0.0,
+      "z": -300.0,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 500
+    },
+    {
+      "x": -126.4,
+      "y": 0.0,
+      "z": -172.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 581
+    },
+    {
+      "x": 381.7,
+      "y": 0.0,
+      "z": -300.0,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 499
+    },
+    {
+      "x": 429.3,
+      "y": 0.0,
+      "z": 274.7,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 352
+    },
+    {
+      "x": -94.6,
+      "y": 0.0,
+      "z": 3.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 562
+    },
+    {
+      "x": -15.2,
+      "y": 0.0,
+      "z": -92.5,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 452
+    },
+    {
+      "x": 64.1,
+      "y": 0.0,
+      "z": -92.5,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 685
+    },
+    {
+      "x": -174.0,
+      "y": 0.0,
+      "z": 83.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 556
+    },
+    {
+      "x": -78.7,
+      "y": 0.0,
+      "z": -12.7,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 607
+    },
+    {
+      "x": -110.5,
+      "y": 0.0,
+      "z": -188.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 387
+    },
+    {
+      "x": 80.0,
+      "y": 0.0,
+      "z": -28.6,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1303
+    },
+    {
+      "x": -94.6,
+      "y": 0.0,
+      "z": -172.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 585
+    },
+    {
+      "x": -94.6,
+      "y": 0.0,
+      "z": 226.8,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 489
+    },
+    {
+      "x": 32.4,
+      "y": 0.0,
+      "z": -92.5,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 379
+    },
+    {
+      "x": 48.3,
+      "y": 0.0,
+      "z": -204.2,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 491
+    },
+    {
+      "x": -221.6,
+      "y": 0.0,
+      "z": 83.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 508
+    },
+    {
+      "x": -110.5,
+      "y": 0.0,
+      "z": -172.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 479
+    },
+    {
+      "x": -78.7,
+      "y": 0.0,
+      "z": 178.9,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 598
+    },
+    {
+      "x": 48.3,
+      "y": 0.0,
+      "z": 147.0,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 266
+    },
+    {
+      "x": 318.2,
+      "y": 0.0,
+      "z": 19.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 400
+    },
+    {
+      "x": -189.9,
+      "y": 0.0,
+      "z": 19.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 330
+    },
+    {
+      "x": -110.5,
+      "y": 0.0,
+      "z": -28.6,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 475
+    },
+    {
+      "x": -94.6,
+      "y": 0.0,
+      "z": 194.9,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 551
+    },
+    {
+      "x": -78.7,
+      "y": 0.0,
+      "z": 115.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 467
+    },
+    {
+      "x": -62.9,
+      "y": 0.0,
+      "z": 226.8,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 501
+    },
+    {
+      "x": -174.0,
+      "y": 0.0,
+      "z": -156.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 447
+    },
+    {
+      "x": -62.9,
+      "y": 0.0,
+      "z": 242.8,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 330
+    },
+    {
+      "x": 0.6,
+      "y": 0.0,
+      "z": 51.2,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 1063
+    },
+    {
+      "x": 397.6,
+      "y": 0.0,
+      "z": 3.3,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 371
+    },
+    {
+      "x": 48.3,
+      "y": 0.0,
+      "z": -252.1,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 392
+    },
+    {
+      "x": 302.3,
+      "y": 0.0,
+      "z": -60.5,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 432
+    },
+    {
+      "x": 381.7,
+      "y": 0.0,
+      "z": -284.0,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 507
+    },
+    {
+      "x": -78.7,
+      "y": 0.0,
+      "z": 35.2,
+      "h": 8.5,
+      "r": 3.8,
+      "pts": 457
+    }
+  ],
+  "roads": [
+    {
+      "x": 84.9,
+      "z": -232.4,
+      "w": 23.1,
+      "d": 23.8,
+      "pts": 113
+    },
+    {
+      "x": -106.7,
+      "z": -434.4,
+      "w": 17.0,
+      "d": 16.1,
+      "pts": 32
+    },
+    {
+      "x": 66.7,
+      "z": -205.9,
+      "w": 21.0,
+      "d": 24.8,
+      "pts": 244
+    },
+    {
+      "x": -163.0,
+      "z": -302.4,
+      "w": 24.8,
+      "d": 24.0,
+      "pts": 44
+    },
+    {
+      "x": -162.6,
+      "z": -158.0,
+      "w": 24.9,
+      "d": 24.9,
+      "pts": 683
+    },
+    {
+      "x": -241.1,
+      "z": -311.2,
+      "w": 20.2,
+      "d": 21.1,
+      "pts": 63
+    },
+    {
+      "x": -260.9,
+      "z": -308.9,
+      "w": 24.7,
+      "d": 23.5,
+      "pts": 98
+    },
+    {
+      "x": -212.6,
+      "z": -255.7,
+      "w": 25.0,
+      "d": 22.0,
+      "pts": 59
+    },
+    {
+      "x": 41.5,
+      "z": -53.4,
+      "w": 21.4,
+      "d": 24.8,
+      "pts": 564
+    },
+    {
+      "x": -264.8,
+      "z": -131.8,
+      "w": 24.8,
+      "d": 24.4,
+      "pts": 93
+    },
+    {
+      "x": -286.4,
+      "z": -132.1,
+      "w": 24.7,
+      "d": 24.5,
+      "pts": 149
+    },
+    {
+      "x": -62.5,
+      "z": -34.8,
+      "w": 24.8,
+      "d": 24.9,
+      "pts": 642
+    },
+    {
+      "x": -113.6,
+      "z": -31.2,
+      "w": 24.7,
+      "d": 24.9,
+      "pts": 254
+    },
+    {
+      "x": -188.9,
+      "z": -32.9,
+      "w": 24.8,
+      "d": 24.5,
+      "pts": 273
+    },
+    {
+      "x": 61.0,
+      "z": -32.4,
+      "w": 24.9,
+      "d": 24.7,
+      "pts": 443
+    },
+    {
+      "x": 83.9,
+      "z": 62.7,
+      "w": 24.0,
+      "d": 24.9,
+      "pts": 94
+    },
+    {
+      "x": -163.6,
+      "z": 19.2,
+      "w": 25.0,
+      "d": 24.7,
+      "pts": 229
+    },
+    {
+      "x": -213.7,
+      "z": 43.8,
+      "w": 24.5,
+      "d": 24.8,
+      "pts": 246
+    },
+    {
+      "x": -164.2,
+      "z": 73.0,
+      "w": 24.7,
+      "d": 22.8,
+      "pts": 105
+    },
+    {
+      "x": -189.0,
+      "z": 71.4,
+      "w": 24.9,
+      "d": 24.7,
+      "pts": 264
+    },
+    {
+      "x": -169.1,
+      "z": 114.7,
+      "w": 23.0,
+      "d": 24.9,
+      "pts": 129
+    },
+    {
+      "x": -189.2,
+      "z": 115.3,
+      "w": 24.9,
+      "d": 24.6,
+      "pts": 560
+    },
+    {
+      "x": 234.8,
+      "z": 592.1,
+      "w": 23.7,
+      "d": 24.1,
+      "pts": 45
+    },
+    {
+      "x": 161.8,
+      "z": 390.5,
+      "w": 24.4,
+      "d": 24.8,
+      "pts": 153
+    },
+    {
+      "x": 183.5,
+      "z": 391.4,
+      "w": 24.0,
+      "d": 24.4,
+      "pts": 74
+    },
+    {
+      "x": -243.1,
+      "z": 242.7,
+      "w": 23.5,
+      "d": 24.4,
+      "pts": 158
+    },
+    {
+      "x": -313.2,
+      "z": -280.7,
+      "w": 24.1,
+      "d": 24.1,
+      "pts": 37
+    },
+    {
+      "x": -184.6,
+      "z": -158.1,
+      "w": 24.4,
+      "d": 24.9,
+      "pts": 119
+    },
+    {
+      "x": -135.7,
+      "z": -235.2,
+      "w": 23.8,
+      "d": 24.6,
+      "pts": 47
+    },
+    {
+      "x": -162.8,
+      "z": -132.7,
+      "w": 24.9,
+      "d": 24.7,
+      "pts": 311
+    },
+    {
+      "x": -290.0,
+      "z": -182.1,
+      "w": 24.8,
+      "d": 24.9,
+      "pts": 171
+    },
+    {
+      "x": -264.6,
+      "z": -159.3,
+      "w": 24.9,
+      "d": 24.8,
+      "pts": 202
+    },
+    {
+      "x": -188.8,
+      "z": -84.0,
+      "w": 24.6,
+      "d": 24.8,
+      "pts": 173
+    },
+    {
+      "x": -135.8,
+      "z": -11.4,
+      "w": 24.7,
+      "d": 24.1,
+      "pts": 145
+    },
+    {
+      "x": -210.8,
+      "z": -8.5,
+      "w": 24.0,
+      "d": 24.4,
+      "pts": 233
+    },
+    {
+      "x": -238.0,
+      "z": 42.9,
+      "w": 24.9,
+      "d": 25.0,
+      "pts": 181
+    },
+    {
+      "x": -258.1,
+      "z": 63.1,
+      "w": 21.7,
+      "d": 20.1,
+      "pts": 68
+    },
+    {
+      "x": -187.2,
+      "z": 92.5,
+      "w": 24.9,
+      "d": 24.9,
+      "pts": 695
+    },
+    {
+      "x": -464.9,
+      "z": 340.4,
+      "w": 24.8,
+      "d": 24.5,
+      "pts": 82
+    },
+    {
+      "x": 138.3,
+      "z": 343.2,
+      "w": 24.3,
+      "d": 24.8,
+      "pts": 57
+    },
+    {
+      "x": -388.3,
+      "z": 439.7,
+      "w": 24.1,
+      "d": 24.0,
+      "pts": 42
+    },
+    {
+      "x": 90.2,
+      "z": 289.9,
+      "w": 20.2,
+      "d": 23.2,
+      "pts": 123
+    },
+    {
+      "x": 166.0,
+      "z": 571.5,
+      "w": 20.3,
+      "d": 23.6,
+      "pts": 75
+    },
+    {
+      "x": -286.2,
+      "z": -160.6,
+      "w": 24.6,
+      "d": 24.8,
+      "pts": 201
+    },
+    {
+      "x": -65.0,
+      "z": -53.8,
+      "w": 24.8,
+      "d": 24.9,
+      "pts": 409
+    },
+    {
+      "x": -213.4,
+      "z": -107.0,
+      "w": 24.5,
+      "d": 24.8,
+      "pts": 120
+    },
+    {
+      "x": 44.4,
+      "z": 16.9,
+      "w": 20.1,
+      "d": 24.9,
+      "pts": 497
+    },
+    {
+      "x": -39.9,
+      "z": 15.5,
+      "w": 24.6,
+      "d": 24.8,
+      "pts": 399
+    },
+    {
+      "x": -86.0,
+      "z": -112.1,
+      "w": 24.8,
+      "d": 24.9,
+      "pts": 136
+    },
+    {
+      "x": -184.8,
+      "z": -233.1,
+      "w": 24.0,
+      "d": 23.9,
+      "pts": 33
+    },
+    {
+      "x": -116.2,
+      "z": -158.4,
+      "w": 24.5,
+      "d": 24.9,
+      "pts": 129
+    },
+    {
+      "x": -211.8,
+      "z": -81.8,
+      "w": 24.7,
+      "d": 24.6,
+      "pts": 183
+    },
+    {
+      "x": -213.1,
+      "z": -53.9,
+      "w": 24.0,
+      "d": 24.7,
+      "pts": 133
+    },
+    {
+      "x": -235.6,
+      "z": -85.9,
+      "w": 24.6,
+      "d": 24.4,
+      "pts": 92
+    },
+    {
+      "x": -284.8,
+      "z": -33.5,
+      "w": 22.3,
+      "d": 24.6,
+      "pts": 99
+    },
+    {
+      "x": -262.6,
+      "z": -34.1,
+      "w": 24.9,
+      "d": 24.3,
+      "pts": 122
+    },
+    {
+      "x": -239.1,
+      "z": -8.5,
+      "w": 24.1,
+      "d": 24.8,
+      "pts": 119
+    },
+    {
+      "x": -16.1,
+      "z": -33.8,
+      "w": 24.2,
+      "d": 23.4,
+      "pts": 40
+    },
+    {
+      "x": -386.7,
+      "z": 238.4,
+      "w": 24.8,
+      "d": 24.1,
+      "pts": 74
+    },
+    {
+      "x": -337.1,
+      "z": 221.1,
+      "w": 24.7,
+      "d": 24.3,
+      "pts": 249
+    }
+  ],
+  "water": [
+    {
+      "x": -135.3,
+      "z": -114.8,
+      "w": 29.6,
+      "d": 29.0,
+      "type": "pool",
+      "pts": 59
+    },
+    {
+      "x": -276.5,
+      "z": -30.8,
+      "w": 28.1,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 157
+    },
+    {
+      "x": 81.0,
+      "z": -147.4,
+      "w": 25.9,
+      "d": 29.9,
+      "type": "pool",
+      "pts": 148
+    },
+    {
+      "x": -279.3,
+      "z": 30.4,
+      "w": 29.6,
+      "d": 29.0,
+      "type": "pool",
+      "pts": 75
+    },
+    {
+      "x": -226.5,
+      "z": 22.6,
+      "w": 25.9,
+      "d": 29.2,
+      "type": "pool",
+      "pts": 100
+    },
+    {
+      "x": -252.5,
+      "z": 29.6,
+      "w": 29.9,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 203
+    },
+    {
+      "x": -250.5,
+      "z": 56.8,
+      "w": 29.9,
+      "d": 28.8,
+      "type": "pool",
+      "pts": 87
+    },
+    {
+      "x": -275.7,
+      "z": 271.0,
+      "w": 30.0,
+      "d": 29.4,
+      "type": "pool",
+      "pts": 89
+    },
+    {
+      "x": 343.8,
+      "z": 270.1,
+      "w": 27.3,
+      "d": 29.2,
+      "type": "pool",
+      "pts": 42
+    },
+    {
+      "x": 223.4,
+      "z": 204.3,
+      "w": 29.9,
+      "d": 29.7,
+      "type": "pool",
+      "pts": 346
+    },
+    {
+      "x": 380.3,
+      "z": 241.8,
+      "w": 27.3,
+      "d": 26.7,
+      "type": "pool",
+      "pts": 37
+    },
+    {
+      "x": 349.4,
+      "z": 391.6,
+      "w": 29.7,
+      "d": 28.7,
+      "type": "pool",
+      "pts": 77
+    },
+    {
+      "x": 346.1,
+      "z": 301.9,
+      "w": 30.0,
+      "d": 28.6,
+      "type": "pool",
+      "pts": 78
+    },
+    {
+      "x": -373.5,
+      "z": 365.4,
+      "w": 29.5,
+      "d": 28.9,
+      "type": "pool",
+      "pts": 66
+    },
+    {
+      "x": 135.3,
+      "z": 91.1,
+      "w": 28.2,
+      "d": 29.1,
+      "type": "pool",
+      "pts": 68
+    },
+    {
+      "x": -280.8,
+      "z": 329.0,
+      "w": 26.7,
+      "d": 29.7,
+      "type": "pool",
+      "pts": 30
+    },
+    {
+      "x": -249.4,
+      "z": 302.5,
+      "w": 29.4,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 139
+    },
+    {
+      "x": -253.9,
+      "z": -300.2,
+      "w": 27.7,
+      "d": 28.3,
+      "type": "pool",
+      "pts": 34
+    },
+    {
+      "x": 77.1,
+      "z": -92.2,
+      "w": 29.9,
+      "d": 29.7,
+      "type": "pool",
+      "pts": 675
+    },
+    {
+      "x": -135.0,
+      "z": -180.2,
+      "w": 29.8,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 340
+    },
+    {
+      "x": -226.0,
+      "z": 1.1,
+      "w": 29.7,
+      "d": 29.9,
+      "type": "pool",
+      "pts": 191
+    },
+    {
+      "x": -250.1,
+      "z": 88.0,
+      "w": 29.2,
+      "d": 27.6,
+      "type": "pool",
+      "pts": 97
+    },
+    {
+      "x": -222.4,
+      "z": 88.2,
+      "w": 29.5,
+      "d": 29.6,
+      "type": "pool",
+      "pts": 171
+    },
+    {
+      "x": -338.5,
+      "z": 243.2,
+      "w": 26.9,
+      "d": 25.4,
+      "type": "pool",
+      "pts": 48
+    },
+    {
+      "x": 203.9,
+      "z": 324.5,
+      "w": 21.3,
+      "d": 29.6,
+      "type": "pool",
+      "pts": 314
+    },
+    {
+      "x": -12.8,
+      "z": 27.4,
+      "w": 27.0,
+      "d": 29.3,
+      "type": "pool",
+      "pts": 422
+    },
+    {
+      "x": 256.2,
+      "z": 328.7,
+      "w": 29.4,
+      "d": 28.2,
+      "type": "pool",
+      "pts": 193
+    },
+    {
+      "x": 376.2,
+      "z": 475.6,
+      "w": 23.3,
+      "d": 21.3,
+      "type": "pool",
+      "pts": 114
+    },
+    {
+      "x": -104.1,
+      "z": -22.9,
+      "w": 29.9,
+      "d": 27.7,
+      "type": "pool",
+      "pts": 442
+    },
+    {
+      "x": -164.0,
+      "z": -25.3,
+      "w": 28.6,
+      "d": 29.7,
+      "type": "pool",
+      "pts": 122
+    },
+    {
+      "x": -222.6,
+      "z": 64.5,
+      "w": 29.2,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 123
+    },
+    {
+      "x": -224.1,
+      "z": 179.4,
+      "w": 29.2,
+      "d": 29.2,
+      "type": "pool",
+      "pts": 39
+    },
+    {
+      "x": -195.2,
+      "z": 61.1,
+      "w": 27.3,
+      "d": 29.6,
+      "type": "pool",
+      "pts": 97
+    },
+    {
+      "x": 23.6,
+      "z": -213.0,
+      "w": 15.0,
+      "d": 29.9,
+      "type": "pool",
+      "pts": 179
+    },
+    {
+      "x": -77.0,
+      "z": -150.0,
+      "w": 29.9,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 286
+    },
+    {
+      "x": -128.2,
+      "z": -24.4,
+      "w": 29.7,
+      "d": 28.2,
+      "type": "pool",
+      "pts": 202
+    },
+    {
+      "x": -66.9,
+      "z": 32.2,
+      "w": 29.2,
+      "d": 29.9,
+      "type": "pool",
+      "pts": 326
+    },
+    {
+      "x": -399.3,
+      "z": 209.8,
+      "w": 26.0,
+      "d": 26.4,
+      "type": "pool",
+      "pts": 87
+    },
+    {
+      "x": -314.3,
+      "z": 273.7,
+      "w": 29.1,
+      "d": 26.7,
+      "type": "pool",
+      "pts": 70
+    },
+    {
+      "x": 348.0,
+      "z": 330.3,
+      "w": 29.9,
+      "d": 29.4,
+      "type": "pool",
+      "pts": 119
+    },
+    {
+      "x": -48.1,
+      "z": 86.7,
+      "w": 26.5,
+      "d": 28.9,
+      "type": "pool",
+      "pts": 182
+    },
+    {
+      "x": 79.3,
+      "z": -117.2,
+      "w": 28.6,
+      "d": 29.9,
+      "type": "pool",
+      "pts": 245
+    },
+    {
+      "x": 46.9,
+      "z": -56.7,
+      "w": 27.6,
+      "d": 28.9,
+      "type": "pool",
+      "pts": 698
+    },
+    {
+      "x": -222.1,
+      "z": -274.7,
+      "w": 28.9,
+      "d": 29.3,
+      "type": "pool",
+      "pts": 59
+    },
+    {
+      "x": -166.4,
+      "z": -239.8,
+      "w": 27.0,
+      "d": 29.4,
+      "type": "pool",
+      "pts": 79
+    },
+    {
+      "x": -226.1,
+      "z": -31.8,
+      "w": 29.9,
+      "d": 29.9,
+      "type": "pool",
+      "pts": 131
+    },
+    {
+      "x": -46.5,
+      "z": -25.6,
+      "w": 29.9,
+      "d": 28.9,
+      "type": "pool",
+      "pts": 183
+    },
+    {
+      "x": -255.5,
+      "z": -30.8,
+      "w": 29.7,
+      "d": 29.6,
+      "type": "pool",
+      "pts": 234
+    },
+    {
+      "x": 219.3,
+      "z": 186.3,
+      "w": 29.4,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 242
+    },
+    {
+      "x": 204.2,
+      "z": 182.5,
+      "w": 29.8,
+      "d": 29.5,
+      "type": "pool",
+      "pts": 243
+    },
+    {
+      "x": -281.5,
+      "z": 297.1,
+      "w": 29.1,
+      "d": 29.1,
+      "type": "pool",
+      "pts": 54
+    },
+    {
+      "x": -249.3,
+      "z": 393.0,
+      "w": 28.9,
+      "d": 29.4,
+      "type": "pool",
+      "pts": 109
+    },
+    {
+      "x": -92.8,
+      "z": 122.6,
+      "w": 29.1,
+      "d": 29.9,
+      "type": "pool",
+      "pts": 313
+    },
+    {
+      "x": -131.8,
+      "z": 239.0,
+      "w": 29.4,
+      "d": 29.6,
+      "type": "pool",
+      "pts": 195
+    },
+    {
+      "x": 498.3,
+      "z": 503.8,
+      "w": 26.3,
+      "d": 26.0,
+      "type": "pool",
+      "pts": 69
+    },
+    {
+      "x": -221.4,
+      "z": 358.6,
+      "w": 29.9,
+      "d": 28.9,
+      "type": "pool",
+      "pts": 76
+    },
+    {
+      "x": -226.9,
+      "z": 326.5,
+      "w": 29.2,
+      "d": 29.7,
+      "type": "pool",
+      "pts": 144
+    },
+    {
+      "x": -229.9,
+      "z": 413.0,
+      "w": 27.3,
+      "d": 25.0,
+      "type": "pool",
+      "pts": 35
+    },
+    {
+      "x": 285.5,
+      "z": 330.4,
+      "w": 29.2,
+      "d": 29.3,
+      "type": "pool",
+      "pts": 69
+    },
+    {
+      "x": 23.1,
+      "z": -271.0,
+      "w": 24.2,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 137
+    },
+    {
+      "x": -98.0,
+      "z": -151.4,
+      "w": 29.5,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 413
+    },
+    {
+      "x": -196.0,
+      "z": 87.8,
+      "w": 29.9,
+      "d": 29.9,
+      "type": "pool",
+      "pts": 120
+    },
+    {
+      "x": -290.4,
+      "z": 209.2,
+      "w": 23.8,
+      "d": 27.5,
+      "type": "pool",
+      "pts": 31
+    },
+    {
+      "x": -191.8,
+      "z": 268.7,
+      "w": 28.8,
+      "d": 28.3,
+      "type": "pool",
+      "pts": 52
+    },
+    {
+      "x": -155.5,
+      "z": 264.8,
+      "w": 29.6,
+      "d": 29.5,
+      "type": "pool",
+      "pts": 140
+    },
+    {
+      "x": -252.6,
+      "z": 415.3,
+      "w": 29.7,
+      "d": 29.1,
+      "type": "pool",
+      "pts": 88
+    },
+    {
+      "x": 226.7,
+      "z": 277.1,
+      "w": 29.2,
+      "d": 29.5,
+      "type": "pool",
+      "pts": 211
+    },
+    {
+      "x": -226.6,
+      "z": 388.3,
+      "w": 28.5,
+      "d": 29.5,
+      "type": "pool",
+      "pts": 85
+    },
+    {
+      "x": -196.2,
+      "z": 334.9,
+      "w": 23.0,
+      "d": 27.6,
+      "type": "pool",
+      "pts": 25
+    },
+    {
+      "x": -109.7,
+      "z": 179.3,
+      "w": 28.8,
+      "d": 28.1,
+      "type": "pool",
+      "pts": 160
+    },
+    {
+      "x": 265.0,
+      "z": 450.6,
+      "w": 24.4,
+      "d": 29.4,
+      "type": "pool",
+      "pts": 92
+    },
+    {
+      "x": -254.9,
+      "z": -274.6,
+      "w": 29.6,
+      "d": 28.0,
+      "type": "pool",
+      "pts": 59
+    },
+    {
+      "x": -312.0,
+      "z": 212.9,
+      "w": 29.2,
+      "d": 27.6,
+      "type": "pool",
+      "pts": 57
+    },
+    {
+      "x": 286.9,
+      "z": 270.1,
+      "w": 29.7,
+      "d": 29.3,
+      "type": "pool",
+      "pts": 117
+    },
+    {
+      "x": 372.2,
+      "z": 361.8,
+      "w": 27.1,
+      "d": 29.6,
+      "type": "pool",
+      "pts": 59
+    },
+    {
+      "x": -102.1,
+      "z": 147.0,
+      "w": 29.8,
+      "d": 29.5,
+      "type": "pool",
+      "pts": 296
+    },
+    {
+      "x": 289.2,
+      "z": 297.2,
+      "w": 29.5,
+      "d": 29.3,
+      "type": "pool",
+      "pts": 79
+    },
+    {
+      "x": 346.5,
+      "z": 358.1,
+      "w": 29.8,
+      "d": 29.5,
+      "type": "pool",
+      "pts": 150
+    },
+    {
+      "x": -253.6,
+      "z": 268.1,
+      "w": 29.8,
+      "d": 29.5,
+      "type": "pool",
+      "pts": 105
+    },
+    {
+      "x": 529.8,
+      "z": 574.6,
+      "w": 27.5,
+      "d": 26.9,
+      "type": "pool",
+      "pts": 25
+    },
+    {
+      "x": -223.8,
+      "z": 273.4,
+      "w": 28.2,
+      "d": 29.6,
+      "type": "pool",
+      "pts": 70
+    },
+    {
+      "x": -100.2,
+      "z": -122.6,
+      "w": 28.6,
+      "d": 30.0,
+      "type": "pool",
+      "pts": 80
+    },
+    {
+      "x": 192.4,
+      "z": 154.0,
+      "w": 29.9,
+      "d": 28.9,
+      "type": "pool",
+      "pts": 94
+    },
+    {
+      "x": 372.8,
+      "z": 331.0,
+      "w": 27.5,
+      "d": 29.7,
+      "type": "pool",
+      "pts": 45
+    },
+    {
+      "x": -399.8,
+      "z": 363.2,
+      "w": 29.6,
+      "d": 26.9,
+      "type": "pool",
+      "pts": 59
+    },
+    {
+      "x": -69.0,
+      "z": 93.5,
+      "w": 29.3,
+      "d": 29.9,
+      "type": "pool",
+      "pts": 302
+    },
+    {
+      "x": -135.0,
+      "z": 119.4,
+      "w": 28.8,
+      "d": 29.6,
+      "type": "pool",
+      "pts": 49
+    },
+    {
+      "x": -161.6,
+      "z": 180.9,
+      "w": 29.3,
+      "d": 29.3,
+      "type": "pool",
+      "pts": 168
+    },
+    {
+      "x": -165.2,
+      "z": -270.0,
+      "w": 29.3,
+      "d": 29.0,
+      "type": "pool",
+      "pts": 63
+    },
+    {
+      "x": -102.1,
+      "z": -174.8,
+      "w": 29.9,
+      "d": 27.7,
+      "type": "pool",
+      "pts": 290
+    },
+    {
+      "x": -41.7,
+      "z": 3.9,
+      "w": 29.7,
+      "d": 29.9,
+      "type": "pool",
+      "pts": 484
+    },
+    {
+      "x": 228.7,
+      "z": 122.1,
+      "w": 29.0,
+      "d": 29.3,
+      "type": "pool",
+      "pts": 78
+    },
+    {
+      "x": -398.5,
+      "z": 383.2,
+      "w": 23.1,
+      "d": 27.3,
+      "type": "pool",
+      "pts": 32
+    },
+    {
+      "x": 319.9,
+      "z": 297.8,
+      "w": 29.9,
+      "d": 29.1,
+      "type": "pool",
+      "pts": 52
+    },
+    {
+      "x": 256.2,
+      "z": 239.1,
+      "w": 29.9,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 242
+    },
+    {
+      "x": 165.7,
+      "z": 120.7,
+      "w": 25.0,
+      "d": 28.8,
+      "type": "pool",
+      "pts": 58
+    },
+    {
+      "x": -78.5,
+      "z": 120.4,
+      "w": 29.8,
+      "d": 30.0,
+      "type": "pool",
+      "pts": 525
+    },
+    {
+      "x": -283.9,
+      "z": 390.5,
+      "w": 29.8,
+      "d": 29.3,
+      "type": "pool",
+      "pts": 32
+    },
+    {
+      "x": -105.9,
+      "z": 208.6,
+      "w": 27.5,
+      "d": 29.6,
+      "type": "pool",
+      "pts": 204
+    },
+    {
+      "x": -251.9,
+      "z": -55.0,
+      "w": 29.9,
+      "d": 24.8,
+      "type": "pool",
+      "pts": 162
+    },
+    {
+      "x": -193.1,
+      "z": -26.1,
+      "w": 29.7,
+      "d": 28.9,
+      "type": "pool",
+      "pts": 153
+    },
+    {
+      "x": 406.4,
+      "z": 240.8,
+      "w": 24.7,
+      "d": 28.9,
+      "type": "pool",
+      "pts": 28
+    },
+    {
+      "x": -164.4,
+      "z": 295.1,
+      "w": 25.2,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 26
+    },
+    {
+      "x": -161.0,
+      "z": 210.8,
+      "w": 29.1,
+      "d": 29.7,
+      "type": "pool",
+      "pts": 58
+    },
+    {
+      "x": 47.6,
+      "z": -39.3,
+      "w": 26.1,
+      "d": 30.0,
+      "type": "pool",
+      "pts": 135
+    },
+    {
+      "x": -130.6,
+      "z": -6.5,
+      "w": 29.2,
+      "d": 26.2,
+      "type": "pool",
+      "pts": 97
+    },
+    {
+      "x": 257.6,
+      "z": 144.9,
+      "w": 29.9,
+      "d": 29.2,
+      "type": "pool",
+      "pts": 90
+    },
+    {
+      "x": 172.8,
+      "z": 153.0,
+      "w": 28.6,
+      "d": 29.5,
+      "type": "pool",
+      "pts": 162
+    },
+    {
+      "x": 110.2,
+      "z": 88.6,
+      "w": 29.6,
+      "d": 29.4,
+      "type": "pool",
+      "pts": 65
+    },
+    {
+      "x": 140.1,
+      "z": 116.3,
+      "w": 28.9,
+      "d": 29.3,
+      "type": "pool",
+      "pts": 48
+    },
+    {
+      "x": 13.1,
+      "z": 361.0,
+      "w": 26.6,
+      "d": 29.4,
+      "type": "pool",
+      "pts": 48
+    },
+    {
+      "x": 22.5,
+      "z": -331.9,
+      "w": 23.2,
+      "d": 29.4,
+      "type": "pool",
+      "pts": 111
+    },
+    {
+      "x": -276.5,
+      "z": -274.7,
+      "w": 25.4,
+      "d": 28.7,
+      "type": "pool",
+      "pts": 71
+    },
+    {
+      "x": -160.2,
+      "z": -122.5,
+      "w": 29.4,
+      "d": 29.4,
+      "type": "pool",
+      "pts": 76
+    },
+    {
+      "x": -160.6,
+      "z": 26.9,
+      "w": 29.5,
+      "d": 29.0,
+      "type": "pool",
+      "pts": 124
+    },
+    {
+      "x": -375.8,
+      "z": 377.9,
+      "w": 29.1,
+      "d": 15.0,
+      "type": "pool",
+      "pts": 38
+    },
+    {
+      "x": 495.3,
+      "z": 327.6,
+      "w": 15.0,
+      "d": 28.4,
+      "type": "pool",
+      "pts": 35
+    },
+    {
+      "x": 488.5,
+      "z": 715.3,
+      "w": 26.7,
+      "d": 20.7,
+      "type": "pool",
+      "pts": 47
+    },
+    {
+      "x": 308.2,
+      "z": 501.7,
+      "w": 27.7,
+      "d": 27.2,
+      "type": "pool",
+      "pts": 51
+    },
+    {
+      "x": -85.0,
+      "z": 138.0,
+      "w": 20.2,
+      "d": 22.8,
+      "type": "pool",
+      "pts": 82
+    },
+    {
+      "x": -321.7,
+      "z": 471.1,
+      "w": 20.4,
+      "d": 28.2,
+      "type": "pool",
+      "pts": 27
+    },
+    {
+      "x": 19.3,
+      "z": 125.3,
+      "w": 18.8,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 101
+    },
+    {
+      "x": -192.5,
+      "z": -269.3,
+      "w": 29.4,
+      "d": 29.2,
+      "type": "pool",
+      "pts": 72
+    },
+    {
+      "x": -166.6,
+      "z": 116.8,
+      "w": 29.5,
+      "d": 29.2,
+      "type": "pool",
+      "pts": 108
+    },
+    {
+      "x": 319.7,
+      "z": 247.5,
+      "w": 22.6,
+      "d": 25.8,
+      "type": "pool",
+      "pts": 30
+    },
+    {
+      "x": 82.0,
+      "z": 54.1,
+      "w": 24.2,
+      "d": 28.5,
+      "type": "pool",
+      "pts": 106
+    },
+    {
+      "x": -131.6,
+      "z": -157.5,
+      "w": 28.2,
+      "d": 27.0,
+      "type": "pool",
+      "pts": 130
+    },
+    {
+      "x": 198.7,
+      "z": 95.2,
+      "w": 28.9,
+      "d": 27.8,
+      "type": "pool",
+      "pts": 26
+    },
+    {
+      "x": 259.2,
+      "z": 295.2,
+      "w": 29.3,
+      "d": 28.2,
+      "type": "pool",
+      "pts": 53
+    },
+    {
+      "x": 20.6,
+      "z": -360.0,
+      "w": 20.8,
+      "d": 28.9,
+      "type": "pool",
+      "pts": 41
+    },
+    {
+      "x": 53.5,
+      "z": -87.8,
+      "w": 17.5,
+      "d": 28.2,
+      "type": "pool",
+      "pts": 78
+    },
+    {
+      "x": -159.8,
+      "z": -178.5,
+      "w": 28.8,
+      "d": 29.7,
+      "type": "pool",
+      "pts": 200
+    },
+    {
+      "x": -102.7,
+      "z": -4.9,
+      "w": 29.9,
+      "d": 28.7,
+      "type": "pool",
+      "pts": 226
+    },
+    {
+      "x": -246.0,
+      "z": 2.7,
+      "w": 28.7,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 88
+    },
+    {
+      "x": 75.4,
+      "z": -6.2,
+      "w": 28.5,
+      "d": 26.5,
+      "type": "pool",
+      "pts": 44
+    },
+    {
+      "x": 75.3,
+      "z": 34.2,
+      "w": 27.8,
+      "d": 28.6,
+      "type": "pool",
+      "pts": 97
+    },
+    {
+      "x": -132.8,
+      "z": 152.8,
+      "w": 29.9,
+      "d": 28.9,
+      "type": "pool",
+      "pts": 160
+    },
+    {
+      "x": -136.8,
+      "z": 203.5,
+      "w": 29.4,
+      "d": 29.9,
+      "type": "pool",
+      "pts": 48
+    },
+    {
+      "x": -342.0,
+      "z": 300.9,
+      "w": 29.9,
+      "d": 29.0,
+      "type": "pool",
+      "pts": 57
+    },
+    {
+      "x": -190.6,
+      "z": 245.1,
+      "w": 27.0,
+      "d": 27.5,
+      "type": "pool",
+      "pts": 36
+    },
+    {
+      "x": -281.8,
+      "z": 418.1,
+      "w": 29.1,
+      "d": 29.1,
+      "type": "pool",
+      "pts": 55
+    },
+    {
+      "x": -15.4,
+      "z": -59.3,
+      "w": 29.0,
+      "d": 28.8,
+      "type": "pool",
+      "pts": 41
+    },
+    {
+      "x": -224.6,
+      "z": -55.2,
+      "w": 29.5,
+      "d": 28.6,
+      "type": "pool",
+      "pts": 125
+    },
+    {
+      "x": 103.9,
+      "z": 32.2,
+      "w": 28.0,
+      "d": 25.6,
+      "type": "pool",
+      "pts": 27
+    },
+    {
+      "x": 378.3,
+      "z": 206.4,
+      "w": 26.5,
+      "d": 28.1,
+      "type": "pool",
+      "pts": 27
+    },
+    {
+      "x": -71.6,
+      "z": 57.7,
+      "w": 29.4,
+      "d": 29.7,
+      "type": "pool",
+      "pts": 117
+    },
+    {
+      "x": 321.8,
+      "z": 333.1,
+      "w": 28.3,
+      "d": 29.0,
+      "type": "pool",
+      "pts": 102
+    },
+    {
+      "x": 49.4,
+      "z": 5.3,
+      "w": 22.4,
+      "d": 28.8,
+      "type": "pool",
+      "pts": 173
+    },
+    {
+      "x": -251.3,
+      "z": 175.4,
+      "w": 29.2,
+      "d": 27.9,
+      "type": "pool",
+      "pts": 76
+    },
+    {
+      "x": 23.4,
+      "z": -301.5,
+      "w": 22.2,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 175
+    },
+    {
+      "x": 68.5,
+      "z": -27.1,
+      "w": 28.8,
+      "d": 29.9,
+      "type": "pool",
+      "pts": 168
+    },
+    {
+      "x": 469.7,
+      "z": 722.3,
+      "w": 29.7,
+      "d": 27.9,
+      "type": "pool",
+      "pts": 87
+    },
+    {
+      "x": -318.5,
+      "z": 353.9,
+      "w": 24.9,
+      "d": 23.5,
+      "type": "pool",
+      "pts": 29
+    },
+    {
+      "x": 350.8,
+      "z": 413.2,
+      "w": 26.8,
+      "d": 29.7,
+      "type": "pool",
+      "pts": 123
+    },
+    {
+      "x": 228.9,
+      "z": 293.1,
+      "w": 27.7,
+      "d": 29.6,
+      "type": "pool",
+      "pts": 159
+    },
+    {
+      "x": 314.1,
+      "z": 177.3,
+      "w": 29.9,
+      "d": 27.4,
+      "type": "pool",
+      "pts": 30
+    },
+    {
+      "x": -192.6,
+      "z": 354.0,
+      "w": 28.5,
+      "d": 29.4,
+      "type": "pool",
+      "pts": 36
+    },
+    {
+      "x": 223.7,
+      "z": 325.4,
+      "w": 30.0,
+      "d": 29.6,
+      "type": "pool",
+      "pts": 283
+    },
+    {
+      "x": 115.9,
+      "z": -238.7,
+      "w": 20.7,
+      "d": 28.5,
+      "type": "pool",
+      "pts": 35
+    },
+    {
+      "x": -276.5,
+      "z": -59.9,
+      "w": 29.4,
+      "d": 29.0,
+      "type": "pool",
+      "pts": 141
+    },
+    {
+      "x": 195.5,
+      "z": 239.1,
+      "w": 28.5,
+      "d": 29.0,
+      "type": "pool",
+      "pts": 53
+    },
+    {
+      "x": -22.5,
+      "z": 51.7,
+      "w": 15.0,
+      "d": 23.7,
+      "type": "pool",
+      "pts": 46
+    },
+    {
+      "x": 251.2,
+      "z": 127.3,
+      "w": 27.0,
+      "d": 22.1,
+      "type": "pool",
+      "pts": 31
+    },
+    {
+      "x": 200.5,
+      "z": 202.2,
+      "w": 29.8,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 123
+    },
+    {
+      "x": 53.1,
+      "z": 23.0,
+      "w": 15.6,
+      "d": 24.9,
+      "type": "pool",
+      "pts": 34
+    },
+    {
+      "x": 25.1,
+      "z": -184.0,
+      "w": 15.0,
+      "d": 29.2,
+      "type": "pool",
+      "pts": 96
+    },
+    {
+      "x": -279.2,
+      "z": 89.1,
+      "w": 29.4,
+      "d": 29.3,
+      "type": "pool",
+      "pts": 33
+    },
+    {
+      "x": -65.1,
+      "z": 2.7,
+      "w": 29.9,
+      "d": 29.1,
+      "type": "pool",
+      "pts": 91
+    },
+    {
+      "x": -251.9,
+      "z": 327.9,
+      "w": 28.6,
+      "d": 29.7,
+      "type": "pool",
+      "pts": 136
+    },
+    {
+      "x": -46.4,
+      "z": 25.8,
+      "w": 29.9,
+      "d": 29.6,
+      "type": "pool",
+      "pts": 381
+    },
+    {
+      "x": -192.4,
+      "z": 116.1,
+      "w": 28.6,
+      "d": 29.4,
+      "type": "pool",
+      "pts": 175
+    },
+    {
+      "x": 348.0,
+      "z": 448.1,
+      "w": 29.5,
+      "d": 28.8,
+      "type": "pool",
+      "pts": 36
+    },
+    {
+      "x": -104.0,
+      "z": 28.3,
+      "w": 28.9,
+      "d": 27.9,
+      "type": "pool",
+      "pts": 43
+    },
+    {
+      "x": 66.8,
+      "z": -60.0,
+      "w": 26.9,
+      "d": 29.7,
+      "type": "pool",
+      "pts": 430
+    },
+    {
+      "x": -434.1,
+      "z": 445.4,
+      "w": 24.2,
+      "d": 20.4,
+      "type": "pool",
+      "pts": 25
+    },
+    {
+      "x": 106.2,
+      "z": -207.0,
+      "w": 21.8,
+      "d": 28.5,
+      "type": "pool",
+      "pts": 29
+    },
+    {
+      "x": -44.5,
+      "z": -59.1,
+      "w": 28.7,
+      "d": 29.7,
+      "type": "pool",
+      "pts": 44
+    },
+    {
+      "x": 375.2,
+      "z": 388.1,
+      "w": 27.1,
+      "d": 28.9,
+      "type": "pool",
+      "pts": 125
+    },
+    {
+      "x": -278.9,
+      "z": -2.3,
+      "w": 29.2,
+      "d": 29.3,
+      "type": "pool",
+      "pts": 42
+    },
+    {
+      "x": 111.5,
+      "z": -4.7,
+      "w": 29.0,
+      "d": 29.6,
+      "type": "pool",
+      "pts": 40
+    },
+    {
+      "x": -132.4,
+      "z": -90.5,
+      "w": 28.4,
+      "d": 24.9,
+      "type": "pool",
+      "pts": 46
+    },
+    {
+      "x": -161.9,
+      "z": 0.5,
+      "w": 29.8,
+      "d": 29.5,
+      "type": "pool",
+      "pts": 252
+    },
+    {
+      "x": -278.1,
+      "z": 154.0,
+      "w": 25.4,
+      "d": 26.6,
+      "type": "pool",
+      "pts": 63
+    },
+    {
+      "x": -81.8,
+      "z": -172.0,
+      "w": 17.7,
+      "d": 26.1,
+      "type": "pool",
+      "pts": 53
+    },
+    {
+      "x": -72.1,
+      "z": -23.3,
+      "w": 29.7,
+      "d": 27.0,
+      "type": "pool",
+      "pts": 143
+    },
+    {
+      "x": -279.4,
+      "z": 58.7,
+      "w": 27.9,
+      "d": 27.7,
+      "type": "pool",
+      "pts": 45
+    },
+    {
+      "x": -164.1,
+      "z": 94.5,
+      "w": 28.5,
+      "d": 27.3,
+      "type": "pool",
+      "pts": 58
+    },
+    {
+      "x": 173.0,
+      "z": 207.8,
+      "w": 29.3,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 114
+    },
+    {
+      "x": -128.6,
+      "z": 181.2,
+      "w": 29.8,
+      "d": 29.6,
+      "type": "pool",
+      "pts": 193
+    },
+    {
+      "x": -17.7,
+      "z": -4.0,
+      "w": 27.6,
+      "d": 29.9,
+      "type": "pool",
+      "pts": 59
+    },
+    {
+      "x": 253.5,
+      "z": 216.8,
+      "w": 29.6,
+      "d": 25.7,
+      "type": "pool",
+      "pts": 118
+    },
+    {
+      "x": 223.2,
+      "z": 362.0,
+      "w": 24.7,
+      "d": 29.1,
+      "type": "pool",
+      "pts": 41
+    },
+    {
+      "x": -142.1,
+      "z": 265.3,
+      "w": 28.3,
+      "d": 29.5,
+      "type": "pool",
+      "pts": 53
+    },
+    {
+      "x": -309.9,
+      "z": -2.4,
+      "w": 25.7,
+      "d": 28.1,
+      "type": "pool",
+      "pts": 30
+    },
+    {
+      "x": -403.6,
+      "z": 295.0,
+      "w": 28.6,
+      "d": 29.1,
+      "type": "pool",
+      "pts": 32
+    },
+    {
+      "x": 103.8,
+      "z": 62.3,
+      "w": 29.6,
+      "d": 29.4,
+      "type": "pool",
+      "pts": 76
+    },
+    {
+      "x": 22.7,
+      "z": -240.1,
+      "w": 16.5,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 158
+    },
+    {
+      "x": -347.3,
+      "z": 205.4,
+      "w": 27.8,
+      "d": 21.9,
+      "type": "pool",
+      "pts": 26
+    },
+    {
+      "x": -255.2,
+      "z": 149.4,
+      "w": 26.3,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 35
+    },
+    {
+      "x": 464.5,
+      "z": 485.4,
+      "w": 29.8,
+      "d": 27.5,
+      "type": "pool",
+      "pts": 69
+    },
+    {
+      "x": 620.8,
+      "z": 640.1,
+      "w": 29.3,
+      "d": 25.9,
+      "type": "pool",
+      "pts": 59
+    },
+    {
+      "x": -315.6,
+      "z": 453.3,
+      "w": 27.8,
+      "d": 27.3,
+      "type": "pool",
+      "pts": 29
+    },
+    {
+      "x": 322.2,
+      "z": 267.5,
+      "w": 29.6,
+      "d": 27.4,
+      "type": "pool",
+      "pts": 44
+    },
+    {
+      "x": 290.6,
+      "z": 175.6,
+      "w": 27.7,
+      "d": 28.7,
+      "type": "pool",
+      "pts": 25
+    },
+    {
+      "x": 442.4,
+      "z": 360.8,
+      "w": 26.4,
+      "d": 27.3,
+      "type": "pool",
+      "pts": 29
+    },
+    {
+      "x": -308.0,
+      "z": 416.4,
+      "w": 26.8,
+      "d": 29.4,
+      "type": "pool",
+      "pts": 34
+    },
+    {
+      "x": 170.2,
+      "z": 178.8,
+      "w": 29.7,
+      "d": 29.3,
+      "type": "pool",
+      "pts": 92
+    },
+    {
+      "x": -257.3,
+      "z": 357.5,
+      "w": 28.8,
+      "d": 28.9,
+      "type": "pool",
+      "pts": 53
+    },
+    {
+      "x": -195.2,
+      "z": 0.7,
+      "w": 29.7,
+      "d": 29.0,
+      "type": "pool",
+      "pts": 170
+    },
+    {
+      "x": -311.6,
+      "z": 239.4,
+      "w": 28.4,
+      "d": 29.7,
+      "type": "pool",
+      "pts": 104
+    },
+    {
+      "x": -341.7,
+      "z": 356.7,
+      "w": 29.0,
+      "d": 23.2,
+      "type": "pool",
+      "pts": 32
+    },
+    {
+      "x": -44.2,
+      "z": 56.7,
+      "w": 29.1,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 83
+    },
+    {
+      "x": 20.1,
+      "z": 141.6,
+      "w": 19.2,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 62
+    },
+    {
+      "x": 287.6,
+      "z": 354.6,
+      "w": 25.6,
+      "d": 29.4,
+      "type": "pool",
+      "pts": 27
+    },
+    {
+      "x": -189.6,
+      "z": -245.5,
+      "w": 28.4,
+      "d": 25.9,
+      "type": "pool",
+      "pts": 51
+    },
+    {
+      "x": 20.5,
+      "z": 50.7,
+      "w": 15.0,
+      "d": 21.6,
+      "type": "pool",
+      "pts": 46
+    },
+    {
+      "x": -342.9,
+      "z": 481.7,
+      "w": 28.6,
+      "d": 21.9,
+      "type": "pool",
+      "pts": 30
+    },
+    {
+      "x": -194.6,
+      "z": 204.2,
+      "w": 26.9,
+      "d": 19.6,
+      "type": "pool",
+      "pts": 38
+    },
+    {
+      "x": 233.9,
+      "z": 232.5,
+      "w": 29.6,
+      "d": 28.0,
+      "type": "pool",
+      "pts": 68
+    },
+    {
+      "x": 260.3,
+      "z": 262.2,
+      "w": 29.2,
+      "d": 28.8,
+      "type": "pool",
+      "pts": 184
+    },
+    {
+      "x": -140.5,
+      "z": 30.1,
+      "w": 29.1,
+      "d": 27.4,
+      "type": "pool",
+      "pts": 37
+    },
+    {
+      "x": -283.5,
+      "z": 238.7,
+      "w": 29.1,
+      "d": 29.9,
+      "type": "pool",
+      "pts": 83
+    },
+    {
+      "x": 23.7,
+      "z": -116.8,
+      "w": 15.0,
+      "d": 29.5,
+      "type": "pool",
+      "pts": 25
+    },
+    {
+      "x": 106.6,
+      "z": -20.7,
+      "w": 28.2,
+      "d": 15.2,
+      "type": "pool",
+      "pts": 27
+    },
+    {
+      "x": 636.5,
+      "z": 638.5,
+      "w": 15.0,
+      "d": 15.0,
+      "type": "pool",
+      "pts": 33
+    },
+    {
+      "x": -160.0,
+      "z": -152.5,
+      "w": 28.0,
+      "d": 29.3,
+      "type": "pool",
+      "pts": 30
+    },
+    {
+      "x": -308.3,
+      "z": 300.6,
+      "w": 29.7,
+      "d": 26.3,
+      "type": "pool",
+      "pts": 60
+    },
+    {
+      "x": -46.6,
+      "z": -90.3,
+      "w": 23.1,
+      "d": 26.9,
+      "type": "pool",
+      "pts": 30
+    },
+    {
+      "x": -75.4,
+      "z": -125.2,
+      "w": 28.7,
+      "d": 29.4,
+      "type": "pool",
+      "pts": 101
+    },
+    {
+      "x": -157.6,
+      "z": 244.4,
+      "w": 29.8,
+      "d": 29.6,
+      "type": "pool",
+      "pts": 104
+    },
+    {
+      "x": -196.3,
+      "z": -295.7,
+      "w": 28.4,
+      "d": 27.8,
+      "type": "pool",
+      "pts": 44
+    },
+    {
+      "x": -250.9,
+      "z": 243.4,
+      "w": 28.6,
+      "d": 29.1,
+      "type": "pool",
+      "pts": 90
+    },
+    {
+      "x": -159.7,
+      "z": 148.7,
+      "w": 29.5,
+      "d": 29.0,
+      "type": "pool",
+      "pts": 53
+    },
+    {
+      "x": -96.2,
+      "z": 93.3,
+      "w": 29.5,
+      "d": 28.8,
+      "type": "pool",
+      "pts": 68
+    },
+    {
+      "x": 250.4,
+      "z": 389.6,
+      "w": 19.6,
+      "d": 26.4,
+      "type": "pool",
+      "pts": 38
+    },
+    {
+      "x": -221.3,
+      "z": -300.1,
+      "w": 29.7,
+      "d": 28.3,
+      "type": "pool",
+      "pts": 76
+    },
+    {
+      "x": 377.1,
+      "z": 298.6,
+      "w": 27.9,
+      "d": 27.2,
+      "type": "pool",
+      "pts": 34
+    },
+    {
+      "x": -225.0,
+      "z": 298.6,
+      "w": 29.0,
+      "d": 29.4,
+      "type": "pool",
+      "pts": 141
+    },
+    {
+      "x": 401.7,
+      "z": 211.8,
+      "w": 25.2,
+      "d": 24.8,
+      "type": "pool",
+      "pts": 28
+    },
+    {
+      "x": 374.9,
+      "z": 417.0,
+      "w": 27.1,
+      "d": 25.0,
+      "type": "pool",
+      "pts": 32
+    },
+    {
+      "x": 444.1,
+      "z": 480.7,
+      "w": 24.8,
+      "d": 26.9,
+      "type": "pool",
+      "pts": 37
+    },
+    {
+      "x": 372.0,
+      "z": 456.2,
+      "w": 29.4,
+      "d": 26.4,
+      "type": "pool",
+      "pts": 50
+    },
+    {
+      "x": 322.3,
+      "z": 353.8,
+      "w": 27.4,
+      "d": 28.0,
+      "type": "pool",
+      "pts": 36
+    },
+    {
+      "x": 315.6,
+      "z": 482.4,
+      "w": 26.8,
+      "d": 28.3,
+      "type": "pool",
+      "pts": 99
+    },
+    {
+      "x": -250.5,
+      "z": -151.2,
+      "w": 25.3,
+      "d": 26.5,
+      "type": "pool",
+      "pts": 26
+    },
+    {
+      "x": -189.5,
+      "z": 29.1,
+      "w": 28.3,
+      "d": 28.8,
+      "type": "pool",
+      "pts": 34
+    },
+    {
+      "x": -280.4,
+      "z": -300.8,
+      "w": 27.6,
+      "d": 28.3,
+      "type": "pool",
+      "pts": 71
+    },
+    {
+      "x": 490.2,
+      "z": 486.7,
+      "w": 18.4,
+      "d": 24.0,
+      "type": "pool",
+      "pts": 28
+    },
+    {
+      "x": -106.1,
+      "z": -88.0,
+      "w": 28.8,
+      "d": 29.8,
+      "type": "pool",
+      "pts": 42
+    },
+    {
+      "x": 203.3,
+      "z": 270.3,
+      "w": 29.3,
+      "d": 29.0,
+      "type": "pool",
+      "pts": 36
+    },
+    {
+      "x": 19.3,
+      "z": -388.1,
+      "w": 23.5,
+      "d": 24.8,
+      "type": "pool",
+      "pts": 28
+    },
+    {
+      "x": -221.0,
+      "z": 116.5,
+      "w": 28.4,
+      "d": 28.8,
+      "type": "pool",
+      "pts": 26
+    },
+    {
+      "x": 284.6,
+      "z": 243.8,
+      "w": 23.8,
+      "d": 28.7,
+      "type": "pool",
+      "pts": 52
+    },
+    {
+      "x": -368.3,
+      "z": 296.0,
+      "w": 28.9,
+      "d": 24.8,
+      "type": "pool",
+      "pts": 26
+    },
+    {
+      "x": -285.6,
+      "z": 447.8,
+      "w": 27.3,
+      "d": 25.7,
+      "type": "pool",
+      "pts": 30
+    },
+    {
+      "x": 20.0,
+      "z": 34.3,
+      "w": 15.0,
+      "d": 24.7,
+      "type": "pool",
+      "pts": 33
+    },
+    {
+      "x": -191.8,
+      "z": 183.4,
+      "w": 25.7,
+      "d": 26.4,
+      "type": "pool",
+      "pts": 35
+    },
+    {
+      "x": 23.8,
+      "z": -156.1,
+      "w": 15.0,
+      "d": 25.2,
+      "type": "pool",
+      "pts": 27
+    },
+    {
+      "x": -138.9,
+      "z": -204.1,
+      "w": 28.4,
+      "d": 29.2,
+      "type": "pool",
+      "pts": 72
+    },
+    {
+      "x": -229.9,
+      "z": 239.7,
+      "w": 26.1,
+      "d": 27.5,
+      "type": "pool",
+      "pts": 27
+    },
+    {
+      "x": 231.4,
+      "z": 387.7,
+      "w": 22.4,
+      "d": 29.6,
+      "type": "pool",
+      "pts": 51
+    },
+    {
+      "x": -112.9,
+      "z": 231.6,
+      "w": 15.0,
+      "d": 25.1,
+      "type": "pool",
+      "pts": 38
+    },
+    {
+      "x": -160.1,
+      "z": -208.7,
+      "w": 28.0,
+      "d": 29.1,
+      "type": "pool",
+      "pts": 106
+    },
+    {
+      "x": -374.3,
+      "z": 208.6,
+      "w": 29.5,
+      "d": 29.5,
+      "type": "pool",
+      "pts": 62
+    },
+    {
+      "x": 279.5,
+      "z": 448.7,
+      "w": 26.1,
+      "d": 29.0,
+      "type": "pool",
+      "pts": 26
+    },
+    {
+      "x": -187.3,
+      "z": -209.4,
+      "w": 22.9,
+      "d": 29.5,
+      "type": "pool",
+      "pts": 35
+    },
+    {
+      "x": 195.8,
+      "z": 303.8,
+      "w": 29.2,
+      "d": 29.2,
+      "type": "pool",
+      "pts": 44
+    },
+    {
+      "x": 111.6,
+      "z": 113.9,
+      "w": 23.7,
+      "d": 28.8,
+      "type": "pool",
+      "pts": 37
+    }
+  ],
+  "dense_ply_url": "/jobs/demo/scene/dense_web.ply",
+  "semantic_ply_url": "/jobs/demo/scene/semantic.ply",
+  "build_time_sec": 5.9
+}
