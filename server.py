@@ -149,7 +149,7 @@ def run_pipeline(job_id: str, video_path: str):
         # Non-fatal
 
         # ── Stage 5: Semantic + dynamic ──
-        write_status(job_id, 'Semantic', 85, 'Running semantic analysis...')
+        write_status(job_id, 'Semantic', 82, 'Running semantic segmentation (mask generation)...')
         t0 = time.time()
         run_script('scripts/08_semantic_filter.py', [
             '--project', project_name,
@@ -158,8 +158,19 @@ def run_pipeline(job_id: str, video_path: str):
         timings['semantic'] = round(time.time() - t0, 1)
         # Non-fatal
 
+        # ── Stage 5.5: 2D→3D Semantic Projection ──
+        write_status(job_id, 'Semantic3D', 88,
+                     'Projecting semantic labels into 3D point cloud (multi-view voting)...')
+        t0 = time.time()
+        run_script('scripts/semantic_2d_to_3d.py', [
+            '--job-id', job_id,
+            '--jobs-base', str(JOBS_DIR),
+        ], job_id)
+        timings['semantic_3d'] = round(time.time() - t0, 1)
+        # Non-fatal
+
         # ── Stage 6: 3D Scene Builder ──
-        write_status(job_id, 'Scene', 92, 'Building web-ready 3D digital twin scene...')
+        write_status(job_id, 'Scene', 93, 'Building web-ready 3D digital twin scene...')
         t0 = time.time()
         run_script('scripts/11_scene_builder.py', [
             '--job-id', job_id,

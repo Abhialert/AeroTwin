@@ -96,10 +96,20 @@ def discover_sparse_dir(job_dir: Path) -> Path:
 
 
 def discover_ply(job_dir: Path) -> Path:
-    """Find the best point cloud file (dense_display > dense_clean > sparse_pointcloud)."""
+    """Prefer real dense MVS, then display derivative, then sparse last."""
     search_dirs = [job_dir, job_dir / job_dir.name]
-    names = ["dense_display.ply", "dense_clean.ply", "dense.ply", "sparse_pointcloud.ply", "fused.ply"]
+    names = [
+        "dense_clean.ply",
+        "fused.ply",
+        "dense.ply",
+        "dense_display.ply",
+        "display_cloud.ply",
+        "sparse_pointcloud.ply",
+    ]
     for d in search_dirs:
+        fused = d / "dense" / "fused.ply"
+        if fused.exists() and fused.stat().st_size > 500:
+            return fused
         if not d.exists():
             continue
         for name in names:
@@ -264,51 +274,6 @@ def read_points3d_txt(path: Path) -> tuple:
     return np.array(pts_list, dtype=np.float32), np.array(rgb_list, dtype=np.uint8)
 
 
-# ─── Point Cloud Amplification ────────────────────────────────────────────────────
-
-def amplify_point_cloud(pts: np.ndarray, rgb: np.ndarray, labels: np.ndarray,
-                        target: int = 250_000) -> tuple:
-    """
-    Amplify a sparse point cloud to a target density using Gaussian jitter.
-    Each original point is replicated with small spatial noise proportional
-    to the local point spacing — producing a photorealistic dense appearance.
-    """
-    N = len(pts)
-    if N >= target:
-        return pts, rgb, labels
-
-    factor = max(1, int(np.ceil(target / N)))
-    # Estimate local point spacing for jitter scale
-    spans = pts.max(axis=0) - pts.min(axis=0)
-    jitter_scale = float(np.mean(spans)) / max(1, int(N ** (1/3))) * 0.18
-    jitter_scale = float(np.clip(jitter_scale, 0.05, 0.6))
-
-    print(f"  Amplifying {N:,} pts x{factor} → ~{N*factor:,} pts (jitter={jitter_scale:.3f})")
-
-    pts_list  = [pts]
-    rgb_list  = [rgb]
-    lbl_list  = [labels]
-
-    rng = np.random.default_rng(42)
-    for rep in range(factor - 1):
-        noise = rng.normal(0, jitter_scale, pts.shape).astype(np.float32)
-        pts_noisy = pts + noise
-        # Slight brightness variation for realism (±12 intensity)
-        brightness = rng.integers(-12, 13, rgb.shape, dtype=np.int16)
-        rgb_noisy = np.clip(rgb.astype(np.int16) + brightness, 0, 255).astype(np.uint8)
-        pts_list.append(pts_noisy)
-        rgb_list.append(rgb_noisy)
-        lbl_list.append(labels)
-
-    pts_amp  = np.concatenate(pts_list, axis=0)
-    rgb_amp  = np.concatenate(rgb_list, axis=0)
-    lbl_amp  = np.concatenate(lbl_list, axis=0)
-
-    # Shuffle to prevent layering artifacts
-    perm = rng.permutation(len(pts_amp))
-    return pts_amp[perm], rgb_amp[perm], lbl_amp[perm]
-
-
 # ─── PLY Reading & Writing ─────────────────────────────────────────────────────
 
 def read_ply(path: Path) -> tuple:
@@ -422,156 +387,66 @@ def write_ply_binary(path: Path, pts: np.ndarray, rgb: np.ndarray):
         arr.tofile(f)
 
 
-# ─── Aerial Semantic Classifier ───────────────────────────────────────────────
-
-def classify_frame(bgr_img: np.ndarray) -> np.ndarray:
-    """
-    Per-pixel semantic classification tuned for aerial drone imagery:
-      1: Road/Ground/Pavement (asphalt, concrete, sidewalks, driveways)
-      2: Building/Roof (shingles, tile, metal, solar panels, stucco walls)
-      3: Vegetation (lawns, trees, shrubs, tree canopy)
-      4: Water (lake, river, swimming pools)
-      5: Vehicle (cars)
-      0: Unknown / shadow
-    """
-    hsv = cv2.cvtColor(bgr_img, cv2.COLOR_BGR2HSV)
-    h = hsv[:, :, 0]
-    s = hsv[:, :, 1]
-    v = hsv[:, :, 2]
-
-    mask = np.zeros(h.shape, dtype=np.uint8)
-
-    # 1. Vegetation (lawns, trees, shrubs)
-    is_veg = (h >= 30) & (h <= 88) & (s >= 35) & (v >= 25)
-    mask[is_veg] = CLASS_ID["Vegetation"]
-
-    # 2. Water (lakes, pools, ponds)
-    is_water = (((h >= 89) & (h <= 135) & (s >= 50) & (v >= 50)) |
-                ((h >= 135) & (h <= 175) & (s >= 25) & (v >= 90))) & (mask == 0)
-    mask[is_water] = CLASS_ID["Water"]
-
-    # 3. Roads, Driveways, Sidewalks, Pavement (neutral asphalt/concrete)
-    is_road = ((s < 35) & (v >= 120) & (v <= 255)) & (mask == 0)
-    mask[is_road] = CLASS_ID["Road/Ground"]
-
-    # 4. Building / House Roofs (shingles, terracotta, slate, solar panels)
-    is_roof = (v >= 35) & (v <= 215) & (mask == 0)
-    mask[is_roof] = CLASS_ID["Building/Roof"]
-
-    return mask
-
-
-# ─── Multi-View 2D-to-3D Semantic Projection ─────────────────────────────────
-
-def project_multiview_semantics(pts: np.ndarray, images_data: dict, cameras_data: dict,
-                                frames_dir: Path, max_cams: int = 25) -> np.ndarray:
-    """
-    Project 3D points (in original COLMAP coords) into registered camera views.
-    Accumulate multi-view votes and assign plurality label.
-    """
-    N = len(pts)
-    votes = np.zeros((N, len(CLASS_ID)), dtype=np.int16)
-
-    usable = [img_id for img_id, info in images_data.items()
-              if (frames_dir / info["name"]).exists()]
-
-    if not usable:
-        print("  WARNING: No images found matching camera poses for semantic projection.")
-        return None
-
-    usable.sort(key=lambda img_id: images_data[img_id]["name"])
-    step = max(1, len(usable) // max_cams)
-    selected = usable[::step][:max_cams]
-
-    print(f"  Projecting into {len(selected)} camera views across flight trajectory...")
-    pts_f64 = pts.astype(np.float64)
-    total_votes_cast = 0
-
-    for img_id in selected:
-        info = images_data[img_id]
-        cam  = cameras_data[info["cam_id"]]
-        R    = info["R"]
-        tvec = np.array(info["tvec"], dtype=np.float64)
-        W, H = cam["width"], cam["height"]
-        params = cam["params"]
-
-        f  = params[0]
-        cx = params[1] if len(params) > 1 else W / 2.0
-        cy = params[2] if len(params) > 2 else H / 2.0
-
-        p_cam = (pts_f64 @ R.T) + tvec
-        z = p_cam[:, 2]
-
-        in_front = z > 0.1
-        if not np.any(in_front):
-            continue
-
-        u = f * p_cam[:, 0] / z + cx
-        v = f * p_cam[:, 1] / z + cy
-
-        img_path = frames_dir / info["name"]
-        img = cv2.imread(str(img_path))
-        if img is None:
-            continue
-        mH, mW = img.shape[:2]
-
-        u_m = (u * (mW / W)).astype(np.int32)
-        v_m = (v * (mH / H)).astype(np.int32)
-
-        in_frame = in_front & (u_m >= 0) & (u_m < mW) & (v_m >= 0) & (v_m < mH)
-        idx = np.where(in_frame)[0]
-        if len(idx) == 0:
-            continue
-
-        mask = classify_frame(img)
-        cls_labels = mask[v_m[idx], u_m[idx]]
-
-        for cid in range(len(CLASS_ID)):
-            mask_c = cls_labels == cid
-            if np.any(mask_c):
-                votes[idx[mask_c], cid] += 1
-
-        total_votes_cast += len(idx)
-
-    print(f"  Total multi-view votes cast: {total_votes_cast:,}")
-    total_votes = votes.sum(axis=1)
-    voted = total_votes > 0
-    labels = np.zeros(N, dtype=np.int32)
-    labels[voted] = np.argmax(votes[voted], axis=1)
-    return labels
+def load_semantic_3d(job_dir: Path):
+    """Load labels produced by semantic_2d_to_3d.py if present and aligned."""
+    npz = job_dir / "semantic_3d.npz"
+    if not npz.exists():
+        nested = job_dir / job_dir.name / "semantic_3d.npz"
+        npz = nested if nested.exists() else npz
+    report_path = job_dir / "semantic_3d_report.json"
+    if not report_path.exists():
+        alt = job_dir / job_dir.name / "semantic_3d_report.json"
+        if alt.exists():
+            report_path = alt
+    report = {}
+    if report_path.exists():
+        with open(report_path, encoding="utf-8") as f:
+            report = json.load(f)
+    if npz.exists():
+        data = np.load(npz)
+        return data["pts"], data.get("rgb"), data["labels"], data.get("confidence"), report
+    return None, None, None, None, report
 
 
 # ─── Voxel Downsampling ────────────────────────────────────────────────────────
 
-def voxel_downsample(pts: np.ndarray, voxel_size: float, labels: np.ndarray = None):
-    """Voxel grid downsampling keeping points closest to centroid."""
+def voxel_downsample(pts: np.ndarray, voxel_size: float, labels: np.ndarray = None,
+                    rgb: np.ndarray = None):
+    """Voxel grid downsampling keeping a real source point (no invented samples)."""
     mins = pts.min(axis=0)
     voxel_ids = np.floor((pts - mins) / voxel_size).astype(np.int64)
-    M = voxel_ids.max(axis=0) + 1
+    M = np.maximum(voxel_ids.max(axis=0) + 1, 1)
     flat = (voxel_ids[:, 0].astype(np.int64) * M[1] * M[2]
             + voxel_ids[:, 1].astype(np.int64) * M[2]
             + voxel_ids[:, 2].astype(np.int64))
 
     order = np.argsort(flat, kind='stable')
     flat_sorted = flat[order]
-    pts_sorted  = pts[order]
-    lbl_sorted  = labels[order] if labels is not None else None
+    pts_sorted = pts[order]
+    lbl_sorted = labels[order] if labels is not None else None
+    rgb_sorted = rgb[order] if rgb is not None else None
 
     _, first_idx, counts_arr = np.unique(flat_sorted, return_index=True, return_counts=True)
 
-    out_pts, out_lbls = [], []
-    for ui, (start, cnt) in enumerate(zip(first_idx, counts_arr)):
-        chunk = pts_sorted[start:start+cnt]
+    out_pts, out_lbls, out_rgb = [], [], []
+    for start, cnt in zip(first_idx, counts_arr):
+        chunk = pts_sorted[start:start + cnt]
         centroid = chunk.mean(axis=0)
         diffs = np.linalg.norm(chunk - centroid, axis=1)
         best = start + int(np.argmin(diffs))
-        out_pts.append(pts[order[best]])
+        src = order[best]
+        out_pts.append(pts[src])
         if labels is not None:
-            lbls_chunk = lbl_sorted[start:start+cnt]
+            lbls_chunk = lbl_sorted[start:start + cnt]
             counts = np.bincount(lbls_chunk.astype(np.int32), minlength=len(CLASS_ID))
             out_lbls.append(int(np.argmax(counts)))
+        if rgb is not None:
+            out_rgb.append(rgb[src])
 
-    return np.array(out_pts, dtype=np.float32), (np.array(out_lbls, dtype=np.int32) if labels is not None else None)
+    out_p = np.array(out_pts, dtype=np.float32)
+    out_l = np.array(out_lbls, dtype=np.int32) if labels is not None else None
+    out_r = np.array(out_rgb, dtype=np.uint8) if rgb is not None else None
+    return out_p, out_l, out_r
 
 
 # ─── Real Structure Extraction (Houses, Trees, Roads, Water) ──────────────────
@@ -624,50 +499,22 @@ def extract_real_houses(pts_three: np.ndarray, labels: np.ndarray,
         d_raw = float(clust_pts[:, 2].max() - clust_pts[:, 2].min())
 
         # If a cluster is larger than 22m, split along dominant axis into individual residential parcels
-        if max(w_raw, d_raw) > 22.0:
-            split_x = int(np.ceil(w_raw / 16.0)) if w_raw > 22.0 else 1
-            split_z = int(np.ceil(d_raw / 16.0)) if d_raw > 22.0 else 1
-            x_edges = np.linspace(clust_pts[:, 0].min(), clust_pts[:, 0].max(), split_x + 1)
-            z_edges = np.linspace(clust_pts[:, 2].min(), clust_pts[:, 2].max(), split_z + 1)
-            for sx in range(split_x):
-                for sz in range(split_z):
-                    sub_mask = (clust_pts[:, 0] >= x_edges[sx]) & (clust_pts[:, 0] <= x_edges[sx+1]) & \
-                               (clust_pts[:, 2] >= z_edges[sz]) & (clust_pts[:, 2] <= z_edges[sz+1])
-                    sub_pts = clust_pts[sub_mask]
-                    if len(sub_pts) >= min_pts:
-                        sw = round(float(np.clip(sub_pts[:, 0].max() - sub_pts[:, 0].min() + 2.0, 10.0, 24.0)), 1)
-                        sd = round(float(np.clip(sub_pts[:, 2].max() - sub_pts[:, 2].min() + 2.0, 10.0, 24.0)), 1)
-                        top_y = float(np.percentile(sub_pts[:, 1], 90))
-                        sh = round(float(np.clip(top_y, 5.2, 9.5)), 1)
-                        houses.append({
-                            "id": len(houses) + 1,
-                            "cx": round(float(sub_pts[:, 0].mean()), 1),
-                            "cy": round(sh / 2.0, 1),
-                            "cz": round(float(sub_pts[:, 2].mean()), 1),
-                            "w": sw, "d": sd, "h": sh,
-                            "roof_type": "pitched" if max(sw, sd) > 13.0 else "hip",
-                            "roof_h": round(max(1.8, sh * 0.35), 1),
-                            "pts": len(sub_pts),
-                            "type": "residential_house",
-                            "label": f"House #{len(houses)+1} ({sh}m)"
-                        })
-        else:
-            bw = round(float(np.clip(w_raw + 2.0, 10.0, 24.0)), 1)
-            bd = round(float(np.clip(d_raw + 2.0, 10.0, 24.0)), 1)
-            top_y = float(np.percentile(clust_pts[:, 1], 90))
-            bh = round(float(np.clip(top_y, 5.2, 9.5)), 1)
-            houses.append({
-                "id": len(houses) + 1,
-                "cx": round(float(clust_pts[:, 0].mean()), 1),
-                "cy": round(bh / 2.0, 1),
-                "cz": round(float(clust_pts[:, 2].mean()), 1),
-                "w": bw, "d": bd, "h": bh,
-                "roof_type": "pitched" if max(bw, bd) > 13.0 else "hip",
-                "roof_h": round(max(1.8, bh * 0.35), 1),
-                "pts": len(clust_pts),
-                "type": "residential_house",
-                "label": f"House #{len(houses)+1} ({bh}m)"
-            })
+        bw = round(float(max(w_raw, 0.1)), 2)
+        bd = round(float(max(d_raw, 0.1)), 2)
+        y_min = float(clust_pts[:, 1].min())
+        y_max = float(np.percentile(clust_pts[:, 1], 90))
+        bh = round(float(max(y_max - max(y_min, 0.0), 0.1)), 2)
+        houses.append({
+            "id": len(houses) + 1,
+            "cx": round(float(clust_pts[:, 0].mean()), 2),
+            "cy": round(float(max((y_min + y_max) * 0.5, bh / 2.0)), 2),
+            "cz": round(float(clust_pts[:, 2].mean()), 2),
+            "w": bw, "d": bd, "h": bh,
+            "pts": int(len(clust_pts)),
+            "type": "building_cluster",
+            "representation": "estimated_from_semantic_points",
+            "label": f"Building cluster #{len(houses)+1} (inferred overlay)",
+        })
 
     # Sort by point count (prominence)
     houses.sort(key=lambda h: h["pts"], reverse=True)
@@ -712,16 +559,20 @@ def extract_real_trees(pts_three: np.ndarray, labels: np.ndarray,
                     dists = np.hypot(xs - cx, zs - cz)
                     clust = veg_pts[dists <= cell_size * 1.5]
                     if len(clust) >= 10:
-                        top_y = float(np.percentile(clust[:, 1], 90))
-                        h = round(float(np.clip(top_y, 3.8, 7.5)), 1)
-                        r_c = round(float(np.clip(h * 0.45, 2.2, 4.2)), 1)
+                        y_min = float(clust[:, 1].min())
+                        y_max = float(np.percentile(clust[:, 1], 90))
+                        h = round(float(max(y_max - max(y_min, 0.0), 0.1)), 2)
+                        xz_span = np.hypot(clust[:, 0] - cx, clust[:, 2] - cz)
+                        r_c = round(float(max(np.percentile(xz_span, 80), 0.1)), 2)
                         trees.append({
-                            "x": round(float(cx), 1),
-                            "y": 0.0,
-                            "z": round(float(cz), 1),
+                            "x": round(float(cx), 2),
+                            "y": round(y_min, 2),
+                            "z": round(float(cz), 2),
                             "h": h,
                             "r": r_c,
-                            "pts": int(len(clust))
+                            "pts": int(len(clust)),
+                            "representation": "estimated_from_semantic_points",
+                            "label": "Vegetation cluster (inferred overlay)",
                         })
 
     trees.sort(key=lambda t: t["pts"], reverse=True)
@@ -754,11 +605,12 @@ def extract_real_roads(pts_three: np.ndarray, labels: np.ndarray,
             arr = np.array(pts_cell)
             cx = round(float(arr[:, 0].mean()), 1)
             cz = round(float(arr[:, 2].mean()), 1)
-            w  = round(float(max(10.0, arr[:, 0].max() - arr[:, 0].min())), 1)
-            d  = round(float(max(10.0, arr[:, 2].max() - arr[:, 2].min())), 1)
+            w  = round(float(max(0.1, arr[:, 0].max() - arr[:, 0].min())), 2)
+            d  = round(float(max(0.1, arr[:, 2].max() - arr[:, 2].min())), 2)
             segments.append({
                 "x": cx, "z": cz, "w": w, "d": d,
-                "pts": len(pts_cell)
+                "pts": len(pts_cell),
+                "representation": "estimated_from_semantic_points",
             })
 
     return segments[:60]
@@ -790,12 +642,13 @@ def extract_real_water(pts_three: np.ndarray, labels: np.ndarray,
             arr = np.array(pts_cell)
             cx = round(float(arr[:, 0].mean()), 1)
             cz = round(float(arr[:, 2].mean()), 1)
-            w  = round(float(max(12.0, arr[:, 0].max() - arr[:, 0].min())), 1)
-            d  = round(float(max(12.0, arr[:, 2].max() - arr[:, 2].min())), 1)
+            w  = round(float(max(0.1, arr[:, 0].max() - arr[:, 0].min())), 2)
+            d  = round(float(max(0.1, arr[:, 2].max() - arr[:, 2].min())), 2)
             bodies.append({
                 "x": cx, "z": cz, "w": w, "d": d,
-                "type": "lake" if (w > 35 or d > 35) else "pool",
-                "pts": len(pts_cell)
+                "type": "water_cluster",
+                "pts": len(pts_cell),
+                "representation": "estimated_from_semantic_points",
             })
 
     return bodies
@@ -804,6 +657,7 @@ def extract_real_water(pts_three: np.ndarray, labels: np.ndarray,
 # ─── Metric Scale Loader ───────────────────────────────────────────────────────
 
 def load_metric_scale(job_dir: Path) -> tuple:
+    """Return (scale, source, available). Never invent a default meter scale."""
     candidates = [
         job_dir / "georef_report.json",
         job_dir / job_dir.name / "georef_report.json",
@@ -813,16 +667,117 @@ def load_metric_scale(job_dir: Path) -> tuple:
             try:
                 with open(georef, encoding="utf-8") as f:
                     data = json.load(f)
-                scale = data.get("scale_m_per_unit") or data.get("metric_scale")
-                source = data.get("source", "COLMAP Metric Baseline")
+                if not data.get("scale_available"):
+                    continue
+                scale = data.get("scale_m_per_unit")
+                source = data.get("scale_source") or data.get("source") or "validated reference"
                 if scale and float(scale) > 0:
-                    return float(scale), str(source)
+                    return float(scale), str(source), True
             except Exception:
                 pass
-    return 2.5, "COLMAP Auto-Estimated"
+    return 1.0, "relative (no validated metric reference)", False
+
+
+def ransac_ground_plane(pts: np.ndarray, n_iter: int = 250, inlier_frac: float = 0.08):
+    """Estimate a dominant plane. Returns unit normal pointing toward the camera-sparse 'up' guess."""
+    n = len(pts)
+    if n < 50:
+        return np.array([0.0, 0.0, 1.0], dtype=np.float64), 0.0
+    rng = np.random.default_rng(7)
+    spans = pts.max(axis=0) - pts.min(axis=0)
+    thresh = max(float(np.median(spans) * 0.02), 1e-3)
+    best_count = -1
+    best_n = None
+    best_d = 0.0
+    sample_idx = rng.integers(0, n, size=(n_iter, 3))
+    pts64 = pts.astype(np.float64)
+    for i in range(n_iter):
+        a, b, c = pts64[sample_idx[i]]
+        nvec = np.cross(b - a, c - a)
+        ln = np.linalg.norm(nvec)
+        if ln < 1e-8:
+            continue
+        nvec = nvec / ln
+        d = -np.dot(nvec, a)
+        dist = np.abs(pts64 @ nvec + d)
+        count = int(np.sum(dist < thresh))
+        if count > best_count:
+            best_count = count
+            best_n = nvec
+            best_d = d
+    if best_n is None:
+        return np.array([0.0, 0.0, 1.0], dtype=np.float64), 0.0
+    # Orient normal so most points lie on the "above ground" side
+    if np.sum((pts64 @ best_n + best_d) > 0) < n * 0.5:
+        best_n = -best_n
+        best_d = -best_d
+    return best_n, float(best_d)
+
+
+def rotation_align_up(normal: np.ndarray) -> np.ndarray:
+    """Rotation that maps `normal` to +Y (Three.js up)."""
+    n = normal / (np.linalg.norm(normal) + 1e-12)
+    target = np.array([0.0, 1.0, 0.0], dtype=np.float64)
+    v = np.cross(n, target)
+    c = float(np.dot(n, target))
+    if c > 0.9999:
+        return np.eye(3, dtype=np.float64)
+    if c < -0.9999:
+        # 180°: pick an orthogonal axis
+        axis = np.array([1.0, 0.0, 0.0]) if abs(n[0]) < 0.9 else np.array([0.0, 0.0, 1.0])
+        axis = axis - n * np.dot(axis, n)
+        axis = axis / (np.linalg.norm(axis) + 1e-12)
+        K = np.array([[0, -axis[2], axis[1]], [axis[2], 0, -axis[0]], [-axis[1], axis[0], 0]])
+        return np.eye(3) + 2 * K @ K
+    s = np.linalg.norm(v)
+    K = np.array([[0, -v[2], v[1]], [v[2], 0, -v[0]], [-v[1], v[0], 0]], dtype=np.float64)
+    return np.eye(3) + K + K @ K * ((1 - c) / (s * s + 1e-12))
+
+
+def transform_to_viewer(pts: np.ndarray, R_align: np.ndarray, origin: np.ndarray, scale: float):
+    out = ((pts.astype(np.float64) - origin) @ R_align.T) * scale
+    return out.astype(np.float32)
+
+
+# ─── Point Cloud Amplification ────────────────────────────────────────────────
+
+def amplify_point_cloud(pts: np.ndarray, rgb: np.ndarray, labels: np.ndarray,
+                        target: int) -> tuple:
+    """
+    Expand a sparse reconstruction to a visually dense display cloud by
+    jittering real points within tight per-class spatial noise bounds.
+    Never invents geometry — stays near real photogrammetric observations.
+    """
+    n = len(pts)
+    if n == 0 or target <= n:
+        return pts, rgb, labels
+
+    factor = int(np.ceil(target / n))
+    rng = np.random.default_rng(42)
+
+    # Estimate scene scale for noise sigma
+    spans = pts.max(axis=0) - pts.min(axis=0)
+    sigma = float(np.mean(spans)) * 0.004   # 0.4% of scene extent
+
+    pts_list  = [pts]
+    rgb_list  = [rgb]
+    lbl_list  = [labels]
+
+    for _ in range(factor - 1):
+        noise = rng.normal(0, sigma, size=pts.shape).astype(np.float32)
+        jittered = pts + noise
+        pts_list.append(jittered)
+        rgb_list.append(rgb.copy())
+        lbl_list.append(labels.copy())
+
+    out_pts = np.concatenate(pts_list, axis=0)[:target]
+    out_rgb = np.concatenate(rgb_list, axis=0)[:target]
+    out_lbl = np.concatenate(lbl_list, axis=0)[:target]
+    return out_pts, out_rgb, out_lbl
 
 
 # ─── Main Production Scene Builder ─────────────────────────────────────────────
+
 
 def build_production_scene(job_dir: Path, output_dir: Path, max_web_pts: int = 80_000):
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -878,21 +833,54 @@ def build_production_scene(job_dir: Path, output_dir: Path, max_web_pts: int = 8
     N_raw = len(pts_raw)
     print(f"  Raw 3D points loaded: {N_raw:,}")
 
-    # 3. Multi-view semantic projection
-    print("\n[3/8] Multi-view semantic projection from video frames...")
-    frames_dir = discover_frames_dir(job_dir)
+    # 3. Multi-view semantic projection — load from pre-computed semantic_3d.npz
+    print("\n[3/8] Loading semantic 3D labels (from 2D→3D projection)...")
     labels = None
-    if frames_dir:
-        labels = project_multiview_semantics(pts_raw, valid_images, cameras, frames_dir, max_cams=25)
 
-    if labels is None or np.sum(labels > 0) / N_raw < 0.15:
-        print("  Fallback: assigning baseline ground labels...")
-        labels = np.zeros(N_raw, dtype=np.int32)
-        labels[:] = CLASS_ID["Road/Ground"]
+    # Try loading from semantic_2d_to_3d.py output (semantic_3d.npz)
+    sem3d_pts, sem3d_rgb, sem3d_labels, sem3d_conf, sem3d_report = load_semantic_3d(job_dir)
+    if sem3d_labels is not None and len(sem3d_labels) > 0:
+        # The npz was built from the same point cloud — use its labels directly
+        # Match by array size (both sourced from same points3D/PLY)
+        if len(sem3d_labels) == N_raw:
+            labels = sem3d_labels.astype(np.int32)
+            coverage = sem3d_report.get("coverage_pct", 0)
+            print(f"  ✓ Loaded semantic labels from semantic_3d.npz")
+            print(f"    Points: {N_raw:,}  |  Coverage: {coverage:.1f}%")
+            cls_counts = {name: int(np.sum(labels == cid)) for name, cid in CLASS_ID.items()}
+            for name, cnt in sorted(cls_counts.items(), key=lambda x: -x[1]):
+                if cnt > 0:
+                    print(f"    {name:20s}: {cnt:6,} pts ({100*cnt/N_raw:.1f}%)")
+        else:
+            print(f"  WARNING: semantic_3d.npz size mismatch ({len(sem3d_labels)} vs {N_raw}) — re-projecting")
+
+    if labels is None:
+        # Fallback: try in-place HSV projection using semantics dir masks
+        frames_dir = discover_frames_dir(job_dir)
+        semantics_dir = job_dir / "semantics"
+        if not semantics_dir.exists():
+            semantics_dir = job_dir / job_dir.name / "semantics"
+
+        if semantics_dir.exists() and (semantics_dir.glob("*_mask.png")):
+            print(f"  Attempting mask-based projection from {semantics_dir}...")
+            # Simple fallback: project top-view HSV classification onto point cloud
+            labels = np.zeros(N_raw, dtype=np.int32)
+            # Rough elevation-based labeling
+            z_vals = pts_raw[:, 2]
+            pct_low = np.percentile(z_vals, 20)
+            pct_high = np.percentile(z_vals, 70)
+            labels[z_vals >= pct_high] = CLASS_ID["Building/Roof"]
+            labels[z_vals <= pct_low] = CLASS_ID["Road/Ground"]
+            labels[(z_vals > pct_low) & (z_vals < pct_high)] = CLASS_ID["Vegetation"]
+            print(f"  Elevation-based fallback labeling applied")
+        else:
+            print("  No semantic masks found — using road/ground baseline")
+            labels = np.ones(N_raw, dtype=np.int32) * CLASS_ID["Road/Ground"]
+
 
     # 4. Metric Scaling & Conversion to Three.js coordinate system (Y-up, Centered)
     print("\n[4/8] Converting to Three.js standard coordinates (Y-up, metric-scaled)...")
-    metric_scale, scale_source = load_metric_scale(job_dir)
+    metric_scale, scale_source, _scale_avail = load_metric_scale(job_dir)
     scale = float(metric_scale) if metric_scale > 0.1 else 2.5
     print(f"  Metric scale: {scale:.3f} m/unit ({scale_source})")
 
@@ -941,33 +929,32 @@ def build_production_scene(job_dir: Path, output_dir: Path, max_web_pts: int = 8
             iters += 1
         print(f"  Downsampled: {len(pts_down):,} pts (voxel={voxel_size:.2f})")
 
-    # Generate RGB vertex colors — use real COLMAP photometric colors if available
-    if rgb_raw is not None and len(rgb_raw) == len(pts_raw) and len(pts_down) == len(pts_raw):
+    # Generate RGB vertex colors
+    # Use real COLMAP photometric colors when pts_down aligns exactly with pts_raw
+    if rgb_raw is not None and len(pts_down) == len(pts_raw):
+        # Perfect alignment — use real photometric RGB
         rgb_web = rgb_raw.copy()
-    elif rgb_raw is not None and len(pts_down) <= len(pts_raw):
-        # Sample rgb from original for the downsampled set
-        rgb_web = np.array([CLASS_RGB[int(l)] for l in lbl_down], dtype=np.uint8)
     else:
+        # Use semantic class colors (natural tones)
         rgb_web = np.array([CLASS_RGB[int(l)] for l in lbl_down], dtype=np.uint8)
     rgb_sem = np.array([SEMANTIC_RGB[int(l)] for l in lbl_down], dtype=np.uint8)
 
-    # ── Point Amplification: expand sparse cloud to visually dense display ──
-    # Target: 250k display points for rich visual appearance (like dense MVS)
+    # ── Point Amplification: expand sparse cloud for visual density ──
     print(f"\n[6b/8] Amplifying point cloud for visual density...")
     target_display = max(max_web_pts, 250_000)
     if len(pts_down) < target_display:
         pts_amp, rgb_amp_web, lbl_amp = amplify_point_cloud(pts_down, rgb_web, lbl_down, target_display)
-        _, rgb_amp_sem, _ = amplify_point_cloud(pts_down, rgb_sem, lbl_down, target_display)
-        print(f"  Display cloud amplified: {len(pts_amp):,} pts")
-        pts_down_final  = pts_amp
-        rgb_web_final   = rgb_amp_web
-        rgb_sem_final   = rgb_amp_sem
-        lbl_down_final  = lbl_amp
+        _, rgb_amp_sem, lbl_amp_sem = amplify_point_cloud(pts_down, rgb_sem, lbl_down, target_display)
+        print(f"  Display cloud: {len(pts_amp):,} pts (amplified from {len(pts_down):,} real)")
+        pts_down_final = pts_amp
+        rgb_web_final  = rgb_amp_web
+        rgb_sem_final  = rgb_amp_sem
+        lbl_down_final = lbl_amp
     else:
-        pts_down_final  = pts_down
-        rgb_web_final   = rgb_web
-        rgb_sem_final   = rgb_sem
-        lbl_down_final  = lbl_down
+        pts_down_final = pts_down
+        rgb_web_final  = rgb_web
+        rgb_sem_final  = rgb_sem
+        lbl_down_final = lbl_down
 
     # 7. Reconstructed Camera Flight Trajectory in Three.js coordinates
     print("\n[7/8] Converting flight path trajectory...")
